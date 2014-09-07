@@ -1,5 +1,5 @@
-#ifndef __SOUNDFLOWER_TOOL_DRIVER_MANAGER_H_INCL__
-#define __SOUNDFLOWER_TOOL_DRIVER_MANAGER_H_INCL__
+#ifndef __ULTRASCHALL_HUB_DRIVER_MANAGER_H_INCL__
+#define __ULTRASCHALL_HUB_DRIVER_MANAGER_H_INCL__
 
 #include <stdbool.h>
 #include <inttypes.h>
@@ -30,6 +30,6 @@ typedef void (*DMStatusCallback)(const DMDriverInformation* DriverInformation);
 bool DMRegisterStatusCallback(DMStatusCallback StatusCallback);
 bool DMUnregisterStatusCallback(DMStatusCallback StatusCallback);
 
-#endif // __SOUNDFLOWER_TOOL_DRIVER_MANAGER_H_INCL__
+#endif // __ULTRASCHALL_HUB_DRIVER_MANAGER_H_INCL__
 
 
