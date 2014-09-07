@@ -17,20 +17,20 @@ Dir.chdir libdir        # change to libdir so that requires work
 
 @svn_root = ".."
 
-puts "  Unloading and removing existing Ultraschall.kext"
-if File.exists?("/Library/Extensions/Ultraschall.kext")
-  puts "    first unload (will often fail, but will cause Ultraschall's performAudioEngineStop to be called)"
-  `sudo kextunload /Library/Extensions/Ultraschall.kext`
+puts "  Unloading and removing existing UltraschallHub.kext"
+if File.exists?("/Library/Extensions/UltraschallHub.kext")
+  puts "    first unload (will often fail, but will cause UltraschallHub's performAudioEngineStop to be called)"
+  `sudo kextunload /Library/Extensions/UltraschallHub.kext`
   puts "    second unload (this one should work)"
-  `sudo kextunload /Library/Extensions/Ultraschall.kext`
+  `sudo kextunload /Library/Extensions/UltraschallHub.kext`
   puts "    removing"
-  puts `sudo rm -rf /Library/Extensions/Ultraschall.kext`
+  puts `sudo rm -rf /Library/Extensions/UltraschallHub.kext`
 end
 
 puts "  Copying to /Library/Extensions and loading kext"
-`sudo cp -rv Ultraschall.kext /Library/Extensions`
-`sudo kextutil -t /Library/Extensions/Ultraschall.kext`
-`sudo kextload /Library/Extensions/Ultraschall.kext`
+`sudo cp -rv ../Build/UltraschallHub.kext /Library/Extensions`
+`sudo kextutil -t /Library/Extensions/UltraschallHub.kext`
+`sudo kextload /Library/Extensions/UltraschallHub.kext`
 `sudo touch /Library/Extensions`
 
 puts "  Done."

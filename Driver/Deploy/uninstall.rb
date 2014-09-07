@@ -37,14 +37,14 @@ if File.exists?("/System/Library/Extensions/Soundflower.kext")
   puts `sudo rm -rf /System/Library/Extensions/Soundflower.kext`
 end
 
-puts "  Unloading and removing existing Ultraschall.kext"
-if File.exists?("/Library/Extensions/Ultraschall.kext")
-  puts "    first unload (will often fail, but will cause Ultraschall's performAudioEngineStop to be called)"
-  `sudo kextunload /Library/Extensions/Ultraschall.kext`
+puts "  Unloading and removing existing UltraschallHub.kext"
+if File.exists?("/Library/Extensions/UltraschallHub.kext")
+  puts "    first unload (will often fail, but will cause UltraschallHub's performAudioEngineStop to be called)"
+  `sudo kextunload /Library/Extensions/UltraschallHub.kext`
   puts "    second unload (this one should work)"
-  `sudo kextunload /Library/Extensions/Ultraschall.kext`
+  `sudo kextunload /Library/Extensions/UltraschallHub.kext`
   puts "    removing"
-  puts `sudo rm -rf /Library/Extensions/Ultraschall.kext`
+  puts `sudo rm -rf /Library/Extensions/UltraschallHub.kext`
 end
 
 puts "  Done."
