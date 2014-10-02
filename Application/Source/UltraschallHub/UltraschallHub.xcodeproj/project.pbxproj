@@ -18,7 +18,6 @@
 		28EBC00319DDD8E1008C104E /* UltraschallHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBC00219DDD8E1008C104E /* UltraschallHub.m */; };
 		28EBC00519DDD8E1008C104E /* UltraschallHub.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 28EBC00419DDD8E1008C104E /* UltraschallHub.tiff */; };
 		28EBC00819DDD8E1008C104E /* UltraschallHub.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EBC00619DDD8E1008C104E /* UltraschallHub.xib */; };
-		28EBC01319DDD957008C104E /* DNLPreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EBC01119DDD957008C104E /* DNLPreferenceView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 		28EBC00419DDD8E1008C104E /* UltraschallHub.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = UltraschallHub.tiff; sourceTree = "<group>"; };
 		28EBC00719DDD8E1008C104E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UltraschallHub.xib; sourceTree = "<group>"; };
 		28EBC00E19DDD8F9008C104E /* UltraschallHub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UltraschallHub-Bridging-Header.h"; sourceTree = "<group>"; };
-		28EBC01119DDD957008C104E /* DNLPreferenceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNLPreferenceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +79,6 @@
 				28EBC00619DDD8E1008C104E /* UltraschallHub.xib */,
 				28EBBFFE19DDD8E1008C104E /* Supporting Files */,
 				28EBC00E19DDD8F9008C104E /* UltraschallHub-Bridging-Header.h */,
-				28EBC01119DDD957008C104E /* DNLPreferenceView.swift */,
 				2869ABF219DDE44900B7163E /* Media.xcassets */,
 			);
 			path = UltraschallHub;
@@ -181,7 +178,6 @@
 			files = (
 				2869ABFD19DE112100B7163E /* DriverManager.c in Sources */,
 				2869ABFA19DE112100B7163E /* AudioEngine.swift in Sources */,
-				28EBC01319DDD957008C104E /* DNLPreferenceView.swift in Sources */,
 				2869ABFF19DE112100B7163E /* DriverManager.swift in Sources */,
 				2869ABFB19DE112100B7163E /* AudioEngineManager.swift in Sources */,
 				28EBC00319DDD8E1008C104E /* UltraschallHub.m in Sources */,
