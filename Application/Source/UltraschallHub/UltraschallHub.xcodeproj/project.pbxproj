@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2803626119DF03BB00811DA3 /* UltraschallHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2803626019DF03BB00811DA3 /* UltraschallHub.swift */; };
 		2869ABF319DDE44900B7163E /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2869ABF219DDE44900B7163E /* Media.xcassets */; };
 		2869ABFA19DE112100B7163E /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2869ABF419DE112100B7163E /* AudioEngine.swift */; };
 		2869ABFB19DE112100B7163E /* AudioEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2869ABF519DE112100B7163E /* AudioEngineManager.swift */; };
@@ -14,13 +15,13 @@
 		2869ABFD19DE112100B7163E /* DriverManager.c in Sources */ = {isa = PBXBuildFile; fileRef = 2869ABF719DE112100B7163E /* DriverManager.c */; };
 		2869ABFE19DE112100B7163E /* DriverManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2869ABF819DE112100B7163E /* DriverManager.h */; };
 		2869ABFF19DE112100B7163E /* DriverManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2869ABF919DE112100B7163E /* DriverManager.swift */; };
-		28EBC00119DDD8E1008C104E /* UltraschallHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 28EBC00019DDD8E1008C104E /* UltraschallHub.h */; };
-		28EBC00319DDD8E1008C104E /* UltraschallHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBC00219DDD8E1008C104E /* UltraschallHub.m */; };
+		2869AC0719DE94BC00B7163E /* HelperTool.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2869AC0619DE94A900B7163E /* HelperTool.sh */; };
 		28EBC00519DDD8E1008C104E /* UltraschallHub.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 28EBC00419DDD8E1008C104E /* UltraschallHub.tiff */; };
 		28EBC00819DDD8E1008C104E /* UltraschallHub.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EBC00619DDD8E1008C104E /* UltraschallHub.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2803626019DF03BB00811DA3 /* UltraschallHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UltraschallHub.swift; sourceTree = "<group>"; };
 		2869ABF219DDE44900B7163E /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		2869ABF419DE112100B7163E /* AudioEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		2869ABF519DE112100B7163E /* AudioEngineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEngineManager.swift; sourceTree = "<group>"; };
@@ -28,10 +29,9 @@
 		2869ABF719DE112100B7163E /* DriverManager.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DriverManager.c; sourceTree = "<group>"; };
 		2869ABF819DE112100B7163E /* DriverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverManager.h; sourceTree = "<group>"; };
 		2869ABF919DE112100B7163E /* DriverManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverManager.swift; sourceTree = "<group>"; };
+		2869AC0619DE94A900B7163E /* HelperTool.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = HelperTool.sh; sourceTree = "<group>"; };
 		28EBBFFB19DDD8E1008C104E /* UltraschallHub.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraschallHub.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		28EBBFFF19DDD8E1008C104E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		28EBC00019DDD8E1008C104E /* UltraschallHub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UltraschallHub.h; sourceTree = "<group>"; };
-		28EBC00219DDD8E1008C104E /* UltraschallHub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UltraschallHub.m; sourceTree = "<group>"; };
 		28EBC00419DDD8E1008C104E /* UltraschallHub.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = UltraschallHub.tiff; sourceTree = "<group>"; };
 		28EBC00719DDD8E1008C104E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UltraschallHub.xib; sourceTree = "<group>"; };
 		28EBC00E19DDD8F9008C104E /* UltraschallHub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UltraschallHub-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -48,6 +48,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2869AC0019DE851100B7163E /* AudioEngine */ = {
+			isa = PBXGroup;
+			children = (
+				2869ABF419DE112100B7163E /* AudioEngine.swift */,
+				2869ABF519DE112100B7163E /* AudioEngineManager.swift */,
+				2869ABF619DE112100B7163E /* AudioEngineTemplate.plist */,
+				2869ABF719DE112100B7163E /* DriverManager.c */,
+				2869ABF819DE112100B7163E /* DriverManager.h */,
+				2869ABF919DE112100B7163E /* DriverManager.swift */,
+			);
+			name = AudioEngine;
+			sourceTree = "<group>";
+		};
+		2869AC0119DE852900B7163E /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				28EBC00419DDD8E1008C104E /* UltraschallHub.tiff */,
+				28EBC00619DDD8E1008C104E /* UltraschallHub.xib */,
+				2803626019DF03BB00811DA3 /* UltraschallHub.swift */,
+			);
+			name = UserInterface;
+			sourceTree = "<group>";
+		};
 		28EBBFF119DDD8E1008C104E = {
 			isa = PBXGroup;
 			children = (
@@ -67,19 +90,12 @@
 		28EBBFFD19DDD8E1008C104E /* UltraschallHub */ = {
 			isa = PBXGroup;
 			children = (
-				2869ABF419DE112100B7163E /* AudioEngine.swift */,
-				2869ABF519DE112100B7163E /* AudioEngineManager.swift */,
-				2869ABF619DE112100B7163E /* AudioEngineTemplate.plist */,
-				2869ABF719DE112100B7163E /* DriverManager.c */,
-				2869ABF819DE112100B7163E /* DriverManager.h */,
-				2869ABF919DE112100B7163E /* DriverManager.swift */,
-				28EBC00019DDD8E1008C104E /* UltraschallHub.h */,
-				28EBC00219DDD8E1008C104E /* UltraschallHub.m */,
-				28EBC00419DDD8E1008C104E /* UltraschallHub.tiff */,
-				28EBC00619DDD8E1008C104E /* UltraschallHub.xib */,
+				2869AC0119DE852900B7163E /* UserInterface */,
+				2869AC0019DE851100B7163E /* AudioEngine */,
 				28EBBFFE19DDD8E1008C104E /* Supporting Files */,
 				28EBC00E19DDD8F9008C104E /* UltraschallHub-Bridging-Header.h */,
 				2869ABF219DDE44900B7163E /* Media.xcassets */,
+				2869AC0619DE94A900B7163E /* HelperTool.sh */,
 			);
 			path = UltraschallHub;
 			sourceTree = "<group>";
@@ -100,7 +116,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2869ABFE19DE112100B7163E /* DriverManager.h in Headers */,
-				28EBC00119DDD8E1008C104E /* UltraschallHub.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +130,7 @@
 				28EBBFF719DDD8E1008C104E /* Frameworks */,
 				28EBBFF819DDD8E1008C104E /* Headers */,
 				28EBBFF919DDD8E1008C104E /* Resources */,
+				2869AC0519DE8DD300B7163E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -162,6 +178,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2869AC0719DE94BC00B7163E /* HelperTool.sh in Resources */,
 				28EBC00519DDD8E1008C104E /* UltraschallHub.tiff in Resources */,
 				2869ABF319DDE44900B7163E /* Media.xcassets in Resources */,
 				28EBC00819DDD8E1008C104E /* UltraschallHub.xib in Resources */,
@@ -171,16 +188,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2869AC0519DE8DD300B7163E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		28EBBFF619DDD8E1008C104E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2869ABFD19DE112100B7163E /* DriverManager.c in Sources */,
+				2803626119DF03BB00811DA3 /* UltraschallHub.swift in Sources */,
 				2869ABFA19DE112100B7163E /* AudioEngine.swift in Sources */,
 				2869ABFF19DE112100B7163E /* DriverManager.swift in Sources */,
 				2869ABFB19DE112100B7163E /* AudioEngineManager.swift in Sources */,
-				28EBC00319DDD8E1008C104E /* UltraschallHub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
