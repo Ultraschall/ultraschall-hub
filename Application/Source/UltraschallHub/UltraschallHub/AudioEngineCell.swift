@@ -9,11 +9,17 @@
 import Cocoa
 
 @IBDesignable
-class AudioEngineCell: NSTableCellView {
+class AudioEngineCell: NSTableCellView, NSTextFieldDelegate {
     @IBOutlet weak var statusLabel: NSTextField!
     @IBOutlet weak var numChannelsPopUpButton: NSPopUpButton!
     
     var engine: AudioEngine?
+    
+    override func controlTextDidChange(obj: NSNotification) {
+        if (engine != nil) {
+            engine!.engineDescription = statusLabel.stringValue
+        }
+    }
     
     @IBAction func valueChanged(sender: AnyObject) {
         var value = numChannelsPopUpButton.itemTitleAtIndex(numChannelsPopUpButton.indexOfSelectedItem)
@@ -29,5 +35,6 @@ class AudioEngineCell: NSTableCellView {
         self.engine = engine
         statusLabel.stringValue = engine.engineDescription
         numChannelsPopUpButton.selectItemWithTitle(String(engine.engineChannels))
+        statusLabel.delegate = self
     }
 }
