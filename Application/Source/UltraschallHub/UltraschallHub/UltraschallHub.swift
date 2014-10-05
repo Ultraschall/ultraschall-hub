@@ -64,6 +64,11 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
     
     // MARK: - Presets
     
+    @IBAction func newPreset(sender: AnyObject) {
+        audioEngineManager.newPreset()
+        settingsTable.reloadData()
+    }
+    
     @IBAction func savePreset(sender: AnyObject) {
         var documentFolderPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last as? NSURL
         var savePanel = NSSavePanel()
@@ -107,8 +112,9 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
         var menu = NSMenu(title: "Presets");
         menu.insertItemWithTitle("Current Settings...", action: "loadDriverSettings:", keyEquivalent: "", atIndex: 0)
         menu.insertItem(NSMenuItem.separatorItem(), atIndex: 1)
-        menu.insertItemWithTitle("Save Preset...", action: "savePreset:", keyEquivalent: "", atIndex: 2)
-        menu.insertItemWithTitle("Load Preset...", action: "loadPreset:", keyEquivalent: "", atIndex: 3)
+        menu.insertItemWithTitle("New Preset...", action: "newPreset:", keyEquivalent: "", atIndex: 2)
+        menu.insertItemWithTitle("Save Preset...", action: "savePreset:", keyEquivalent: "", atIndex: 3)
+        menu.insertItemWithTitle("Load Preset...", action: "loadPreset:", keyEquivalent: "", atIndex: 4)
         
         for item: AnyObject in menu.itemArray {
             if let menuItem = item as? NSMenuItem {

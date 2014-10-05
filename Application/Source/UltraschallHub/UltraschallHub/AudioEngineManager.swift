@@ -141,6 +141,10 @@ class AudioEngineManager {
     
     // MARK: - Presets
     
+    func newPreset() {
+        audioEngines.removeAllObjects()
+    }
+    
     func loadPreset(path: String) -> Bool {
         var preset = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as NSMutableDictionary?
         if (preset != nil) {    
