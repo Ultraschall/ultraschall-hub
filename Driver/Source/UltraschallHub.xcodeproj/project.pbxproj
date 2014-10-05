@@ -14,7 +14,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		00F55081007288EA11FF4F98 /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = System/Library/Frameworks/Kernel.framework; sourceTree = SDKROOT; };
 		32256D46182ECBBF001D85A3 /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = System/Library/Frameworks/Kernel.framework; sourceTree = SDKROOT; };
 		54D0ADA60A5E329B006380BD /* UltraschallHub.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraschallHub.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		789FB3540D62DE4E00C0F5C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,7 +41,6 @@
 				089C167CFE841241C02AAC07 /* Resources */,
 				32256D44182ECBBF001D85A3 /* Frameworks */,
 				19C28FB6FE9D52B211CA2CBB /* Products */,
-				00F55081007288EA11FF4F98 /* Kernel.framework */,
 			);
 			name = SampleAudioDriver;
 			sourceTree = "<group>";

@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Identifier</key>
+	<string></string>
 	<key>BlockSize</key>
-	<integer>8192</integer>
+	<real>8192</real>
 	<key>Description</key>
 	<string>Ultraschall (Generic)</string>
 	<key>Formats</key>

@@ -24,6 +24,7 @@ public struct DriverManager {
             return false;
         }
     }
+
     
     public func activate(driverPath: String) -> Bool {
         if isLoaded(driverPath) {
