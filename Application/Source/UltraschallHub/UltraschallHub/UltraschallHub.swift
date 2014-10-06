@@ -26,6 +26,7 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
     }
     
     override func mainViewDidLoad() {
+        baseView.invalidateIntrinsicContentSize()
         audioEngineManager = AudioEngineManager()
         refresh()
     }
