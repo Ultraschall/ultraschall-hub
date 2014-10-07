@@ -1,3 +1,10 @@
+//
+//  AudioEngine.swift
+//  UltraschallHub
+//
+//  Created by Daniel Lindenfelser on 04.10.14.
+//
+
 import Cocoa
 
 class AudioEngineManager {
@@ -11,8 +18,8 @@ class AudioEngineManager {
     
     func engineAtIndex(index: Int) -> AudioEngine? {
         var array = audioEngines.keysSortedByValueUsingComparator { (obj1, obj2) -> NSComparisonResult in
-            var engine1 = obj1 as AudioEngine
-            var engine2 = obj2 as AudioEngine
+            let engine1 = obj1 as AudioEngine
+            let engine2 = obj2 as AudioEngine
             return engine1.engineDescription.caseInsensitiveCompare(engine2.engineDescription)
         }
         return audioEngines.objectForKey(array[index]) as AudioEngine?
@@ -72,7 +79,14 @@ class AudioEngineManager {
         return false
     }
     
-    func getEngines(baseDictionary: NSDictionary) -> NSArray? {
+    // MARK: - Driver Configuration
+    
+    private func pathForTemporaryFile() -> String {
+        var uuid = CFUUIDCreateString(nil, CFUUIDCreate(nil)) as String
+        return NSTemporaryDirectory().stringByAppendingPathComponent(uuid)
+    }
+    
+    private func getConfigurationEngines(baseDictionary: NSDictionary) -> NSArray? {
         if let configuration = baseDictionary as? [String: AnyObject] {
             if let personalities = configuration["IOKitPersonalities"]! as? [String : AnyObject] {
                 if let phantom = personalities["PhantomAudioDriver"]! as? [String : AnyObject] {
@@ -85,13 +99,6 @@ class AudioEngineManager {
         return nil
     }
     
-    // MARK: - Driver Configuration
-    
-    func pathForTemporaryFile() -> String {
-        var uuid = CFUUIDCreateString(nil, CFUUIDCreate(nil)) as String
-        return NSTemporaryDirectory().stringByAppendingPathComponent(uuid)
-    }
-    
     func loadDriverConfiguration() {
         loadConfiguration("/Library/Extensions/UltraschallHub.kext/Contents/Info.plist")
     }
@@ -99,16 +106,13 @@ class AudioEngineManager {
     func loadConfiguration(path: String) -> Bool {
         audioEngines.removeAllObjects()
         
-        var configuration = NSDictionary(contentsOfFile: path)
-        if configuration == nil {
-            return false
-        }
-        
-        var engines = getEngines(configuration!)
-        for engine in engines! {
-            var newEngine = AudioEngine.fromDictionary(engine as NSDictionary)
-            if newEngine != nil {
-                audioEngines[newEngine!.engineIdentifier] = newEngine
+        if let configuration = NSDictionary(contentsOfFile: path) {
+            if let engines = getConfigurationEngines(configuration) {
+                for engine in engines {
+                    if let newEngine = AudioEngine.fromDictionary(engine as NSDictionary) {
+                        audioEngines[newEngine.engineIdentifier] = newEngine
+                    }
+                }
             }
         }
         
@@ -131,7 +135,7 @@ class AudioEngineManager {
                 engines.removeAllObjects()
                 for kv in audioEngines {
                     var engine = kv.value as AudioEngine
-                    engines.insertObject(engine.getDictionary()!, atIndex: 0);
+                    engines.insertObject(engine.asDictionary()!, atIndex: 0);
                 }
                 return configuration!.writeToFile(path, atomically: true)
             }

@@ -8,14 +8,12 @@
         <customObject id="-2" userLabel="File's Owner" customClass="UltraschallHub">
             <connections>
                 <outlet property="_window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
-                <outlet property="baseView" destination="se5-gp-TjO" id="OPJ-Yy-oQi"/>
                 <outlet property="mainView" destination="se5-gp-TjO" id="KXA-kR-meq"/>
                 <outlet property="presetButton" destination="a3k-jp-HU7" id="71S-Pd-c5z"/>
                 <outlet property="refreshButton" destination="LDe-P8-tNj" id="PHi-5k-0uK"/>
                 <outlet property="settingsTable" destination="vtz-Ov-d8q" id="uy3-bJ-N4T"/>
                 <outlet property="statusLabel" destination="Gsv-C3-WiK" id="N7Z-lb-B32"/>
                 <outlet property="unloadAndLoadButton" destination="tVJ-7U-M17" id="KG2-Du-QkR"/>
-                <outlet property="window" destination="F0z-JX-Cv5" id="sAj-fg-1zT"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -45,9 +43,9 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LDe-P8-tNj">
-                        <rect key="frame" x="-6" y="79" width="160" height="32"/>
+                        <rect key="frame" x="-6" y="79" width="172" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="148" id="GaC-ph-KhP"/>
+                            <constraint firstAttribute="width" constant="160" id="GaC-ph-KhP"/>
                         </constraints>
                         <buttonCell key="cell" type="push" title="Update Settings" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0aA-jN-x9X">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -211,8 +209,15 @@
                             <action selector="presetButtonPressed:" target="-2" id="e0D-w7-xBU"/>
                         </connections>
                     </button>
+                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OVo-mb-LpE">
+                        <rect key="frame" x="610" y="10" width="25" height="25"/>
+                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="duN-9b-ubP">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tVJ-7U-M17">
-                        <rect key="frame" x="-6" y="46" width="160" height="32"/>
+                        <rect key="frame" x="-6" y="46" width="172" height="32"/>
                         <buttonCell key="cell" type="push" title="Unload Driver" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8bk-0T-SOf">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -221,16 +226,9 @@
                             </connections>
                         </buttonCell>
                     </button>
-                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OVo-mb-LpE">
-                        <rect key="frame" x="610" y="10" width="25" height="25"/>
-                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="duN-9b-ubP">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="QVi-9p-sGF" firstAttribute="leading" secondItem="LDe-P8-tNj" secondAttribute="trailing" constant="35" id="08r-T5-Jhz"/>
+                    <constraint firstItem="QVi-9p-sGF" firstAttribute="leading" secondItem="LDe-P8-tNj" secondAttribute="trailing" constant="23" id="08r-T5-Jhz"/>
                     <constraint firstItem="OVo-mb-LpE" firstAttribute="top" secondItem="QVi-9p-sGF" secondAttribute="bottom" constant="35" id="1mj-E9-8Wf"/>
                     <constraint firstAttribute="bottom" secondItem="OVo-mb-LpE" secondAttribute="bottom" constant="13" id="3a9-HF-MKU"/>
                     <constraint firstItem="ArF-Ym-U4T" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="22" id="67B-Xf-Ylw"/>

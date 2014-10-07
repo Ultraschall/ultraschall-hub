@@ -1,3 +1,10 @@
+//
+//  AudioEngine.swift
+//  UltraschallHub
+//
+//  Created by Daniel Lindenfelser on 04.10.14.
+//
+
 import Cocoa
 
 class AudioEngine : NSObject, NSCoding {
@@ -9,18 +16,6 @@ class AudioEngine : NSObject, NSCoding {
         self.engineIdentifier = CFUUIDCreateString(nil, CFUUIDCreate(nil))
         self.engineDescription = "Ultraschall (Generic)"
         self.engineChannels = 2
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        self.engineIdentifier = aDecoder.decodeObjectForKey("engineIdentifier") as String
-        self.engineDescription  = aDecoder.decodeObjectForKey("engineDescription") as String
-        self.engineChannels = aDecoder.decodeObjectForKey("engineChannels") as Int
-    }
-    
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(engineDescription, forKey: "engineDescription")
-        aCoder.encodeObject(engineChannels, forKey: "engineChannels")
-        aCoder.encodeObject(engineIdentifier, forKey: "engineIdentifier")
     }
     
     init(description: String, channels: Int) {
@@ -36,16 +31,11 @@ class AudioEngine : NSObject, NSCoding {
     }
     
     class func fromTemplate() -> AudioEngine? {
-        if let template = NSDictionary(contentsOfFile: "AudioEngineTemplate.plist") as? [String : AnyObject] {
-            if let description = template["Description"]! as? String {
-                if let formats = template["Formats"]! as? [AnyObject] {
-                    if let numChannels = formats[0]["IOAudioStreamNumChannels"] as? Int {
-                        return AudioEngine(description: description, channels: numChannels)
-                    }
-                }
+        if let file = UltraschallHub.preferencePaneBundle().pathForResource("AudioEngineTemplate", ofType: "plist") {
+            if let template = NSDictionary(contentsOfFile: file) {
+                return fromDictionary(template)
             }
         }
-
         return nil
     }
 
@@ -66,14 +56,29 @@ class AudioEngine : NSObject, NSCoding {
         return nil
     }
     
-    func getDictionary() -> NSDictionary? {
-        var file = UltraschallHub.preferencePaneBundle().pathForResource("AudioEngineTemplate", ofType: "plist")
-        var template = NSMutableDictionary(contentsOfFile: file!)
-        template?.setObject(engineDescription, forKey: "Description")
-        template?.setObject(engineIdentifier, forKey: "Identifier")
-        if let formats = template!["Formats"]! as? NSMutableDictionary {
-            template?.setObject(engineChannels, forKey: "IOAudioStreamNumChannels")
+    func asDictionary() -> NSDictionary? {
+        if let file = UltraschallHub.preferencePaneBundle().pathForResource("AudioEngineTemplate", ofType: "plist") {
+            if let template = NSMutableDictionary(contentsOfFile: file) {
+                template.setObject(engineDescription, forKey: "Description")
+                template.setObject(engineIdentifier, forKey: "Identifier")
+                if let formats = template["Formats"]! as? NSMutableDictionary {
+                    template.setObject(engineChannels, forKey: "IOAudioStreamNumChannels")
+                    return template as NSDictionary?
+                }
+            }
         }
-        return template as NSDictionary?
+        return nil
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        self.engineIdentifier = aDecoder.decodeObjectForKey("engineIdentifier") as String
+        self.engineDescription  = aDecoder.decodeObjectForKey("engineDescription") as String
+        self.engineChannels = aDecoder.decodeObjectForKey("engineChannels") as Int
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(engineDescription, forKey: "engineDescription")
+        aCoder.encodeObject(engineChannels, forKey: "engineChannels")
+        aCoder.encodeObject(engineIdentifier, forKey: "engineIdentifier")
     }
 }

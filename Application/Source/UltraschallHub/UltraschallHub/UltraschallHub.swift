@@ -3,22 +3,22 @@
 //  UltraschallHub
 //
 //  Created by Daniel Lindenfelser on 03.10.14.
+//  Copyright (c) 2014 Daniel Lindenfelser. All rights reserved.
 //
 
 import Cocoa
 import PreferencePanes
 
 class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelegate {
-    var audioEngineManager: AudioEngineManager!
+    let audioEngineManager: AudioEngineManager! = AudioEngineManager()
 
-    @IBOutlet var window: NSWindow!
     @IBOutlet weak var settingsTable: NSTableView!
+    
     @IBOutlet weak var refreshButton: NSButton!
     @IBOutlet weak var unloadAndLoadButton: NSButton!
     @IBOutlet weak var presetButton: NSButton!
     
     @IBOutlet weak var statusLabel: NSTextField!
-    @IBOutlet weak var baseView: NSView!
     
     class func preferencePaneBundle() -> NSBundle! {
         var bundle = NSBundle(path: NSBundle(forClass: self).bundlePath + "/Contents/Resources")
@@ -26,8 +26,7 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
     }
     
     override func mainViewDidLoad() {
-        baseView.invalidateIntrinsicContentSize()
-        audioEngineManager = AudioEngineManager()
+        mainView.invalidateIntrinsicContentSize()
         refresh()
     }
     
@@ -71,36 +70,40 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
     }
     
     @IBAction func savePreset(sender: AnyObject) {
-        var documentFolderPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last as? NSURL
-        var savePanel = NSSavePanel()
-        savePanel.directoryURL = documentFolderPath
+        let savePanel = NSSavePanel()
         savePanel.allowedFileTypes = [ "preset" ]
         savePanel.allowsOtherFileTypes = true
         savePanel.extensionHidden = true
         savePanel.canCreateDirectories = true
         savePanel.title = "Save preset..."
-        var result = savePanel.runModal()
+        let result = savePanel.runModal()
         
         if (result == NSOKButton) {
-            var path = savePanel.URL!.path!
-            var status = audioEngineManager.savePreset(path)
+            if let url = savePanel.URL {
+                if let path = url.path {
+                    // TODO: handle fails
+                    var status = audioEngineManager.savePreset(path)
+                }
+            }
         }
     }
     
     @IBAction func loadPreset(sender: AnyObject) {
-        var documentFolderPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last as? NSURL
-        var openPanel = NSOpenPanel()
-        openPanel.directoryURL = documentFolderPath
+        let openPanel = NSOpenPanel()
         openPanel.allowedFileTypes = [ "preset" ]
         openPanel.allowsOtherFileTypes = true
         openPanel.extensionHidden = true
         openPanel.canChooseFiles = true
         openPanel.title = "Load preset..."
-        var result = openPanel.runModal()
+        let result = openPanel.runModal()
         if (result == NSOKButton) {
-            var path = openPanel.URL!.path!
-            var status = audioEngineManager.loadPreset(path)
-            settingsTable.reloadData()
+            if let url = openPanel.URL {
+                if let path = url.path {
+                    // TODO: handle fails
+                    var status = audioEngineManager.loadPreset(path)
+                    settingsTable.reloadData()
+                }
+            }
         }
     }
     
@@ -110,7 +113,7 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
     }
     
     @IBAction func presetButtonPressed(sender: AnyObject) {
-        var menu = NSMenu(title: "Presets");
+        let menu = NSMenu(title: "Presets");
         menu.insertItemWithTitle("Current Settings...", action: "loadDriverSettings:", keyEquivalent: "", atIndex: 0)
         menu.insertItem(NSMenuItem.separatorItem(), atIndex: 1)
         menu.insertItemWithTitle("New Preset...", action: "newPreset:", keyEquivalent: "", atIndex: 2)
@@ -124,7 +127,7 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
         }
         
         var location = presetButton.frame.origin
-        menu.popUpMenuPositioningItem(menu.itemAtIndex(0)!, atLocation: location, inView: baseView)
+        menu.popUpMenuPositioningItem(menu.itemAtIndex(0)!, atLocation: location, inView: mainView)
     }
     
     // MARK: - Driver Status
