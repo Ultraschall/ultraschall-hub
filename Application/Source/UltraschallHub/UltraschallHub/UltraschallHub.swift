@@ -27,11 +27,6 @@ class UltraschallHub: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     @IBOutlet weak var statusLabel: NSTextField!
     
-    class func preferencePaneBundle() -> NSBundle! {
-        var bundle = NSBundle(path: NSBundle(forClass: self).bundlePath + "/Contents/Resources")
-        return bundle
-    }
-    
     // MARK: - Table View
     func numberOfRowsInTableView(aTableView: NSTableView!) -> Int
     {
@@ -156,7 +151,7 @@ class UltraschallHub: NSViewController, NSTableViewDataSource, NSTableViewDelega
         }
     }
     
-    @IBAction func refreshPressed(sender: AnyObject) {
+    @IBAction func applyPressed(sender: AnyObject) {
         // TODO: Real Save Configuration Code
         audioEngineManager.saveConfiguration("/Users/danlin/Desktop/test.plist")
         refresh();
