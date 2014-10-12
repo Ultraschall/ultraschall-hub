@@ -61,9 +61,11 @@ class AudioEngine : NSObject, NSCoding {
             if let template = NSMutableDictionary(contentsOfFile: file) {
                 template.setObject(engineDescription, forKey: "Description")
                 template.setObject(engineIdentifier, forKey: "Identifier")
-                if let formats = template["Formats"]! as? NSMutableDictionary {
-                    template.setObject(engineChannels, forKey: "IOAudioStreamNumChannels")
-                    return template as NSDictionary?
+                if let formats = template.objectForKey("Formats") as? NSArray {
+                    if let element = formats[0] as? NSMutableDictionary {
+                        element.setObject(engineChannels, forKey: "IOAudioStreamNumChannels")
+                        return template as NSDictionary?
+                    }
                 }
             }
         }

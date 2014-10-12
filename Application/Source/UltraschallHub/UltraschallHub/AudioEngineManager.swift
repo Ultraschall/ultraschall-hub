@@ -131,13 +131,16 @@ class AudioEngineManager {
         
         if let personalities = configuration!["IOKitPersonalities"]! as? NSDictionary {
             if let phantom = personalities["PhantomAudioDriver"]! as? NSMutableDictionary {
-                var engines = phantom["AudioEngines"] as NSMutableArray
+                if var engines = phantom["AudioEngines"] as? NSMutableArray {
                 engines.removeAllObjects()
                 for kv in audioEngines {
                     var engine = kv.value as AudioEngine
-                    engines.insertObject(engine.asDictionary()!, atIndex: 0);
+                    if let data = engine.asDictionary() {
+                        engines.insertObject(data, atIndex: 0);
+                    }
                 }
                 return configuration!.writeToFile(path, atomically: true)
+                }
             }
         }
         return false
