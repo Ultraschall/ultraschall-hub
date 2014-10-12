@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2803626119DF03BB00811DA3 /* UltraschallHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2803626019DF03BB00811DA3 /* UltraschallHub.swift */; };
+		2864DD2319EAB25900A6A973 /* StatusBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2864DD2219EAB25900A6A973 /* StatusBubble.swift */; };
 		2869ABFA19DE112100B7163E /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2869ABF419DE112100B7163E /* AudioEngine.swift */; };
 		2869ABFB19DE112100B7163E /* AudioEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2869ABF519DE112100B7163E /* AudioEngineManager.swift */; };
 		2869ABFC19DE112100B7163E /* AudioEngineTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2869ABF619DE112100B7163E /* AudioEngineTemplate.plist */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		2803626019DF03BB00811DA3 /* UltraschallHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UltraschallHub.swift; sourceTree = "<group>"; };
+		2864DD2219EAB25900A6A973 /* StatusBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBubble.swift; sourceTree = "<group>"; };
 		2869ABF419DE112100B7163E /* AudioEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		2869ABF519DE112100B7163E /* AudioEngineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEngineManager.swift; sourceTree = "<group>"; };
 		2869ABF619DE112100B7163E /* AudioEngineTemplate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AudioEngineTemplate.plist; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				2803626019DF03BB00811DA3 /* UltraschallHub.swift */,
 				28B89EC519DF82BA00087BDB /* GradiantView.swift */,
 				28C2236219E1364600BF6F14 /* AudioEngineCell.swift */,
+				2864DD2219EAB25900A6A973 /* StatusBubble.swift */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				2869ABFA19DE112100B7163E /* AudioEngine.swift in Sources */,
 				2869ABFF19DE112100B7163E /* DriverManager.swift in Sources */,
 				28B89EC619DF82BA00087BDB /* GradiantView.swift in Sources */,
+				2864DD2319EAB25900A6A973 /* StatusBubble.swift in Sources */,
 				2869ABFB19DE112100B7163E /* AudioEngineManager.swift in Sources */,
 				28C2236319E1364600BF6F14 /* AudioEngineCell.swift in Sources */,
 			);

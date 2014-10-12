@@ -14,6 +14,8 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
 
     @IBOutlet weak var settingsTable: NSTableView!
     
+    @IBOutlet weak var statusBubble: StatusBubble!
+    
     @IBOutlet weak var refreshButton: NSButton!
     @IBOutlet weak var unloadAndLoadButton: NSButton!
     @IBOutlet weak var presetButton: NSButton!
@@ -133,16 +135,25 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
     // MARK: - Driver Status
     func refresh() {
         if (DriverManager().isLoaded("fm.ultraschall.driver.UltraschallHub")) {
-            unloadAndLoadButton.title = "Unload Driver"
-            setStatusText("Loaded")
+            self.setDriverLoaded(true);
         } else {
-            unloadAndLoadButton.title = "Load Driver"
-            setStatusText("Unloaded")
+
+            self.setDriverLoaded(false);
         }
     }
     
-    func setStatusText(text: NSString!) {
-        statusLabel.stringValue = "Status: " + text
+    func setDriverLoaded(loaded: Bool!) {
+        if (loaded == true) {
+            statusLabel.stringValue = "Driver: loaded"
+            unloadAndLoadButton.title = "Unload Driver"
+            statusBubble.active = true
+            statusBubble.needsDisplay = true
+        } else {
+            statusLabel.stringValue = "Driver: unloaded"
+            unloadAndLoadButton.title = "Load Driver"
+            statusBubble.active = false
+            statusBubble.needsDisplay = true
+        }
     }
     
     @IBAction func refreshPressed(sender: AnyObject) {
@@ -153,5 +164,7 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
         
     @IBAction func loadUnloadPressed(sender: AnyObject) {
         // TODO: Load and Unload Driver Code
+        statusBubble.active = !statusBubble.active;
+        setDriverLoaded(statusBubble.active);
     }
 }
