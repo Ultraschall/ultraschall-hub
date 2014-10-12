@@ -34,7 +34,5 @@ class StatusBubble: NSView {
             ovalPath.lineWidth = 1
             ovalPath.stroke()
         }
-        // Drawing code here.
     }
-    
 }

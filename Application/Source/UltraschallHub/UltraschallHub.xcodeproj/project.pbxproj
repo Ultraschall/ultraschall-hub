@@ -7,42 +7,62 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2803626119DF03BB00811DA3 /* UltraschallHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2803626019DF03BB00811DA3 /* UltraschallHub.swift */; };
-		2864DD2319EAB25900A6A973 /* StatusBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2864DD2219EAB25900A6A973 /* StatusBubble.swift */; };
-		2869ABFA19DE112100B7163E /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2869ABF419DE112100B7163E /* AudioEngine.swift */; };
-		2869ABFB19DE112100B7163E /* AudioEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2869ABF519DE112100B7163E /* AudioEngineManager.swift */; };
-		2869ABFC19DE112100B7163E /* AudioEngineTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2869ABF619DE112100B7163E /* AudioEngineTemplate.plist */; };
-		2869ABFD19DE112100B7163E /* DriverManager.c in Sources */ = {isa = PBXBuildFile; fileRef = 2869ABF719DE112100B7163E /* DriverManager.c */; };
-		2869ABFE19DE112100B7163E /* DriverManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2869ABF819DE112100B7163E /* DriverManager.h */; };
-		2869ABFF19DE112100B7163E /* DriverManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2869ABF919DE112100B7163E /* DriverManager.swift */; };
-		288B9CBA19E247DF000EDF4E /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288B9CB919E247DF000EDF4E /* Media.xcassets */; };
-		28B89EC619DF82BA00087BDB /* GradiantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B89EC519DF82BA00087BDB /* GradiantView.swift */; };
-		28C2236319E1364600BF6F14 /* AudioEngineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2236219E1364600BF6F14 /* AudioEngineCell.swift */; };
-		28EBC00519DDD8E1008C104E /* UltraschallHub.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 28EBC00419DDD8E1008C104E /* UltraschallHub.tiff */; };
-		28EBC00819DDD8E1008C104E /* UltraschallHub.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EBC00619DDD8E1008C104E /* UltraschallHub.xib */; };
+		28F406BD19EB060600593AD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F406BC19EB060600593AD2 /* AppDelegate.swift */; };
+		28F406BF19EB060600593AD2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F406BE19EB060600593AD2 /* Images.xcassets */; };
+		28F406C219EB060600593AD2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F406C019EB060600593AD2 /* MainMenu.xib */; };
+		28F406CE19EB060600593AD2 /* UltraschallHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F406CD19EB060600593AD2 /* UltraschallHubTests.swift */; };
+		28F406D819EB069600593AD2 /* AudioEngineTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28F406D719EB069600593AD2 /* AudioEngineTemplate.plist */; };
+		28F406DC19EB087800593AD2 /* GradiantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F406DA19EB087800593AD2 /* GradiantView.swift */; };
+		28F406DD19EB087800593AD2 /* StatusBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F406DB19EB087800593AD2 /* StatusBubble.swift */; };
+		28F406DF19EB097600593AD2 /* AudioEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F406DE19EB097600593AD2 /* AudioEngineManager.swift */; };
+		28F406E119EB098300593AD2 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F406E019EB098300593AD2 /* AudioEngine.swift */; };
+		28F406E319EB099200593AD2 /* AudioEngineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F406E219EB099200593AD2 /* AudioEngineCell.swift */; };
+		28F406E519EB0A4100593AD2 /* UltraschallHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F406E419EB0A4100593AD2 /* UltraschallHub.swift */; };
+		28F406EC19EB0B3200593AD2 /* DriverManager.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F406E919EB0B3200593AD2 /* DriverManager.c */; };
+		28F406ED19EB0B3200593AD2 /* DriverManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F406EB19EB0B3200593AD2 /* DriverManager.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		28F406C819EB060600593AD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28F406AF19EB060600593AD2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28F406B619EB060600593AD2;
+			remoteInfo = UltraschallHub;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		2803626019DF03BB00811DA3 /* UltraschallHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UltraschallHub.swift; sourceTree = "<group>"; };
-		2864DD2219EAB25900A6A973 /* StatusBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBubble.swift; sourceTree = "<group>"; };
-		2869ABF419DE112100B7163E /* AudioEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
-		2869ABF519DE112100B7163E /* AudioEngineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEngineManager.swift; sourceTree = "<group>"; };
-		2869ABF619DE112100B7163E /* AudioEngineTemplate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AudioEngineTemplate.plist; sourceTree = "<group>"; };
-		2869ABF719DE112100B7163E /* DriverManager.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DriverManager.c; sourceTree = "<group>"; };
-		2869ABF819DE112100B7163E /* DriverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverManager.h; sourceTree = "<group>"; };
-		2869ABF919DE112100B7163E /* DriverManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverManager.swift; sourceTree = "<group>"; };
-		288B9CB919E247DF000EDF4E /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
-		28B89EC519DF82BA00087BDB /* GradiantView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradiantView.swift; sourceTree = "<group>"; };
-		28C2236219E1364600BF6F14 /* AudioEngineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEngineCell.swift; sourceTree = "<group>"; };
-		28EBBFFB19DDD8E1008C104E /* UltraschallHub.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraschallHub.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
-		28EBBFFF19DDD8E1008C104E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		28EBC00419DDD8E1008C104E /* UltraschallHub.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = UltraschallHub.tiff; sourceTree = "<group>"; };
-		28EBC00719DDD8E1008C104E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UltraschallHub.xib; sourceTree = "<group>"; };
-		28EBC00E19DDD8F9008C104E /* UltraschallHub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UltraschallHub-Bridging-Header.h"; sourceTree = "<group>"; };
+		28F406B719EB060600593AD2 /* UltraschallHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltraschallHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		28F406BB19EB060600593AD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28F406BC19EB060600593AD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		28F406BE19EB060600593AD2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		28F406C119EB060600593AD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		28F406C719EB060600593AD2 /* UltraschallHubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraschallHubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28F406CC19EB060600593AD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28F406CD19EB060600593AD2 /* UltraschallHubTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltraschallHubTests.swift; sourceTree = "<group>"; };
+		28F406D719EB069600593AD2 /* AudioEngineTemplate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AudioEngineTemplate.plist; sourceTree = "<group>"; };
+		28F406DA19EB087800593AD2 /* GradiantView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradiantView.swift; sourceTree = "<group>"; };
+		28F406DB19EB087800593AD2 /* StatusBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBubble.swift; sourceTree = "<group>"; };
+		28F406DE19EB097600593AD2 /* AudioEngineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEngineManager.swift; sourceTree = "<group>"; };
+		28F406E019EB098300593AD2 /* AudioEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		28F406E219EB099200593AD2 /* AudioEngineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEngineCell.swift; sourceTree = "<group>"; };
+		28F406E419EB0A4100593AD2 /* UltraschallHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UltraschallHub.swift; sourceTree = "<group>"; };
+		28F406E819EB0B3100593AD2 /* UltraschallHub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UltraschallHub-Bridging-Header.h"; sourceTree = "<group>"; };
+		28F406E919EB0B3200593AD2 /* DriverManager.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DriverManager.c; sourceTree = "<group>"; };
+		28F406EA19EB0B3200593AD2 /* DriverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverManager.h; sourceTree = "<group>"; };
+		28F406EB19EB0B3200593AD2 /* DriverManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		28EBBFF719DDD8E1008C104E /* Frameworks */ = {
+		28F406B419EB060600593AD2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28F406C419EB060600593AD2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -52,90 +72,105 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2869AC0019DE851100B7163E /* AudioEngine */ = {
+		28F406AE19EB060600593AD2 = {
 			isa = PBXGroup;
 			children = (
-				2869ABF419DE112100B7163E /* AudioEngine.swift */,
-				2869ABF519DE112100B7163E /* AudioEngineManager.swift */,
-				2869ABF619DE112100B7163E /* AudioEngineTemplate.plist */,
-				2869ABF719DE112100B7163E /* DriverManager.c */,
-				2869ABF819DE112100B7163E /* DriverManager.h */,
-				2869ABF919DE112100B7163E /* DriverManager.swift */,
-			);
-			name = AudioEngine;
-			sourceTree = "<group>";
-		};
-		2869AC0119DE852900B7163E /* UserInterface */ = {
-			isa = PBXGroup;
-			children = (
-				28EBC00419DDD8E1008C104E /* UltraschallHub.tiff */,
-				28EBC00619DDD8E1008C104E /* UltraschallHub.xib */,
-				2803626019DF03BB00811DA3 /* UltraschallHub.swift */,
-				28B89EC519DF82BA00087BDB /* GradiantView.swift */,
-				28C2236219E1364600BF6F14 /* AudioEngineCell.swift */,
-				2864DD2219EAB25900A6A973 /* StatusBubble.swift */,
-			);
-			name = UserInterface;
-			sourceTree = "<group>";
-		};
-		28EBBFF119DDD8E1008C104E = {
-			isa = PBXGroup;
-			children = (
-				288B9CB919E247DF000EDF4E /* Media.xcassets */,
-				28EBBFFD19DDD8E1008C104E /* UltraschallHub */,
-				28EBBFFC19DDD8E1008C104E /* Products */,
+				28F406B919EB060600593AD2 /* UltraschallHub */,
+				28F406CA19EB060600593AD2 /* UltraschallHubTests */,
+				28F406B819EB060600593AD2 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		28EBBFFC19DDD8E1008C104E /* Products */ = {
+		28F406B819EB060600593AD2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				28EBBFFB19DDD8E1008C104E /* UltraschallHub.prefPane */,
+				28F406B719EB060600593AD2 /* UltraschallHub.app */,
+				28F406C719EB060600593AD2 /* UltraschallHubTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		28EBBFFD19DDD8E1008C104E /* UltraschallHub */ = {
+		28F406B919EB060600593AD2 /* UltraschallHub */ = {
 			isa = PBXGroup;
 			children = (
-				2869AC0119DE852900B7163E /* UserInterface */,
-				2869AC0019DE851100B7163E /* AudioEngine */,
-				28EBBFFE19DDD8E1008C104E /* Supporting Files */,
-				28EBC00E19DDD8F9008C104E /* UltraschallHub-Bridging-Header.h */,
+				28F406E719EB0B1D00593AD2 /* AudioEngine */,
+				28F406E619EB0B1300593AD2 /* DriverManager */,
+				28F406D919EB086600593AD2 /* Views */,
+				28F406BC19EB060600593AD2 /* AppDelegate.swift */,
+				28F406BE19EB060600593AD2 /* Images.xcassets */,
+				28F406C019EB060600593AD2 /* MainMenu.xib */,
+				28F406BA19EB060600593AD2 /* Supporting Files */,
+				28F406E419EB0A4100593AD2 /* UltraschallHub.swift */,
 			);
 			path = UltraschallHub;
 			sourceTree = "<group>";
 		};
-		28EBBFFE19DDD8E1008C104E /* Supporting Files */ = {
+		28F406BA19EB060600593AD2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				28EBBFFF19DDD8E1008C104E /* Info.plist */,
+				28F406E819EB0B3100593AD2 /* UltraschallHub-Bridging-Header.h */,
+				28F406D719EB069600593AD2 /* AudioEngineTemplate.plist */,
+				28F406BB19EB060600593AD2 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		28F406CA19EB060600593AD2 /* UltraschallHubTests */ = {
+			isa = PBXGroup;
+			children = (
+				28F406CD19EB060600593AD2 /* UltraschallHubTests.swift */,
+				28F406CB19EB060600593AD2 /* Supporting Files */,
+			);
+			path = UltraschallHubTests;
+			sourceTree = "<group>";
+		};
+		28F406CB19EB060600593AD2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				28F406CC19EB060600593AD2 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		28F406D919EB086600593AD2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				28F406DA19EB087800593AD2 /* GradiantView.swift */,
+				28F406DB19EB087800593AD2 /* StatusBubble.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		28F406E619EB0B1300593AD2 /* DriverManager */ = {
+			isa = PBXGroup;
+			children = (
+				28F406E919EB0B3200593AD2 /* DriverManager.c */,
+				28F406EA19EB0B3200593AD2 /* DriverManager.h */,
+				28F406EB19EB0B3200593AD2 /* DriverManager.swift */,
+			);
+			name = DriverManager;
+			sourceTree = "<group>";
+		};
+		28F406E719EB0B1D00593AD2 /* AudioEngine */ = {
+			isa = PBXGroup;
+			children = (
+				28F406E019EB098300593AD2 /* AudioEngine.swift */,
+				28F406E219EB099200593AD2 /* AudioEngineCell.swift */,
+				28F406DE19EB097600593AD2 /* AudioEngineManager.swift */,
+			);
+			name = AudioEngine;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		28EBBFF819DDD8E1008C104E /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2869ABFE19DE112100B7163E /* DriverManager.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		28EBBFFA19DDD8E1008C104E /* UltraschallHub */ = {
+		28F406B619EB060600593AD2 /* UltraschallHub */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 28EBC00B19DDD8E1008C104E /* Build configuration list for PBXNativeTarget "UltraschallHub" */;
+			buildConfigurationList = 28F406D119EB060600593AD2 /* Build configuration list for PBXNativeTarget "UltraschallHub" */;
 			buildPhases = (
-				28EBBFF619DDD8E1008C104E /* Sources */,
-				28EBBFF719DDD8E1008C104E /* Frameworks */,
-				28EBBFF819DDD8E1008C104E /* Headers */,
-				28EBBFF919DDD8E1008C104E /* Resources */,
+				28F406B319EB060600593AD2 /* Sources */,
+				28F406B419EB060600593AD2 /* Frameworks */,
+				28F406B519EB060600593AD2 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -143,24 +178,46 @@
 			);
 			name = UltraschallHub;
 			productName = UltraschallHub;
-			productReference = 28EBBFFB19DDD8E1008C104E /* UltraschallHub.prefPane */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 28F406B719EB060600593AD2 /* UltraschallHub.app */;
+			productType = "com.apple.product-type.application";
+		};
+		28F406C619EB060600593AD2 /* UltraschallHubTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28F406D419EB060600593AD2 /* Build configuration list for PBXNativeTarget "UltraschallHubTests" */;
+			buildPhases = (
+				28F406C319EB060600593AD2 /* Sources */,
+				28F406C419EB060600593AD2 /* Frameworks */,
+				28F406C519EB060600593AD2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				28F406C919EB060600593AD2 /* PBXTargetDependency */,
+			);
+			name = UltraschallHubTests;
+			productName = UltraschallHubTests;
+			productReference = 28F406C719EB060600593AD2 /* UltraschallHubTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		28EBBFF219DDD8E1008C104E /* Project object */ = {
+		28F406AF19EB060600593AD2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Daniel Lindenfelser";
 				TargetAttributes = {
-					28EBBFFA19DDD8E1008C104E = {
+					28F406B619EB060600593AD2 = {
 						CreatedOnToolsVersion = 6.1;
+					};
+					28F406C619EB060600593AD2 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 28F406B619EB060600593AD2;
 					};
 				};
 			};
-			buildConfigurationList = 28EBBFF519DDD8E1008C104E /* Build configuration list for PBXProject "UltraschallHub" */;
+			buildConfigurationList = 28F406B219EB060600593AD2 /* Build configuration list for PBXProject "UltraschallHub" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -168,61 +225,85 @@
 				en,
 				Base,
 			);
-			mainGroup = 28EBBFF119DDD8E1008C104E;
-			productRefGroup = 28EBBFFC19DDD8E1008C104E /* Products */;
+			mainGroup = 28F406AE19EB060600593AD2;
+			productRefGroup = 28F406B819EB060600593AD2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				28EBBFFA19DDD8E1008C104E /* UltraschallHub */,
+				28F406B619EB060600593AD2 /* UltraschallHub */,
+				28F406C619EB060600593AD2 /* UltraschallHubTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		28EBBFF919DDD8E1008C104E /* Resources */ = {
+		28F406B519EB060600593AD2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28EBC00519DDD8E1008C104E /* UltraschallHub.tiff in Resources */,
-				28EBC00819DDD8E1008C104E /* UltraschallHub.xib in Resources */,
-				288B9CBA19E247DF000EDF4E /* Media.xcassets in Resources */,
-				2869ABFC19DE112100B7163E /* AudioEngineTemplate.plist in Resources */,
+				28F406BF19EB060600593AD2 /* Images.xcassets in Resources */,
+				28F406C219EB060600593AD2 /* MainMenu.xib in Resources */,
+				28F406D819EB069600593AD2 /* AudioEngineTemplate.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28F406C519EB060600593AD2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		28EBBFF619DDD8E1008C104E /* Sources */ = {
+		28F406B319EB060600593AD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2869ABFD19DE112100B7163E /* DriverManager.c in Sources */,
-				2803626119DF03BB00811DA3 /* UltraschallHub.swift in Sources */,
-				2869ABFA19DE112100B7163E /* AudioEngine.swift in Sources */,
-				2869ABFF19DE112100B7163E /* DriverManager.swift in Sources */,
-				28B89EC619DF82BA00087BDB /* GradiantView.swift in Sources */,
-				2864DD2319EAB25900A6A973 /* StatusBubble.swift in Sources */,
-				2869ABFB19DE112100B7163E /* AudioEngineManager.swift in Sources */,
-				28C2236319E1364600BF6F14 /* AudioEngineCell.swift in Sources */,
+				28F406DC19EB087800593AD2 /* GradiantView.swift in Sources */,
+				28F406E519EB0A4100593AD2 /* UltraschallHub.swift in Sources */,
+				28F406BD19EB060600593AD2 /* AppDelegate.swift in Sources */,
+				28F406ED19EB0B3200593AD2 /* DriverManager.swift in Sources */,
+				28F406E119EB098300593AD2 /* AudioEngine.swift in Sources */,
+				28F406DF19EB097600593AD2 /* AudioEngineManager.swift in Sources */,
+				28F406E319EB099200593AD2 /* AudioEngineCell.swift in Sources */,
+				28F406DD19EB087800593AD2 /* StatusBubble.swift in Sources */,
+				28F406EC19EB0B3200593AD2 /* DriverManager.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28F406C319EB060600593AD2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28F406CE19EB060600593AD2 /* UltraschallHubTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		28F406C919EB060600593AD2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28F406B619EB060600593AD2 /* UltraschallHub */;
+			targetProxy = 28F406C819EB060600593AD2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
-		28EBC00619DDD8E1008C104E /* UltraschallHub.xib */ = {
+		28F406C019EB060600593AD2 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				28EBC00719DDD8E1008C104E /* Base */,
+				28F406C119EB060600593AD2 /* Base */,
 			);
-			name = UltraschallHub.xib;
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		28EBC00919DDD8E1008C104E /* Debug */ = {
+		28F406CF19EB060600593AD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -239,6 +320,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -255,14 +337,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		28EBC00A19DDD8E1008C104E /* Release */ = {
+		28F406D019EB060600593AD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -279,6 +362,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -290,63 +374,106 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
 			name = Release;
 		};
-		28EBC00C19DDD8E1008C104E /* Debug */ = {
+		28F406D219EB060600593AD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = UltraschallHub/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "UltraschallHub/UltraschallHub-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Debug;
 		};
-		28EBC00D19DDD8E1008C104E /* Release */ = {
+		28F406D319EB060600593AD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = UltraschallHub/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(DT_TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "UltraschallHub/UltraschallHub-Bridging-Header.h";
-				WRAPPER_EXTENSION = prefPane;
+			};
+			name = Release;
+		};
+		28F406D519EB060600593AD2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = UltraschallHubTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UltraschallHub.app/Contents/MacOS/UltraschallHub";
+			};
+			name = Debug;
+		};
+		28F406D619EB060600593AD2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = UltraschallHubTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UltraschallHub.app/Contents/MacOS/UltraschallHub";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		28EBBFF519DDD8E1008C104E /* Build configuration list for PBXProject "UltraschallHub" */ = {
+		28F406B219EB060600593AD2 /* Build configuration list for PBXProject "UltraschallHub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				28EBC00919DDD8E1008C104E /* Debug */,
-				28EBC00A19DDD8E1008C104E /* Release */,
+				28F406CF19EB060600593AD2 /* Debug */,
+				28F406D019EB060600593AD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		28EBC00B19DDD8E1008C104E /* Build configuration list for PBXNativeTarget "UltraschallHub" */ = {
+		28F406D119EB060600593AD2 /* Build configuration list for PBXNativeTarget "UltraschallHub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				28EBC00C19DDD8E1008C104E /* Debug */,
-				28EBC00D19DDD8E1008C104E /* Release */,
+				28F406D219EB060600593AD2 /* Debug */,
+				28F406D319EB060600593AD2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28F406D419EB060600593AD2 /* Build configuration list for PBXNativeTarget "UltraschallHubTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28F406D519EB060600593AD2 /* Debug */,
+				28F406D619EB060600593AD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 28EBBFF219DDD8E1008C104E /* Project object */;
+	rootObject = 28F406AF19EB060600593AD2 /* Project object */;
 }

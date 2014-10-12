@@ -2,16 +2,21 @@
 //  UltraschallHub.swift
 //  UltraschallHub
 //
-//  Created by Daniel Lindenfelser on 03.10.14.
+//  Created by Daniel Lindenfelser on 12/10/14.
 //  Copyright (c) 2014 Daniel Lindenfelser. All rights reserved.
 //
 
 import Cocoa
-import PreferencePanes
 
-class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelegate {
+class UltraschallHub: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        refresh()
+    }
+    
     let audioEngineManager: AudioEngineManager! = AudioEngineManager()
-
+    
     @IBOutlet weak var settingsTable: NSTableView!
     
     @IBOutlet weak var statusBubble: StatusBubble!
@@ -25,11 +30,6 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
     class func preferencePaneBundle() -> NSBundle! {
         var bundle = NSBundle(path: NSBundle(forClass: self).bundlePath + "/Contents/Resources")
         return bundle
-    }
-    
-    override func mainViewDidLoad() {
-        mainView.invalidateIntrinsicContentSize()
-        refresh()
     }
     
     // MARK: - Table View
@@ -129,7 +129,7 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
         }
         
         var location = presetButton.frame.origin
-        menu.popUpMenuPositioningItem(menu.itemAtIndex(0)!, atLocation: location, inView: mainView)
+        menu.popUpMenuPositioningItem(menu.itemAtIndex(0)!, atLocation: location, inView: self.view)
     }
     
     // MARK: - Driver Status
@@ -137,7 +137,7 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
         if (DriverManager().isLoaded("fm.ultraschall.driver.UltraschallHub")) {
             self.setDriverLoaded(true);
         } else {
-
+            
             self.setDriverLoaded(false);
         }
     }
@@ -161,10 +161,11 @@ class UltraschallHub: NSPreferencePane, NSTableViewDataSource, NSTableViewDelega
         audioEngineManager.saveConfiguration("/Users/danlin/Desktop/test.plist")
         refresh();
     }
-        
+    
     @IBAction func loadUnloadPressed(sender: AnyObject) {
         // TODO: Load and Unload Driver Code
         statusBubble.active = !statusBubble.active;
         setDriverLoaded(statusBubble.active);
     }
+
 }
