@@ -1,5 +1,5 @@
 /*
-  File:UltraschallEngine.h
+  File:SoundflowerEngine.h
 
   Version:1.0.1
     ma++ ingalls  |  cycling '74  |  Copyright (C) 2004  |  soundflower.com
@@ -20,16 +20,16 @@
 
 */
 
-#ifndef _UltraschallENGINE_H
-#define _UltraschallENGINE_H
+#ifndef _SoundflowerENGINE_H
+#define _SoundflowerENGINE_H
 
 #include <IOKit/audio/IOAudioEngine.h>
 #include "UltraschallDevice.h"
 
 
-class UltraschallEngine : public IOAudioEngine
+class SoundflowerEngine : public IOAudioEngine
 {
-    OSDeclareDefaultStructors(UltraschallEngine)
+    OSDeclareDefaultStructors(SoundflowerEngine)
     
 	UInt32				mBufferSize;
 	void*				mBuffer;				// input/output buffer
@@ -78,4 +78,4 @@ public:
 };
 
 
-#endif /* _UltraschallENGINE_H */
+#endif /* _SoundflowerENGINE_H */
