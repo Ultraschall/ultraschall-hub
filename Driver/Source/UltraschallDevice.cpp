@@ -1,5 +1,5 @@
 /*
-  File:SoundflowerDevice.cpp
+  File:UltraschallDevice.cpp
 
   Version:1.0.1
     ma++ ingalls  |  cycling '74  |  Copyright (C) 2004  |  soundflower.com
@@ -39,21 +39,21 @@
 
 #define super IOAudioDevice
 
-OSDefineMetaClassAndStructors(SoundflowerDevice, IOAudioDevice)
+OSDefineMetaClassAndStructors(UltraschallDevice, IOAudioDevice)
 
 // There should probably only be one of these? This needs to be 
 // set to the last valid position of the log lookup table. 
-const SInt32 SoundflowerDevice::kVolumeMax = 99;
-const SInt32 SoundflowerDevice::kGainMax = 99;
+const SInt32 UltraschallDevice::kVolumeMax = 99;
+const SInt32 UltraschallDevice::kGainMax = 99;
 
 
 
 
-bool SoundflowerDevice::initHardware(IOService *provider)
+bool UltraschallDevice::initHardware(IOService *provider)
 {
     bool result = false;
     
-	//IOLog("SoundflowerDevice[%p]::initHardware(%p)\n", this, provider);
+	//IOLog("UltraschallDevice[%p]::initHardware(%p)\n", this, provider);
     
     if (!super::initHardware(provider))
         goto Done;
@@ -73,30 +73,30 @@ Done:
 }
 
 
-bool SoundflowerDevice::createAudioEngines()
+bool UltraschallDevice::createAudioEngines()
 {
     OSArray*				audioEngineArray = OSDynamicCast(OSArray, getProperty(AUDIO_ENGINES_KEY));
     OSCollectionIterator*	audioEngineIterator;
     OSDictionary*			audioEngineDict;
 	
     if (!audioEngineArray) {
-        IOLog("SoundflowerDevice[%p]::createAudioEngine() - Error: no AudioEngine array in personality.\n", this);
+        IOLog("UltraschallDevice[%p]::createAudioEngine() - Error: no AudioEngine array in personality.\n", this);
         return false;
     }
     
 	audioEngineIterator = OSCollectionIterator::withCollection(audioEngineArray);
     if (!audioEngineIterator) {
-		IOLog("SoundflowerDevice: no audio engines available.\n");
+		IOLog("UltraschallDevice: no audio engines available.\n");
 		return true;
 	}
     
     while ((audioEngineDict = (OSDictionary*)audioEngineIterator->getNextObject())) {
-		SoundflowerEngine*	audioEngine = NULL;
+		UltraschallEngine*	audioEngine = NULL;
 		
         if (OSDynamicCast(OSDictionary, audioEngineDict) == NULL)
             continue;
         
-		audioEngine = new SoundflowerEngine;
+		audioEngine = new UltraschallEngine;
         if (!audioEngine)
 			continue;
         
@@ -115,14 +115,14 @@ bool SoundflowerDevice::createAudioEngines()
 
 #define addControl(control, handler) \
     if (!control) {\
-		IOLog("Soundflower failed to add control.\n");	\
+		IOLog("Ultraschall failed to add control.\n");	\
 		return false; \
 	} \
     control->setValueChangeHandler(handler, this); \
     audioEngine->addDefaultAudioControl(control); \
     control->release();
 
-bool SoundflowerDevice::initControls(SoundflowerEngine* audioEngine)
+bool UltraschallDevice::initControls(UltraschallEngine* audioEngine)
 {
     IOAudioControl*	control = NULL;
     
@@ -155,9 +155,9 @@ bool SoundflowerDevice::initControls(SoundflowerEngine* audioEngine)
 		 // scheme, we use a size 100 lookup table to compute the correct log scaling. And set
 		 // the minimum to -40 dB. Perhaps -50 dB would have been better, but this seems ok.
 		 
-        control = IOAudioLevelControl::createVolumeControl(SoundflowerDevice::kVolumeMax,		// Initial value
+        control = IOAudioLevelControl::createVolumeControl(UltraschallDevice::kVolumeMax,		// Initial value
                                                            0,									// min value
-                                                           SoundflowerDevice::kVolumeMax,		// max value
+                                                           UltraschallDevice::kVolumeMax,		// max value
                                                            (-40 << 16) + (32768),				// -72 in IOFixed (16.16)
                                                            0,									// max 0.0 in IOFixed
                                                            channel,								// kIOAudioControlChannelIDDefaultLeft,
@@ -167,9 +167,9 @@ bool SoundflowerDevice::initControls(SoundflowerEngine* audioEngine)
         addControl(control, (IOAudioControl::IntValueChangeHandler)volumeChangeHandler);
         
         // Gain control for each channel
-        control = IOAudioLevelControl::createVolumeControl(SoundflowerDevice::kGainMax,			// Initial value
+        control = IOAudioLevelControl::createVolumeControl(UltraschallDevice::kGainMax,			// Initial value
                                                            0,									// min value
-                                                           SoundflowerDevice::kGainMax,			// max value
+                                                           UltraschallDevice::kGainMax,			// max value
                                                            0,									// min 0.0 in IOFixed
                                                            (40 << 16) + (32768),				// 72 in IOFixed (16.16)
                                                            channel,								// kIOAudioControlChannelIDDefaultLeft,
@@ -199,10 +199,10 @@ bool SoundflowerDevice::initControls(SoundflowerEngine* audioEngine)
 }
 
 
-IOReturn SoundflowerDevice::volumeChangeHandler(IOService *target, IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue)
+IOReturn UltraschallDevice::volumeChangeHandler(IOService *target, IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue)
 {
     IOReturn			result = kIOReturnBadArgument;
-    SoundflowerDevice*	audioDevice = (SoundflowerDevice *)target;
+    UltraschallDevice*	audioDevice = (UltraschallDevice *)target;
 	
     if (audioDevice)
         result = audioDevice->volumeChanged(volumeControl, oldValue, newValue);
@@ -210,7 +210,7 @@ IOReturn SoundflowerDevice::volumeChangeHandler(IOService *target, IOAudioContro
 }
 
 
-IOReturn SoundflowerDevice::volumeChanged(IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue)
+IOReturn UltraschallDevice::volumeChanged(IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue)
 {
     if (volumeControl)
          mVolume[volumeControl->getChannelID()] = newValue;
@@ -218,10 +218,10 @@ IOReturn SoundflowerDevice::volumeChanged(IOAudioControl *volumeControl, SInt32 
 }
 
 
-IOReturn SoundflowerDevice::outputMuteChangeHandler(IOService *target, IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
+IOReturn UltraschallDevice::outputMuteChangeHandler(IOService *target, IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
 {
     IOReturn			result = kIOReturnBadArgument;
-    SoundflowerDevice*	audioDevice = (SoundflowerDevice*)target;
+    UltraschallDevice*	audioDevice = (UltraschallDevice*)target;
 	
     if (audioDevice)
         result = audioDevice->outputMuteChanged(muteControl, oldValue, newValue);
@@ -229,7 +229,7 @@ IOReturn SoundflowerDevice::outputMuteChangeHandler(IOService *target, IOAudioCo
 }
 
 
-IOReturn SoundflowerDevice::outputMuteChanged(IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
+IOReturn UltraschallDevice::outputMuteChanged(IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
 {
     if (muteControl)
          mMuteOut[muteControl->getChannelID()] = newValue;
@@ -237,10 +237,10 @@ IOReturn SoundflowerDevice::outputMuteChanged(IOAudioControl *muteControl, SInt3
 }
 
 
-IOReturn SoundflowerDevice::gainChangeHandler(IOService *target, IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue)
+IOReturn UltraschallDevice::gainChangeHandler(IOService *target, IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue)
 {
     IOReturn			result = kIOReturnBadArgument;
-    SoundflowerDevice*	audioDevice = (SoundflowerDevice *)target;
+    UltraschallDevice*	audioDevice = (UltraschallDevice *)target;
 	
     if (audioDevice)
         result = audioDevice->gainChanged(gainControl, oldValue, newValue);
@@ -248,7 +248,7 @@ IOReturn SoundflowerDevice::gainChangeHandler(IOService *target, IOAudioControl 
 }
 
 
-IOReturn SoundflowerDevice::gainChanged(IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue)
+IOReturn UltraschallDevice::gainChanged(IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue)
 {
     if (gainControl)
 		mGain[gainControl->getChannelID()] = newValue;
@@ -256,10 +256,10 @@ IOReturn SoundflowerDevice::gainChanged(IOAudioControl *gainControl, SInt32 oldV
 }
 
 
-IOReturn SoundflowerDevice::inputMuteChangeHandler(IOService *target, IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
+IOReturn UltraschallDevice::inputMuteChangeHandler(IOService *target, IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
 {
     IOReturn			result = kIOReturnBadArgument;
-    SoundflowerDevice*	audioDevice = (SoundflowerDevice*)target;
+    UltraschallDevice*	audioDevice = (UltraschallDevice*)target;
 
     if (audioDevice)
         result = audioDevice->inputMuteChanged(muteControl, oldValue, newValue);
@@ -267,7 +267,7 @@ IOReturn SoundflowerDevice::inputMuteChangeHandler(IOService *target, IOAudioCon
 }
 
 
-IOReturn SoundflowerDevice::inputMuteChanged(IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
+IOReturn UltraschallDevice::inputMuteChanged(IOAudioControl *muteControl, SInt32 oldValue, SInt32 newValue)
 {
     if (muteControl)
          mMuteIn[muteControl->getChannelID()] = newValue;

@@ -1,5 +1,5 @@
 /*
-  File:SoundflowerDevice.h
+  File:UltraschallDevice.h
 
   Version:1.0.1
     ma++ ingalls  |  cycling '74  |  Copyright (C) 2004  |  soundflower.com
@@ -33,15 +33,15 @@
 #define SAMPLE_RATES_KEY				"SampleRates"
 #define SEPARATE_STREAM_BUFFERS_KEY		"SeparateStreamBuffers"
 #define SEPARATE_INPUT_BUFFERS_KEY		"SeparateInputBuffers"
-#define SoundflowerDevice				fm_ultraschall_driver_UltraschallDevice
+#define UltraschallDevice				fm_ultraschall_driver_UltraschallDevice
 
 
-class SoundflowerEngine;
+class UltraschallEngine;
 
-class SoundflowerDevice : public IOAudioDevice
+class UltraschallDevice : public IOAudioDevice
 {
-    OSDeclareDefaultStructors(SoundflowerDevice)
-    friend class SoundflowerEngine;
+    OSDeclareDefaultStructors(UltraschallDevice)
+    friend class UltraschallEngine;
     
 	// class members
 	
@@ -61,7 +61,7 @@ class SoundflowerDevice : public IOAudioDevice
 	
     virtual bool initHardware(IOService *provider);
     virtual bool createAudioEngines();
-    virtual bool initControls(SoundflowerEngine *audioEngine);
+    virtual bool initControls(UltraschallEngine *audioEngine);
     
     static  IOReturn volumeChangeHandler(IOService *target, IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue);
     virtual IOReturn volumeChanged(IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue);
