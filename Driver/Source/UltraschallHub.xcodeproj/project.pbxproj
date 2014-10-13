@@ -129,7 +129,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 				TargetAttributes = {
 					54D0AD930A5E329B006380BD = {
 						DevelopmentTeam = 8J2G689FCZ;
@@ -192,28 +192,28 @@
 		548AD6D409CE873500241D17 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Heiko Panjas (8J2G689FCZ)";
 				INFOPLIST_FILE = Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 			};
 			name = Development;
 		};
 		548AD6D509CE873500241D17 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Heiko Panjas (8J2G689FCZ)";
 				INFOPLIST_FILE = Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 			};
 			name = Deployment;
 		};
 		54D0ADA20A5E329B006380BD /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Heiko Panjas (8J2G689FCZ)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Heiko Panjas (8J2G689FCZ)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
@@ -230,7 +230,7 @@
 				MODULE_VERSION = 0.9.0;
 				PRODUCT_NAME = UltraschallHub;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -243,8 +243,8 @@
 		54D0ADA30A5E329B006380BD /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Heiko Panjas (8J2G689FCZ)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Heiko Panjas (8J2G689FCZ)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
@@ -260,7 +260,7 @@
 				MODULE_VERSION = 0.9.0;
 				PRODUCT_NAME = UltraschallHub;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
