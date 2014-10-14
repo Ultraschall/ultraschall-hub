@@ -61,15 +61,15 @@ const int spaceHeight = 30;
 
 #pragma mark - Input / Output Control
 
-- (void)addOutputWithTitle:(NSString*)title {
+- (Conncetor *)addOutputWithTitle:(NSString*)title {
     Conncetor* connector = [[Conncetor alloc] init];
     connector.title = title;
     connector.type = kConncetorOutput;
     connector.superview = self;
-    [self addOutput:connector];
+    return [self addOutput:connector];
 }
 
-- (void)addOutput:(Conncetor *)connector {
+- (Conncetor *)addOutput:(Conncetor *)connector {
     [self.outputs addObject:connector];
     
     NSDictionary* textFontAttributes = @{NSFontAttributeName: [NSFont fontWithName: @"Helvetica" size: 12]};
@@ -88,17 +88,18 @@ const int spaceHeight = 30;
                             self.frame.origin.y,
                             width,
                             spaceConnector + (MAX(self.inputs.count, self.outputs.count) * connectorHeight));
+    return connector;
 }
 
-- (void)addInputWithTitle:(NSString*)title {
+- (Conncetor *)addInputWithTitle:(NSString*)title {
     Conncetor* connector = [[Conncetor alloc] init];
     connector.title = title;
     connector.type = kConncetorInput;
     connector.superview = self;
-    [self addInput:connector];
+    return [self addInput:connector];
 }
 
-- (void)addInput:(Conncetor *)connector {
+- (Conncetor *)addInput:(Conncetor *)connector {
     [self.inputs addObject:connector];
     
     NSDictionary* textFontAttributes = @{NSFontAttributeName: [NSFont fontWithName: @"Helvetica" size: 12]};
@@ -117,6 +118,7 @@ const int spaceHeight = 30;
                             self.frame.origin.y,
                             width,
                             spaceConnector + (MAX(self.inputs.count, self.outputs.count) * connectorHeight));
+    return connector;
 }
 
 #pragma mark - Drawing
@@ -531,6 +533,16 @@ static NSComparisonResult DraggedViewAboveOtherViewsComparator(NSView* view1, NS
                         if ([deviceView connectorAtPoint:self.lastDragLocation].type != self.dragConnectionObject.type) {
                             self.dragConnectionObject.connectedTo = [deviceView connectorAtPoint:self.lastDragLocation];
                             self.dragConnectionObject.connectedTo.connectedTo = self.dragConnectionObject;
+                            
+                            if (self.dragConnectionObject.type == kConncetorOutput) {
+                                if (self.delegate) {
+                                    [self.delegate connectInput:self.dragConnectionObject withOutput:self.dragConnectionObject.connectedTo];
+                                }
+                            } else {
+                                if (self.delegate) {
+                                    [self.delegate connectInput:self.dragConnectionObject.connectedTo withOutput:self.dragConnectionObject];
+                                }
+                            }
                         }
                     }
                 }

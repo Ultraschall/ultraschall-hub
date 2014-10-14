@@ -46,6 +46,7 @@
 */ 
 
 #include "AudioDevice.h"
+#include <string.h>
 
 void	AudioDevice::Init(AudioDeviceID devid, bool isInput)
 {
@@ -130,6 +131,30 @@ int		AudioDevice::CountChannels()
 	}
 	free(buflist);
 	return result;
+}
+
+char * AudioDevice::GetChannelName(char *buf, UInt32 maxlen, UInt32 inChannel)
+{
+    inChannel++;
+    AudioObjectPropertyScope theScope = mIsInput ? kAudioDevicePropertyScopeInput : kAudioDevicePropertyScopeOutput;
+    
+    AudioObjectPropertyAddress theAddress = { kAudioDevicePropertyChannelName,
+                                            theScope,
+                                            inChannel };
+    
+    OSStatus err = AudioObjectGetPropertyData(mID, &theAddress, 0, NULL,  &maxlen, buf);
+    if (err) {
+        return stpncpy(buf, "Unknown", maxlen);
+    } else {
+        if (!strncmp(buf, "", 1)) {
+            if (mIsInput) {
+                sprintf(buf, "In %i", inChannel);
+            } else {
+                sprintf(buf, "Out %i", inChannel);
+            }
+        }
+    }
+    return buf;
 }
 
 char *	AudioDevice::GetName(char *buf, UInt32 maxlen)

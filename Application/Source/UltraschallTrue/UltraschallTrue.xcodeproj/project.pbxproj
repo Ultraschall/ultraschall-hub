@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		283313DB19EC67C400F9CCD9 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283313DA19EC67C400F9CCD9 /* CoreFoundation.framework */; };
 		28FAB1D719E46E110008E515 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FAB1D619E46E110008E515 /* AppDelegate.m */; };
 		28FAB1D919E46E110008E515 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FAB1D819E46E110008E515 /* main.m */; };
 		28FAB1DB19E46E110008E515 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB1DA19E46E110008E515 /* Images.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		283313DA19EC67C400F9CCD9 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		28FAB1D019E46E110008E515 /* UltraschallTrue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltraschallTrue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28FAB1D419E46E110008E515 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28FAB1D519E46E110008E515 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				283313DB19EC67C400F9CCD9 /* CoreFoundation.framework in Frameworks */,
 				28FAB21319E46E670008E515 /* AudioToolbox.framework in Frameworks */,
 				28FAB21119E46E430008E515 /* AudioUnit.framework in Frameworks */,
 				28FAB20F19E46E3E0008E515 /* CoreAudio.framework in Frameworks */,
@@ -193,6 +196,7 @@
 		28FAB21419E46E710008E515 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				283313DA19EC67C400F9CCD9 /* CoreFoundation.framework */,
 				28FAB21219E46E670008E515 /* AudioToolbox.framework */,
 				28FAB21019E46E430008E515 /* AudioUnit.framework */,
 				28FAB20E19E46E3E0008E515 /* CoreAudio.framework */,

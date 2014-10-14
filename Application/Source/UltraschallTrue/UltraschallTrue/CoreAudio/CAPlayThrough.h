@@ -73,7 +73,7 @@ class CAPlayThroughHost
 {
 
 public:
-	CAPlayThroughHost(AudioDeviceID input, AudioDeviceID output);
+	CAPlayThroughHost(AudioDeviceID input, AudioDeviceID output, UInt32 inputChannel = 0, UInt32 outputChannel = 0);
 	~CAPlayThroughHost();
 	
 	void		CreatePlayThrough(AudioDeviceID input, AudioDeviceID output);
@@ -103,6 +103,10 @@ private:
     
 private:
 	CAPlayThrough *mPlayThrough;
+    
+    //Channel Mapping
+    UInt32 mInputChannel;
+    UInt32 mOutputChannel;
 };
 
 #endif //__CAPlayThrough_H__

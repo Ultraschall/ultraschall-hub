@@ -7,12 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#include <CoreAudio/CoreAudio.h>
 
 typedef enum {
     kConncetorNone,
     kConncetorOutput,
     kConncetorInput
 } ConncetorType;
+
+@protocol DeviceConnector;
 
 @class DeviceView;
 
@@ -27,6 +30,9 @@ typedef enum {
 
 @property DeviceView* superview;
 
+@property AudioDeviceID deviceID;
+@property UInt32 channel;
+
 @end
 
 @interface DeviceView : NSView
@@ -40,16 +46,21 @@ typedef enum {
 @property NSPoint dragConnectionStartPoint;
 @property BOOL dragValideConnection;
 
-@property id delegate;
+@property (nonatomic, weak) id<DeviceConnector> delegate;
 
 - (void)setTitle:(NSString *)titleText;
-- (void)addOutputWithTitle:(NSString*)title;
-- (void)addOutput:(Conncetor *)connector;
-- (void)addInputWithTitle:(NSString*)title;
-- (void)addInput:(Conncetor *)connector;
+- (Conncetor *)addOutputWithTitle:(NSString*)title;
+- (Conncetor *)addOutput:(Conncetor *)connector;
+- (Conncetor *)addInputWithTitle:(NSString*)title;
+- (Conncetor *)addInput:(Conncetor *)connector;
 
 - (void)drawLinks:(NSRect)frame;
 
+@end
+
+@protocol DeviceConnector <NSObject>
+@required
+-(void)connectInput:(Conncetor*)input withOutput:(Conncetor*)output;
 @end
 
 

@@ -8,10 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "DeviceView.h"
-#import "AudioDeviceList.h"
 
-@interface MappingView : NSView
+@interface MappingView : NSView <DeviceConnector>
 
 - (IBAction)test:(id)sender;
+-(void)connectInput:(Conncetor*)input withOutput:(Conncetor*)output;
 
 @end

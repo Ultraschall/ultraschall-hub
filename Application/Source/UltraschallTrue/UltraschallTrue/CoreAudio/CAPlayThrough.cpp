@@ -53,7 +53,7 @@
 class CAPlayThrough 
 {
 public:
-	CAPlayThrough(AudioDeviceID input, AudioDeviceID output);
+	CAPlayThrough(AudioDeviceID input, AudioDeviceID output, UInt32 inputChannel, UInt32 outputChannel);
 	~CAPlayThrough();
 	
 	OSStatus	Init(AudioDeviceID input, AudioDeviceID output);
@@ -98,6 +98,10 @@ private:
 	AudioDevice mInputDevice, mOutputDevice;
 	CARingBuffer *mBuffer;
 	
+    //Channel Mapping
+    UInt32 mInputChannel;
+    UInt32 mOutputChannel;
+    
 	//AudioUnits and Graph
 	AUGraph mGraph;
 	AUNode mVarispeedNode;
@@ -116,11 +120,13 @@ private:
 
 
 #pragma mark ---CAPlayThrough Methods---
-CAPlayThrough::CAPlayThrough(AudioDeviceID input, AudioDeviceID output):
+CAPlayThrough::CAPlayThrough(AudioDeviceID input, AudioDeviceID output, UInt32 inputChannel, UInt32 outputChannel):
 mBuffer(NULL),
 mFirstInputTime(-1),
 mFirstOutputTime(-1),
-mInToOutSampleOffset(0)
+mInToOutSampleOffset(0),
+mInputChannel(inputChannel),
+mOutputChannel(outputChannel)
 {
 	OSStatus err = noErr;
 	err = Init(input,output);
@@ -539,9 +545,30 @@ OSStatus CAPlayThrough::SetupBuffers()
 	//in the input device vs output device
 	//////////////////////////////////////
 	asbd.mChannelsPerFrame =((asbd_dev1_in.mChannelsPerFrame < asbd_dev2_out.mChannelsPerFrame) ?asbd_dev1_in.mChannelsPerFrame :asbd_dev2_out.mChannelsPerFrame) ;
-	//printf("Info: Input Device channel count=%ld\t Input Device channel count=%ld\n",asbd_dev1_in.mChannelsPerFrame,asbd_dev2_out.mChannelsPerFrame);	
+//    asbd.mChannelsPerFrame = 1;
+	//printf("Info: Input Device channel count=%ld\t Input Device channel count=%ld\n",asbd_dev1_in.mChannelsPerFrame,asbd_dev2_out.mChannelsPerFrame);
 	//printf("Info: CAPlayThrough will use %ld channels\n",asbd.mChannelsPerFrame);	
-
+    //Channel Map
+    SInt32 *channelMap =NULL;
+    UInt32 numOfChannels = asbd_dev1_in.mChannelsPerFrame; //2 channels
+    UInt32 mapSize = numOfChannels *sizeof(SInt32);
+    channelMap = (SInt32 *)malloc(mapSize);
+    
+    //for each channel of desired input, map the channel from
+    //the device's output channel.
+    for(UInt32 i=0;i<numOfChannels;i++)
+    {
+        channelMap[i]=-1;
+    }
+    //channelMap[desiredInputChannel] = deviceOutputChannel;
+    channelMap[mInputChannel] = mOutputChannel;
+    AudioUnitSetProperty(mInputUnit,
+                         kAudioOutputUnitProperty_ChannelMap,
+                         kAudioUnitScope_Output,
+                         1,
+                         channelMap,
+                         mapSize);
+    free(channelMap);
 	
 	// We must get the sample rate of the input device and set it to the stream format of AUHAL
 	propertySize = sizeof(Float64);
@@ -720,8 +747,10 @@ OSStatus CAPlayThrough::OutputProc(void *inRefCon,
 #pragma mark -									
 #pragma mark -- CAPlayThroughHost Methods --
 
-CAPlayThroughHost::CAPlayThroughHost(AudioDeviceID input, AudioDeviceID output):
-	mPlayThrough(NULL)
+CAPlayThroughHost::CAPlayThroughHost(AudioDeviceID input, AudioDeviceID output, UInt32 inputChannel, UInt32 outputChannel):
+	mPlayThrough(NULL),
+    mInputChannel(inputChannel),
+    mOutputChannel(outputChannel)
 {
 	CreatePlayThrough(input, output);
 }
@@ -733,7 +762,7 @@ CAPlayThroughHost::~CAPlayThroughHost()
 
 void CAPlayThroughHost::CreatePlayThrough(AudioDeviceID input, AudioDeviceID output)
 {
-	mPlayThrough = new CAPlayThrough(input, output);
+	mPlayThrough = new CAPlayThrough(input, output, mInputChannel, mOutputChannel);
     StreamListenerQueue = dispatch_queue_create("com.CAPlayThough.StreamListenerQueue", DISPATCH_QUEUE_SERIAL);
     //if (StreamListenerQueue) dispatch_set_context(StreamListenerQueue, this);
 	AddDeviceListeners(input);
