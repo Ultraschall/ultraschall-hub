@@ -97,10 +97,10 @@
 				28F406E619EB0B1300593AD2 /* DriverManager */,
 				28F406D919EB086600593AD2 /* Views */,
 				28F406BC19EB060600593AD2 /* AppDelegate.swift */,
+				28F406E419EB0A4100593AD2 /* UltraschallHub.swift */,
 				28F406BE19EB060600593AD2 /* Images.xcassets */,
 				28F406C019EB060600593AD2 /* MainMenu.xib */,
 				28F406BA19EB060600593AD2 /* Supporting Files */,
-				28F406E419EB0A4100593AD2 /* UltraschallHub.swift */,
 			);
 			path = UltraschallHub;
 			sourceTree = "<group>";

@@ -31,7 +31,7 @@ class AudioEngine : NSObject, NSCoding {
     }
     
     class func fromTemplate() -> AudioEngine? {
-        if let file = UltraschallHub.preferencePaneBundle().pathForResource("AudioEngineTemplate", ofType: "plist") {
+        if let file = NSBundle.mainBundle().pathForResource("AudioEngineTemplate", ofType: "plist") {
             if let template = NSDictionary(contentsOfFile: file) {
                 return fromDictionary(template)
             }
@@ -57,7 +57,7 @@ class AudioEngine : NSObject, NSCoding {
     }
     
     func asDictionary() -> NSDictionary? {
-        if let file = UltraschallHub.preferencePaneBundle().pathForResource("AudioEngineTemplate", ofType: "plist") {
+        if let file = NSBundle.mainBundle().pathForResource("AudioEngineTemplate", ofType: "plist") {
             if let template = NSMutableDictionary(contentsOfFile: file) {
                 template.setObject(engineDescription, forKey: "Description")
                 template.setObject(engineIdentifier, forKey: "Identifier")
