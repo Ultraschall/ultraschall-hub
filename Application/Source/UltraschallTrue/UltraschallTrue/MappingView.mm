@@ -49,6 +49,7 @@
             if ([devices objectForKey:key] != nil) {
                 device = (DeviceView*) [devices objectForKey:key];
                 AudioDevice *audioDevice = new AudioDevice((*i).mID, input);
+                audioDevice->SetBufferSize(64);
                 for (int j = 0; j < audioDevice->CountChannels(); j++) {
                     char channelNameBuffer[1024];
                     audioDevice->GetChannelName(channelNameBuffer, sizeof(channelNameBuffer), j);
@@ -58,7 +59,7 @@
                     [connector setChannel:j];
                 }
             } else {
-                device = [[DeviceView alloc] initWithFrame:NSMakeRect(10, 10, 100, 100)];
+                device = [[DeviceView alloc] initWithFrame:NSMakeRect(100 * [[self subviews] count], 10, 100, 100)];
                 [device setTitle:key];
                 AudioDevice *audioDevice = new AudioDevice((*i).mID, input);
                 for (int j = 0; j < audioDevice->CountChannels(); j++) {
@@ -89,6 +90,7 @@
             if ([devices objectForKey:key] != nil) {
                 device = (DeviceView*) [devices objectForKey:key];
                 AudioDevice *audioDevice = new AudioDevice((*i).mID, input);
+                audioDevice->SetBufferSize(64);
                 for (int j = 0; j < audioDevice->CountChannels(); j++) {
                     char channelNameBuffer[1024];
                     audioDevice->GetChannelName(channelNameBuffer, sizeof(channelNameBuffer), j);
@@ -98,7 +100,7 @@
                     [connector setChannel:j];
                 }
             } else {
-                device = [[DeviceView alloc] initWithFrame:NSMakeRect(10, 10, 100, 100)];
+                device = [[DeviceView alloc] initWithFrame:NSMakeRect(100 * [[self subviews] count], 10, 100, 100)];
                 [device setTitle:key];
                 AudioDevice *audioDevice = new AudioDevice((*i).mID, input);
                 for (int j = 0; j < audioDevice->CountChannels(); j++) {

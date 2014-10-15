@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		283313DB19EC67C400F9CCD9 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283313DA19EC67C400F9CCD9 /* CoreFoundation.framework */; };
+		28429B7819ECF2B1009CA567 /* DNLPlayThroughManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28429B7719ECF2B1009CA567 /* DNLPlayThroughManager.mm */; };
 		28FAB1D719E46E110008E515 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FAB1D619E46E110008E515 /* AppDelegate.m */; };
 		28FAB1D919E46E110008E515 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FAB1D819E46E110008E515 /* main.m */; };
 		28FAB1DB19E46E110008E515 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB1DA19E46E110008E515 /* Images.xcassets */; };
@@ -39,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		283313DA19EC67C400F9CCD9 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		28429B7619ECF2B1009CA567 /* DNLPlayThroughManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNLPlayThroughManager.h; sourceTree = "<group>"; };
+		28429B7719ECF2B1009CA567 /* DNLPlayThroughManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DNLPlayThroughManager.mm; sourceTree = "<group>"; };
 		28FAB1D019E46E110008E515 /* UltraschallTrue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltraschallTrue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28FAB1D419E46E110008E515 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28FAB1D519E46E110008E515 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -170,6 +173,8 @@
 				28FAB1F819E46E250008E515 /* CAPlayThrough.cpp */,
 				28FAB1F919E46E250008E515 /* CAPlayThrough.h */,
 				28FAB1FA19E46E250008E515 /* PublicUtility */,
+				28429B7619ECF2B1009CA567 /* DNLPlayThroughManager.h */,
+				28429B7719ECF2B1009CA567 /* DNLPlayThroughManager.mm */,
 			);
 			path = CoreAudio;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				28FAB20B19E46E250008E515 /* CADebugPrintf.cpp in Sources */,
 				28FAB21A19E472DF0008E515 /* MappingView.mm in Sources */,
 				28FAB20719E46E250008E515 /* AudioDevice.cpp in Sources */,
+				28429B7819ECF2B1009CA567 /* DNLPlayThroughManager.mm in Sources */,
 				28FAB20C19E46E250008E515 /* CARingBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

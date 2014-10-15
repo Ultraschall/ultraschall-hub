@@ -91,12 +91,6 @@ private:
 	void RemoveDeviceListeners(AudioDeviceID input);
     
     void ResetPlayThrough();
-       
-    // this sample now uses AudioObjectAddPropertyListenerBlock instead of AudioObjectAddPropertyListener
-    /*static OSStatus StreamListener(AudioObjectID inObjectID,
-                                   UInt32 inNumberAddresses,
-                                   const AudioObjectPropertyAddress inAddresses[],
-                                   void* inClientData);*/
     
     dispatch_queue_t StreamListenerQueue;
     AudioObjectPropertyListenerBlock StreamListenerBlock;
