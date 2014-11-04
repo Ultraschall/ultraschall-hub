@@ -129,7 +129,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 				TargetAttributes = {
 					54D0AD930A5E329B006380BD = {
 						DevelopmentTeam = 8J2G689FCZ;
@@ -195,7 +195,7 @@
 				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 			};
 			name = Development;
 		};
@@ -205,7 +205,7 @@
 				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 			};
 			name = Deployment;
 		};
@@ -230,7 +230,7 @@
 				MODULE_VERSION = 0.9.0;
 				PRODUCT_NAME = UltraschallHub;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -260,7 +260,7 @@
 				MODULE_VERSION = 0.9.0;
 				PRODUCT_NAME = UltraschallHub;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",

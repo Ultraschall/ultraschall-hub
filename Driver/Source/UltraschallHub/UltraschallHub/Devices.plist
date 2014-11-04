@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Devices</key>
+	<array>
+		<dict>
+			<key>UUID</key>
+			<string>617A2DCB-ABFB-442F-B9F2-BEDE1AB10181</string>
+			<key>Name</key>
+			<string>Ultraschall Device</string>
+			<key>Channels</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+</dict>
+</plist>

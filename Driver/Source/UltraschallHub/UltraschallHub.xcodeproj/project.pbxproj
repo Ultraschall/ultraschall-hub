@@ -1,0 +1,378 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2841AD0419F5935500305774 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2841AD0119F5935500305774 /* CADebugMacros.cpp */; };
+		2841AD0719F5936300305774 /* CADebugPrintf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2841AD0519F5936300305774 /* CADebugPrintf.cpp */; };
+		2841AD0A19F5937200305774 /* CARingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2841AD0819F5937200305774 /* CARingBuffer.cpp */; };
+		2841AD1019F593C700305774 /* CAMutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2841AD0F19F593C700305774 /* CAMutex.cpp */; };
+		2841AD1319F593DC00305774 /* CAHostTimeBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2841AD1219F593DC00305774 /* CAHostTimeBase.cpp */; };
+		28534A1E1A06A8490088448D /* CADebugger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28534A1C1A06A8490088448D /* CADebugger.cpp */; };
+		288F7B961A05EA9400C95ED7 /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 288F7B941A05EA9400C95ED7 /* Device.cpp */; };
+		288F7B991A05EAB400C95ED7 /* PlugIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 288F7B971A05EAB400C95ED7 /* PlugIn.cpp */; };
+		288F7B9C1A06072900C95ED7 /* CAVolumeCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 288F7B9A1A06072900C95ED7 /* CAVolumeCurve.cpp */; };
+		2897B85C19F2F8C5004D7D77 /* Devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2897B85B19F2F8C5004D7D77 /* Devices.plist */; };
+		28E6D61319F03D0300FB5630 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E6D61219F03D0300FB5630 /* CoreAudio.framework */; };
+		28E6D61519F0457000FB5630 /* UltraschallHubDevice.icns in Resources */ = {isa = PBXBuildFile; fileRef = 28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */; };
+		28FFC8941A0615FB00BDA4E5 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2897B85D19F3061B004D7D77 /* CoreFoundation.framework */; };
+		28FFC8961A06160900BDA4E5 /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FFC8951A06160900BDA4E5 /* libpthread.dylib */; };
+		B02F2086E812182335B8C036 /* CACFString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02F21A024FFB3904CD69074 /* CACFString.cpp */; };
+		B02F296B69F0804BFF2AC296 /* CADispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02F2A523A020DD15EFEEF3E /* CADispatchQueue.cpp */; };
+		B02F299B6949718F45CF6789 /* Factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02F251A4B52761BFC735DD5 /* Factory.cpp */; };
+		B02F2A0ED307ABBC983E3F27 /* CAObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02F2810BCAC1574A089B75E /* CAObject.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2841AD0119F5935500305774 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
+		2841AD0219F5935500305774 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
+		2841AD0319F5935500305774 /* CAException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAException.h; sourceTree = "<group>"; };
+		2841AD0519F5936300305774 /* CADebugPrintf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugPrintf.cpp; sourceTree = "<group>"; };
+		2841AD0619F5936300305774 /* CADebugPrintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugPrintf.h; sourceTree = "<group>"; };
+		2841AD0819F5937200305774 /* CARingBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CARingBuffer.cpp; sourceTree = "<group>"; };
+		2841AD0919F5937200305774 /* CARingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARingBuffer.h; sourceTree = "<group>"; };
+		2841AD0B19F593AA00305774 /* CABitOperations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CABitOperations.h; sourceTree = "<group>"; };
+		2841AD0C19F593AA00305774 /* CAAtomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAAtomic.h; sourceTree = "<group>"; };
+		2841AD0D19F593B400305774 /* CAAutoDisposer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAAutoDisposer.h; sourceTree = "<group>"; };
+		2841AD0E19F593C700305774 /* CAMutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMutex.h; sourceTree = "<group>"; };
+		2841AD0F19F593C700305774 /* CAMutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAMutex.cpp; sourceTree = "<group>"; };
+		2841AD1119F593DC00305774 /* CAHostTimeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAHostTimeBase.h; sourceTree = "<group>"; };
+		2841AD1219F593DC00305774 /* CAHostTimeBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAHostTimeBase.cpp; sourceTree = "<group>"; };
+		28534A1C1A06A8490088448D /* CADebugger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugger.cpp; sourceTree = "<group>"; };
+		28534A1D1A06A8490088448D /* CADebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugger.h; sourceTree = "<group>"; };
+		288F7B941A05EA9400C95ED7 /* Device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Device.cpp; sourceTree = "<group>"; };
+		288F7B951A05EA9400C95ED7 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		288F7B971A05EAB400C95ED7 /* PlugIn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlugIn.cpp; sourceTree = "<group>"; };
+		288F7B981A05EAB400C95ED7 /* PlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugIn.h; sourceTree = "<group>"; };
+		288F7B9A1A06072900C95ED7 /* CAVolumeCurve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAVolumeCurve.cpp; sourceTree = "<group>"; };
+		288F7B9B1A06072900C95ED7 /* CAVolumeCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAVolumeCurve.h; sourceTree = "<group>"; };
+		2897B85B19F2F8C5004D7D77 /* Devices.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Devices.plist; sourceTree = "<group>"; };
+		2897B85D19F3061B004D7D77 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		28E6D60519F03CD700FB5630 /* UltraschallHub.driver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraschallHub.driver; sourceTree = BUILT_PRODUCTS_DIR; };
+		28E6D60919F03CD700FB5630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28E6D61219F03D0300FB5630 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = UltraschallHubDevice.icns; sourceTree = "<group>"; };
+		28FFC8951A06160900BDA4E5 /* libpthread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpthread.dylib; path = usr/lib/libpthread.dylib; sourceTree = SDKROOT; };
+		B02F209CA5E06C0695507944 /* CADispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADispatchQueue.h; sourceTree = "<group>"; };
+		B02F20BFDB9A9E6634E8CF6F /* CACFString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CACFString.h; sourceTree = "<group>"; };
+		B02F21A024FFB3904CD69074 /* CACFString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CACFString.cpp; sourceTree = "<group>"; };
+		B02F22949133B6EE25F189B2 /* CACFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CACFObject.h; sourceTree = "<group>"; };
+		B02F23839362FF14BD731C8E /* Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Factory.h; sourceTree = "<group>"; };
+		B02F251A4B52761BFC735DD5 /* Factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Factory.cpp; sourceTree = "<group>"; };
+		B02F2810BCAC1574A089B75E /* CAObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAObject.cpp; sourceTree = "<group>"; };
+		B02F2A523A020DD15EFEEF3E /* CADispatchQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADispatchQueue.cpp; sourceTree = "<group>"; };
+		B02F2CF01909432499B6AE87 /* CAObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAObject.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		28E6D60219F03CD700FB5630 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28FFC8961A06160900BDA4E5 /* libpthread.dylib in Frameworks */,
+				28FFC8941A0615FB00BDA4E5 /* CoreFoundation.framework in Frameworks */,
+				28E6D61319F03D0300FB5630 /* CoreAudio.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2897B86319F3226A004D7D77 /* PublicUtility */ = {
+			isa = PBXGroup;
+			children = (
+				28534A1C1A06A8490088448D /* CADebugger.cpp */,
+				28534A1D1A06A8490088448D /* CADebugger.h */,
+				288F7B9A1A06072900C95ED7 /* CAVolumeCurve.cpp */,
+				288F7B9B1A06072900C95ED7 /* CAVolumeCurve.h */,
+				2841AD1119F593DC00305774 /* CAHostTimeBase.h */,
+				2841AD1219F593DC00305774 /* CAHostTimeBase.cpp */,
+				2841AD0E19F593C700305774 /* CAMutex.h */,
+				2841AD0F19F593C700305774 /* CAMutex.cpp */,
+				2841AD0D19F593B400305774 /* CAAutoDisposer.h */,
+				2841AD0B19F593AA00305774 /* CABitOperations.h */,
+				2841AD0C19F593AA00305774 /* CAAtomic.h */,
+				2841AD0119F5935500305774 /* CADebugMacros.cpp */,
+				2841AD0219F5935500305774 /* CADebugMacros.h */,
+				2841AD0519F5936300305774 /* CADebugPrintf.cpp */,
+				2841AD0619F5936300305774 /* CADebugPrintf.h */,
+				2841AD0319F5935500305774 /* CAException.h */,
+				2841AD0819F5937200305774 /* CARingBuffer.cpp */,
+				2841AD0919F5937200305774 /* CARingBuffer.h */,
+				B02F21A024FFB3904CD69074 /* CACFString.cpp */,
+				B02F20BFDB9A9E6634E8CF6F /* CACFString.h */,
+				B02F2A523A020DD15EFEEF3E /* CADispatchQueue.cpp */,
+				B02F209CA5E06C0695507944 /* CADispatchQueue.h */,
+				B02F2CF01909432499B6AE87 /* CAObject.h */,
+				B02F2810BCAC1574A089B75E /* CAObject.cpp */,
+				B02F22949133B6EE25F189B2 /* CACFObject.h */,
+			);
+			name = PublicUtility;
+			sourceTree = "<group>";
+		};
+		28DAF26519FC08090071172B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				28FFC8951A06160900BDA4E5 /* libpthread.dylib */,
+				28E6D61219F03D0300FB5630 /* CoreAudio.framework */,
+				2897B85D19F3061B004D7D77 /* CoreFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		28E6D5FC19F03CD700FB5630 = {
+			isa = PBXGroup;
+			children = (
+				28DAF26519FC08090071172B /* Frameworks */,
+				28E6D60719F03CD700FB5630 /* UltraschallHub */,
+				28E6D60619F03CD700FB5630 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		28E6D60619F03CD700FB5630 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				28E6D60519F03CD700FB5630 /* UltraschallHub.driver */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		28E6D60719F03CD700FB5630 /* UltraschallHub */ = {
+			isa = PBXGroup;
+			children = (
+				28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */,
+				B02F251A4B52761BFC735DD5 /* Factory.cpp */,
+				B02F23839362FF14BD731C8E /* Factory.h */,
+				288F7B971A05EAB400C95ED7 /* PlugIn.cpp */,
+				288F7B981A05EAB400C95ED7 /* PlugIn.h */,
+				288F7B941A05EA9400C95ED7 /* Device.cpp */,
+				288F7B951A05EA9400C95ED7 /* Device.h */,
+				2897B86319F3226A004D7D77 /* PublicUtility */,
+				28E6D60819F03CD700FB5630 /* Supporting Files */,
+			);
+			path = UltraschallHub;
+			sourceTree = "<group>";
+		};
+		28E6D60819F03CD700FB5630 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				28E6D60919F03CD700FB5630 /* Info.plist */,
+				2897B85B19F2F8C5004D7D77 /* Devices.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		28E6D60419F03CD700FB5630 /* UltraschallHub */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28E6D60C19F03CD700FB5630 /* Build configuration list for PBXNativeTarget "UltraschallHub" */;
+			buildPhases = (
+				28E6D60119F03CD700FB5630 /* Sources */,
+				28E6D60219F03CD700FB5630 /* Frameworks */,
+				28E6D60319F03CD700FB5630 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UltraschallHub;
+			productName = UltraschallHub;
+			productReference = 28E6D60519F03CD700FB5630 /* UltraschallHub.driver */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		28E6D5FD19F03CD700FB5630 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = ultraschall.fm;
+				TargetAttributes = {
+					28E6D60419F03CD700FB5630 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = 28E6D60019F03CD700FB5630 /* Build configuration list for PBXProject "UltraschallHub" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 28E6D5FC19F03CD700FB5630;
+			productRefGroup = 28E6D60619F03CD700FB5630 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				28E6D60419F03CD700FB5630 /* UltraschallHub */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		28E6D60319F03CD700FB5630 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2897B85C19F2F8C5004D7D77 /* Devices.plist in Resources */,
+				28E6D61519F0457000FB5630 /* UltraschallHubDevice.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		28E6D60119F03CD700FB5630 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2841AD0719F5936300305774 /* CADebugPrintf.cpp in Sources */,
+				2841AD1319F593DC00305774 /* CAHostTimeBase.cpp in Sources */,
+				288F7B991A05EAB400C95ED7 /* PlugIn.cpp in Sources */,
+				2841AD1019F593C700305774 /* CAMutex.cpp in Sources */,
+				288F7B9C1A06072900C95ED7 /* CAVolumeCurve.cpp in Sources */,
+				2841AD0A19F5937200305774 /* CARingBuffer.cpp in Sources */,
+				2841AD0419F5935500305774 /* CADebugMacros.cpp in Sources */,
+				288F7B961A05EA9400C95ED7 /* Device.cpp in Sources */,
+				28534A1E1A06A8490088448D /* CADebugger.cpp in Sources */,
+				B02F2086E812182335B8C036 /* CACFString.cpp in Sources */,
+				B02F296B69F0804BFF2AC296 /* CADispatchQueue.cpp in Sources */,
+				B02F2A0ED307ABBC983E3F27 /* CAObject.cpp in Sources */,
+				B02F299B6949718F45CF6789 /* Factory.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		28E6D60A19F03CD700FB5630 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		28E6D60B19F03CD700FB5630 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		28E6D60D19F03CD700FB5630 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = UltraschallHub/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = driver;
+			};
+			name = Debug;
+		};
+		28E6D60E19F03CD700FB5630 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = UltraschallHub/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = driver;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		28E6D60019F03CD700FB5630 /* Build configuration list for PBXProject "UltraschallHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28E6D60A19F03CD700FB5630 /* Debug */,
+				28E6D60B19F03CD700FB5630 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28E6D60C19F03CD700FB5630 /* Build configuration list for PBXNativeTarget "UltraschallHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28E6D60D19F03CD700FB5630 /* Debug */,
+				28E6D60E19F03CD700FB5630 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 28E6D5FD19F03CD700FB5630 /* Project object */;
+}
