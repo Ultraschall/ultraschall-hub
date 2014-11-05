@@ -24,7 +24,7 @@
 
 class UltHub_Device;
 
-#define kUltraschallHub_Manufacturer "ultraschall.fm"
+#define kUltraschallHub_Manufacturer "fm.ultraschall"
 
 class UltHub_PlugIn : public CAObject {
 public:
@@ -33,7 +33,7 @@ public:
 protected:
     UltHub_PlugIn();
 
-    virtual                            ~UltHub_PlugIn();
+    virtual ~UltHub_PlugIn();
 
     virtual void Activate();
 
@@ -56,6 +56,8 @@ public:
 
 #pragma mark Device List Management
 private:
+    void InitializeDevices();
+
     void AddDevice(UltHub_Device *inDevice);
 
     void __unused RemoveDevice(UltHub_Device *inDevice);

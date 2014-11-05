@@ -34,28 +34,8 @@ UltHub_PlugIn::~UltHub_PlugIn() {
 
 void UltHub_PlugIn::Activate() {
     CAObject::Activate();
-    CFBundleRef mainBundle;
-    // Get the main bundle for the app
-    mainBundle = CFBundleGetMainBundle();
 
-    UltHub_Device *theNewDevice = NULL;
-    //	make the new device object
-    AudioObjectID theNewDeviceObjectID = CAObjectMap::GetNextObjectID();
-    theNewDevice = new UltHub_Device(theNewDeviceObjectID);
-
-    //	add it to the object map
-    CAObjectMap::MapObject(theNewDeviceObjectID, theNewDevice);
-
-    //	add it to the device list
-    AddDevice(theNewDevice);
-
-    //	activate the device
-    theNewDevice->Activate();
-
-    //	this will change the owned object list and the device list
-    AudioObjectPropertyAddress theChangedProperties[] = {kAudioObjectPropertyOwnedObjects, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster,
-            kAudioPlugInPropertyDeviceList, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster};
-    Host_PropertiesChanged(GetObjectID(), 2, theChangedProperties);
+    InitializeDevices();
 }
 
 void UltHub_PlugIn::Deactivate() {
@@ -75,6 +55,8 @@ void UltHub_PlugIn::StaticInitializer() {
         sInstance = nullptr;
     }
 }
+
+#pragma mark Property Operations
 
 bool UltHub_PlugIn::HasProperty(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress) const {
     bool theAnswer;
@@ -200,6 +182,31 @@ void UltHub_PlugIn::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
     };
 }
 
+#pragma mark Device List Management
+
+void UltHub_PlugIn::InitializeDevices() {
+    // TODO: dnl -> read config file here
+
+    UltHub_Device *theNewDevice = NULL;
+    //	make the new device object
+    AudioObjectID theNewDeviceObjectID = CAObjectMap::GetNextObjectID();
+    theNewDevice = new UltHub_Device(theNewDeviceObjectID);
+
+    //	add it to the object map
+    CAObjectMap::MapObject(theNewDeviceObjectID, theNewDevice);
+
+    //	add it to the device list
+    AddDevice(theNewDevice);
+
+    //	activate the device
+    theNewDevice->Activate();
+
+    //	this will change the owned object list and the device list
+    AudioObjectPropertyAddress theChangedProperties[] = {kAudioObjectPropertyOwnedObjects, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster,
+            kAudioPlugInPropertyDeviceList, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster};
+    Host_PropertiesChanged(GetObjectID(), 2, theChangedProperties);
+}
+
 void UltHub_PlugIn::AddDevice(UltHub_Device *inDevice) {
     __unused CAMutex::Locker theLocker(mMutex);
     _AddDevice(inDevice);
@@ -264,7 +271,7 @@ void UltHub_PlugIn::_RemoveAllDevices() {
     }
 }
 
+#pragma mark Host Accesss
 pthread_once_t                UltHub_PlugIn::sStaticInitializer = PTHREAD_ONCE_INIT;
 UltHub_PlugIn *UltHub_PlugIn::sInstance = NULL;
 AudioServerPlugInHostRef    UltHub_PlugIn::sHost = NULL;
-
