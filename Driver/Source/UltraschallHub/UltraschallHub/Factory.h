@@ -11,7 +11,8 @@
 
 //	Entry points for the COM methods
 extern "C"
-void *UltHub_Create(CFAllocatorRef inAllocator, CFUUIDRef inRequestedTypeUUID) __used;
+
+void *UltHub_Create(CFAllocatorRef inAllocator, CFUUIDRef inRequestedTypeUUID);
 
 static HRESULT UltHub_QueryInterface(void *inDriver, REFIID inUUID, LPVOID *outInterface);
 

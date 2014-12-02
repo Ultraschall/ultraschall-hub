@@ -184,22 +184,81 @@ void UltHub_PlugIn::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
 
 #pragma mark Device List Management
 
+CFPropertyListRef CreateMyPropertyListFromFile(CFURLRef fileURL)
+{
+    CFPropertyListRef propertyList;
+    CFStringRef       errorString;
+    CFDataRef         resourceData;
+    Boolean           status;
+    SInt32            errorCode;
+    
+    // Read the XML file.
+    status = CFURLCreateDataAndPropertiesFromResource(kCFAllocatorDefault,
+                                                      fileURL,
+                                                      &resourceData,            // place to put file data
+                                                      NULL,
+                                                      NULL,
+                                                      &errorCode);
+    
+    // Reconstitute the dictionary using the XML data.
+    propertyList = CFPropertyListCreateFromXMLData(kCFAllocatorDefault,
+                                                   resourceData,
+                                                   kCFPropertyListImmutable,
+                                                   &errorString);
+    
+    CFRelease( resourceData );
+    return propertyList;
+}
+
 void UltHub_PlugIn::InitializeDevices() {
     // TODO: dnl -> read config file here
+    // TODO: dnl -> kAudioObjectPropertyCustomPropertyInfoList
+    CFBundleRef myBundle = CFBundleGetBundleWithIdentifier(CFSTR(kUltraschallHub_BundleID));
+    CFURLRef settingsURL = CFBundleCopyResourceURL(myBundle, CFSTR("Devices"), CFSTR("plist"), NULL);
+    
+    CFPropertyListRef propertyList = CreateMyPropertyListFromFile(settingsURL);
+    
+    if (CFGetTypeID(propertyList) == CFDictionaryGetTypeID()) {
+        CFDictionaryRef root = (CFDictionaryRef)propertyList;
+        if (CFDictionaryContainsKey(root, CFSTR("Devices"))) {
+            CFArrayRef devices = (CFArrayRef)CFDictionaryGetValue(root, CFSTR("Devices"));
+            if (devices != NULL) {
+                for (int index = 0; index < CFArrayGetCount(devices); index++) {
+                    CFDictionaryRef device = (CFDictionaryRef)CFArrayGetValueAtIndex(devices, index);
+                    if (device != NULL) {
+                        if (CFDictionaryContainsKey(device, CFSTR("UUID"))) {
+                            if (CFDictionaryContainsKey(device, CFSTR("Name"))) {
+                                if (CFDictionaryContainsKey(device, CFSTR("Channels"))) {
+                                    CFStringRef uuid = (CFStringRef)CFDictionaryGetValue(device, CFSTR("UUID"));
+                                    CFStringRef name = (CFStringRef)CFDictionaryGetValue(device, CFSTR("Name"));
 
-    UltHub_Device *theNewDevice = NULL;
-    //	make the new device object
-    AudioObjectID theNewDeviceObjectID = CAObjectMap::GetNextObjectID();
-    theNewDevice = new UltHub_Device(theNewDeviceObjectID);
-
-    //	add it to the object map
-    CAObjectMap::MapObject(theNewDeviceObjectID, theNewDevice);
-
-    //	add it to the device list
-    AddDevice(theNewDevice);
-
-    //	activate the device
-    theNewDevice->Activate();
+                                    UltHub_Device *theNewDevice = NULL;
+                                    //	make the new device object
+                                    AudioObjectID theNewDeviceObjectID = CAObjectMap::GetNextObjectID();
+                                    theNewDevice = new UltHub_Device(theNewDeviceObjectID);
+                                    theNewDevice->setDeviceUID(uuid);
+                                    theNewDevice->setDeviceName(name);
+                                    //	add it to the object map
+                                    CAObjectMap::MapObject(theNewDeviceObjectID, theNewDevice);
+                                    
+                                    //	add it to the device list
+                                    AddDevice(theNewDevice);
+                                    
+                                    //	activate the device
+                                    theNewDevice->Activate();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    CFRelease(myBundle);
+    CFRelease(settingsURL);
+    CFRelease(propertyList);
 
     //	this will change the owned object list and the device list
     AudioObjectPropertyAddress theChangedProperties[] = {kAudioObjectPropertyOwnedObjects, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster,
