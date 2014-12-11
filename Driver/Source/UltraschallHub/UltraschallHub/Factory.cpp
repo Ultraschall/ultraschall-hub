@@ -10,14 +10,14 @@
 #include "CACFObject.h"
 #include "CAException.h"
 
-static AudioServerPlugInDriverInterface *gAudioServerPlugInDriverInterfacePtr = &gAudioServerPlugInDriverInterface;
+static AudioServerPlugInDriverInterface* gAudioServerPlugInDriverInterfacePtr = &gAudioServerPlugInDriverInterface;
 static AudioServerPlugInDriverRef gAudioServerPlugInDriverRef = &gAudioServerPlugInDriverInterfacePtr;
 static UInt32 gAudioServerPlugInDriverRefCount = 1;
 
 #pragma mark Factory
 
-extern "C"
-__unused void *UltHub_Create(CFAllocatorRef /*inAllocator*/, CFUUIDRef inRequestedTypeUUID) {
+extern "C" void* UltHub_Create(CFAllocatorRef /*inAllocator*/, CFUUIDRef inRequestedTypeUUID)
+{
     //	This is the CFPlugIn factory function. Its job is to create the implementation for the given
     //	type provided that the type is supported. Because this driver is simple and all its
     //	initialization is handled via static iniitalization when the bundle is loaded, all that
@@ -27,7 +27,7 @@ __unused void *UltHub_Create(CFAllocatorRef /*inAllocator*/, CFUUIDRef inRequest
     //	The majority of the driver's initilization should be handled in the Initialize() method of
     //	the driver's AudioServerPlugInDriverInterface.
 
-    void *theAnswer = NULL;
+    void* theAnswer = NULL;
     if (CFEqual(inRequestedTypeUUID, kAudioServerPlugInTypeUUID)) {
         theAnswer = gAudioServerPlugInDriverRef;
         UltHub_PlugIn::GetInstance();
@@ -35,10 +35,10 @@ __unused void *UltHub_Create(CFAllocatorRef /*inAllocator*/, CFUUIDRef inRequest
     return theAnswer;
 }
 
-
 #pragma mark Inheritence
 
-static HRESULT UltHub_QueryInterface(void *inDriver, REFIID inUUID, LPVOID *outInterface) {
+static HRESULT UltHub_QueryInterface(void* inDriver, REFIID inUUID, LPVOID* outInterface)
+{
     //	This function is called by the HAL to get the interface to talk to the plug-in through.
     //	AudioServerPlugIns are required to support the IUnknown interface and the
     //	AudioServerPlugInDriverInterface. As it happens, all interfaces must also provide the
@@ -67,7 +67,7 @@ static HRESULT UltHub_QueryInterface(void *inDriver, REFIID inUUID, LPVOID *outI
         ++gAudioServerPlugInDriverRefCount;
         *outInterface = gAudioServerPlugInDriverRef;
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -77,7 +77,8 @@ static HRESULT UltHub_QueryInterface(void *inDriver, REFIID inUUID, LPVOID *outI
     return theAnswer;
 }
 
-static ULONG UltHub_AddRef(void *inDriver) {
+static ULONG UltHub_AddRef(void* inDriver)
+{
     //	This call returns the resulting reference count after the increment.
 
     //	declare the local variables
@@ -91,11 +92,12 @@ static ULONG UltHub_AddRef(void *inDriver) {
     ++gAudioServerPlugInDriverRefCount;
     theAnswer = gAudioServerPlugInDriverRefCount;
 
-    Done:
+Done:
     return theAnswer;
 }
 
-static ULONG UltHub_Release(void *inDriver) {
+static ULONG UltHub_Release(void* inDriver)
+{
     //	This call returns the resulting reference count after the decrement.
 
     //	declare the local variables
@@ -112,13 +114,14 @@ static ULONG UltHub_Release(void *inDriver) {
     --gAudioServerPlugInDriverRefCount;
     theAnswer = gAudioServerPlugInDriverRefCount;
 
-    Done:
+Done:
     return theAnswer;
 }
 
 #pragma mark Basic Operations
 
-static OSStatus UltHub_Initialize(AudioServerPlugInDriverRef inDriver, AudioServerPlugInHostRef inHost) {
+static OSStatus UltHub_Initialize(AudioServerPlugInDriverRef inDriver, AudioServerPlugInHostRef inHost)
+{
     //	The job of this method is, as the name implies, to get the driver initialized. One specific
     //	thing that needs to be done is to store the AudioServerPlugInHostRef so that it can be used
     //	later. Note that when this call returns, the HAL will scan the various lists the driver
@@ -136,7 +139,7 @@ static OSStatus UltHub_Initialize(AudioServerPlugInDriverRef inDriver, AudioServ
         //	store the AudioServerPlugInHostRef
         UltHub_PlugIn::GetInstance().SetHost(inHost);
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -146,7 +149,8 @@ static OSStatus UltHub_Initialize(AudioServerPlugInDriverRef inDriver, AudioServ
     return theAnswer;
 }
 
-static OSStatus UltHub_CreateDevice(AudioServerPlugInDriverRef /*inDriver*/, CFDictionaryRef /*inDescription*/, const AudioServerPlugInClientInfo * /*inClientInfo*/, AudioObjectID * /*outDeviceObjectID*/) {
+static OSStatus UltHub_CreateDevice(AudioServerPlugInDriverRef /*inDriver*/, CFDictionaryRef /*inDescription*/, const AudioServerPlugInClientInfo* /*inClientInfo*/, AudioObjectID* /*outDeviceObjectID*/)
+{
     //	This method is used to tell a driver that implements the Transport Manager semantics to
     //	create an AudioEndpointDevice from a set of AudioEndpoints. Since this driver is not a
     //	Transport Manager, we just return kAudioHardwareUnsupportedOperationError.
@@ -154,7 +158,8 @@ static OSStatus UltHub_CreateDevice(AudioServerPlugInDriverRef /*inDriver*/, CFD
     return kAudioHardwareUnsupportedOperationError;
 }
 
-static OSStatus UltHub_DestroyDevice(AudioServerPlugInDriverRef /*inDriver*/, AudioObjectID /*inDeviceObjectID*/) {
+static OSStatus UltHub_DestroyDevice(AudioServerPlugInDriverRef /*inDriver*/, AudioObjectID /*inDeviceObjectID*/)
+{
     //	This method is used to tell a driver that implements the Transport Manager semantics to
     //	destroy an AudioEndpointDevice. Since this driver is not a Transport Manager, we just check
     //	the arguments and return kAudioHardwareUnsupportedOperationError.
@@ -162,7 +167,8 @@ static OSStatus UltHub_DestroyDevice(AudioServerPlugInDriverRef /*inDriver*/, Au
     return kAudioHardwareUnsupportedOperationError;
 }
 
-static OSStatus UltHub_AddDeviceClient(AudioServerPlugInDriverRef /*inDriver*/, AudioObjectID /*inDeviceObjectID*/, const AudioServerPlugInClientInfo * /*inClientInfo*/) {
+static OSStatus UltHub_AddDeviceClient(AudioServerPlugInDriverRef /*inDriver*/, AudioObjectID /*inDeviceObjectID*/, const AudioServerPlugInClientInfo* /*inClientInfo*/)
+{
     //	This method is used to inform the driver about a new client that is using the given device.
     //	This allows the device to act differently depending on who the client is. This driver does
     //	not need to track the clients using the device, so we just return successfully.
@@ -170,14 +176,16 @@ static OSStatus UltHub_AddDeviceClient(AudioServerPlugInDriverRef /*inDriver*/, 
     return 0;
 }
 
-static OSStatus UltHub_RemoveDeviceClient(AudioServerPlugInDriverRef /*inDriver*/, AudioObjectID /*inDeviceObjectID*/, const AudioServerPlugInClientInfo * /*inClientInfo*/) {
+static OSStatus UltHub_RemoveDeviceClient(AudioServerPlugInDriverRef /*inDriver*/, AudioObjectID /*inDeviceObjectID*/, const AudioServerPlugInClientInfo* /*inClientInfo*/)
+{
     //	This method is used to inform the driver about a client that is no longer using the given
     //	device. This driver does not track clients, so we just return successfully.
 
     return 0;
 }
 
-static OSStatus UltHub_PerformDeviceConfigurationChange(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt64 inChangeAction, void *inChangeInfo) {
+static OSStatus UltHub_PerformDeviceConfigurationChange(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt64 inChangeAction, void* inChangeInfo)
+{
     //	This method is called to tell the device that it can perform the configuation change that it
     //	had requested via a call to the host method, RequestDeviceConfigurationChange(). The
     //	arguments, inChangeAction and inChangeInfo are the same as what was passed to
@@ -202,7 +210,7 @@ static OSStatus UltHub_PerformDeviceConfigurationChange(AudioServerPlugInDriverR
         //	tell it to do the work
         theDevice->PerformConfigChange(inChangeAction, inChangeInfo);
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -212,7 +220,8 @@ static OSStatus UltHub_PerformDeviceConfigurationChange(AudioServerPlugInDriverR
     return theAnswer;
 }
 
-static OSStatus UltHub_AbortDeviceConfigurationChange(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt64 inChangeAction, void *inChangeInfo) {
+static OSStatus UltHub_AbortDeviceConfigurationChange(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt64 inChangeAction, void* inChangeInfo)
+{
     //	This method is called to tell the driver that a request for a config change has been denied.
     //	This provides the driver an opportunity to clean up any state associated with the request.
 
@@ -230,7 +239,7 @@ static OSStatus UltHub_AbortDeviceConfigurationChange(AudioServerPlugInDriverRef
         //	tell it to do the work
         theDevice->AbortConfigChange(inChangeAction, inChangeInfo);
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -242,7 +251,8 @@ static OSStatus UltHub_AbortDeviceConfigurationChange(AudioServerPlugInDriverRef
 
 #pragma mark Property Operations
 
-static Boolean UltHub_HasProperty(AudioServerPlugInDriverRef inDriver, AudioObjectID inObjectID, pid_t inClientProcessID, const AudioObjectPropertyAddress *inAddress) {
+static Boolean UltHub_HasProperty(AudioServerPlugInDriverRef inDriver, AudioObjectID inObjectID, pid_t inClientProcessID, const AudioObjectPropertyAddress* inAddress)
+{
     //	This method returns whether or not the given object has the given property.
 
     //	declare the local variables
@@ -260,7 +270,7 @@ static Boolean UltHub_HasProperty(AudioServerPlugInDriverRef inDriver, AudioObje
         //	tell it to do the work
         theAnswer = theObject->HasProperty(inObjectID, inClientProcessID, *inAddress);
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = false;
     }
     catch (...) {
@@ -270,7 +280,8 @@ static Boolean UltHub_HasProperty(AudioServerPlugInDriverRef inDriver, AudioObje
     return theAnswer;
 }
 
-static OSStatus UltHub_IsPropertySettable(AudioServerPlugInDriverRef inDriver, AudioObjectID inObjectID, pid_t inClientProcessID, const AudioObjectPropertyAddress *inAddress, Boolean *outIsSettable) {
+static OSStatus UltHub_IsPropertySettable(AudioServerPlugInDriverRef inDriver, AudioObjectID inObjectID, pid_t inClientProcessID, const AudioObjectPropertyAddress* inAddress, Boolean* outIsSettable)
+{
     //	This method returns whether or not the given property on the object can have its value
     //	changed.
 
@@ -295,7 +306,7 @@ static OSStatus UltHub_IsPropertySettable(AudioServerPlugInDriverRef inDriver, A
             theAnswer = kAudioHardwareUnknownPropertyError;
         }
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -305,7 +316,8 @@ static OSStatus UltHub_IsPropertySettable(AudioServerPlugInDriverRef inDriver, A
     return theAnswer;
 }
 
-static OSStatus UltHub_GetPropertyDataSize(AudioServerPlugInDriverRef inDriver, AudioObjectID inObjectID, pid_t inClientProcessID, const AudioObjectPropertyAddress *inAddress, UInt32 inQualifierDataSize, const void *inQualifierData, UInt32 *outDataSize) {
+static OSStatus UltHub_GetPropertyDataSize(AudioServerPlugInDriverRef inDriver, AudioObjectID inObjectID, pid_t inClientProcessID, const AudioObjectPropertyAddress* inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32* outDataSize)
+{
     //	This method returns the byte size of the property's data.
 
     //	declare the local variables
@@ -329,7 +341,7 @@ static OSStatus UltHub_GetPropertyDataSize(AudioServerPlugInDriverRef inDriver, 
             theAnswer = kAudioHardwareUnknownPropertyError;
         }
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -339,7 +351,8 @@ static OSStatus UltHub_GetPropertyDataSize(AudioServerPlugInDriverRef inDriver, 
     return theAnswer;
 }
 
-static OSStatus UltHub_GetPropertyData(AudioServerPlugInDriverRef inDriver, AudioObjectID inObjectID, pid_t inClientProcessID, const AudioObjectPropertyAddress *inAddress, UInt32 inQualifierDataSize, const void *inQualifierData, UInt32 inDataSize, UInt32 *outDataSize, void *outData) {
+static OSStatus UltHub_GetPropertyData(AudioServerPlugInDriverRef inDriver, AudioObjectID inObjectID, pid_t inClientProcessID, const AudioObjectPropertyAddress* inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, UInt32* outDataSize, void* outData)
+{
     //	This method fetches the data for a given property
 
     //	declare the local variables
@@ -364,7 +377,7 @@ static OSStatus UltHub_GetPropertyData(AudioServerPlugInDriverRef inDriver, Audi
             theAnswer = kAudioHardwareUnknownPropertyError;
         }
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -374,7 +387,8 @@ static OSStatus UltHub_GetPropertyData(AudioServerPlugInDriverRef inDriver, Audi
     return theAnswer;
 }
 
-static OSStatus UltHub_SetPropertyData(AudioServerPlugInDriverRef inDriver, AudioObjectID inObjectID, pid_t inClientProcessID, const AudioObjectPropertyAddress *inAddress, UInt32 inQualifierDataSize, const void *inQualifierData, UInt32 inDataSize, const void *inData) {
+static OSStatus UltHub_SetPropertyData(AudioServerPlugInDriverRef inDriver, AudioObjectID inObjectID, pid_t inClientProcessID, const AudioObjectPropertyAddress* inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, const void* inData)
+{
     //	This method changes the value of the given property
 
     //	declare the local variables
@@ -402,7 +416,7 @@ static OSStatus UltHub_SetPropertyData(AudioServerPlugInDriverRef inDriver, Audi
             theAnswer = kAudioHardwareUnknownPropertyError;
         }
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -414,7 +428,8 @@ static OSStatus UltHub_SetPropertyData(AudioServerPlugInDriverRef inDriver, Audi
 
 #pragma mark IO Operations
 
-static OSStatus UltHub_StartIO(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 /*inClientID*/) {
+static OSStatus UltHub_StartIO(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 /*inClientID*/)
+{
     //	This call tells the device that IO is starting for the given client. When this routine
     //	returns, the device's clock is running and it is ready to have data read/written. It is
     //	important to note that multiple clients can have IO running on the device at the same time.
@@ -435,7 +450,7 @@ static OSStatus UltHub_StartIO(AudioServerPlugInDriverRef inDriver, AudioObjectI
         //	tell it to do the work
         theDevice->StartIO();
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -445,7 +460,8 @@ static OSStatus UltHub_StartIO(AudioServerPlugInDriverRef inDriver, AudioObjectI
     return theAnswer;
 }
 
-static OSStatus UltHub_StopIO(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 /*inClientID*/) {
+static OSStatus UltHub_StopIO(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 /*inClientID*/)
+{
     //	This call tells the device that the client has stopped IO. The driver can stop the hardware
     //	once all clients have stopped.
 
@@ -463,7 +479,7 @@ static OSStatus UltHub_StopIO(AudioServerPlugInDriverRef inDriver, AudioObjectID
         //	tell it to do the work
         theDevice->StopIO();
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -473,7 +489,8 @@ static OSStatus UltHub_StopIO(AudioServerPlugInDriverRef inDriver, AudioObjectID
     return theAnswer;
 }
 
-static OSStatus UltHub_GetZeroTimeStamp(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 inClientID, Float64 *outSampleTime, UInt64 *outHostTime, UInt64 *outSeed) {
+static OSStatus UltHub_GetZeroTimeStamp(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 inClientID, Float64* outSampleTime, UInt64* outHostTime, UInt64* outSeed)
+{
     //	This method returns the current zero time stamp for the device. The HAL models the timing of
     //	a device as a series of time stamps that relate the sample time to a host time. The zero
     //	time stamps are spaced such that the sample times are the value of
@@ -497,7 +514,7 @@ static OSStatus UltHub_GetZeroTimeStamp(AudioServerPlugInDriverRef inDriver, Aud
         //	tell it to do the work
         theDevice->GetZeroTimeStamp(*outSampleTime, *outHostTime, *outSeed);
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -507,7 +524,8 @@ static OSStatus UltHub_GetZeroTimeStamp(AudioServerPlugInDriverRef inDriver, Aud
     return theAnswer;
 }
 
-static OSStatus UltHub_WillDoIOOperation(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 /*inClientID*/, UInt32 inOperationID, Boolean *outWillDo, Boolean *outWillDoInPlace) {
+static OSStatus UltHub_WillDoIOOperation(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 /*inClientID*/, UInt32 inOperationID, Boolean* outWillDo, Boolean* outWillDoInPlace)
+{
     //	This method returns whether or not the device will do a given IO operation.
 
     //	declare the local variables
@@ -532,7 +550,7 @@ static OSStatus UltHub_WillDoIOOperation(AudioServerPlugInDriverRef inDriver, Au
         *outWillDo = willDo;
         *outWillDoInPlace = willDoInPlace;
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -542,7 +560,8 @@ static OSStatus UltHub_WillDoIOOperation(AudioServerPlugInDriverRef inDriver, Au
     return theAnswer;
 }
 
-static OSStatus UltHub_BeginIOOperation(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 /*inClientID*/, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo *inIOCycleInfo) {
+static OSStatus UltHub_BeginIOOperation(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 /*inClientID*/, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo* inIOCycleInfo)
+{
     //	This is called at the beginning of an IO operation.
 
     //	declare the local variables
@@ -560,7 +579,7 @@ static OSStatus UltHub_BeginIOOperation(AudioServerPlugInDriverRef inDriver, Aud
         //	tell it to do the work
         theDevice->BeginIOOperation(inOperationID, inIOBufferFrameSize, *inIOCycleInfo);
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -570,7 +589,8 @@ static OSStatus UltHub_BeginIOOperation(AudioServerPlugInDriverRef inDriver, Aud
     return theAnswer;
 }
 
-static OSStatus UltHub_DoIOOperation(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, AudioObjectID inStreamObjectID, UInt32 /*inClientID*/, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo *inIOCycleInfo, void *ioMainBuffer, void *ioSecondaryBuffer) {
+static OSStatus UltHub_DoIOOperation(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, AudioObjectID inStreamObjectID, UInt32 /*inClientID*/, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo* inIOCycleInfo, void* ioMainBuffer, void* ioSecondaryBuffer)
+{
     //	This is called to actuall perform a given operation. For this device, all we need to do is
     //	clear the buffer for the ReadInput operation.
 
@@ -589,7 +609,7 @@ static OSStatus UltHub_DoIOOperation(AudioServerPlugInDriverRef inDriver, AudioO
         //	tell it to do the work
         theDevice->DoIOOperation(inStreamObjectID, inOperationID, inIOBufferFrameSize, *inIOCycleInfo, ioMainBuffer, ioSecondaryBuffer);
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {
@@ -599,7 +619,8 @@ static OSStatus UltHub_DoIOOperation(AudioServerPlugInDriverRef inDriver, AudioO
     return theAnswer;
 }
 
-static OSStatus UltHub_EndIOOperation(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 /*inClientID*/, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo *inIOCycleInfo) {
+static OSStatus UltHub_EndIOOperation(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 /*inClientID*/, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo* inIOCycleInfo)
+{
     //	This is called at the end of an IO operation.
 
     //	declare the local variables
@@ -617,7 +638,7 @@ static OSStatus UltHub_EndIOOperation(AudioServerPlugInDriverRef inDriver, Audio
         //	tell it to do the work
         theDevice->EndIOOperation(inOperationID, inIOBufferFrameSize, *inIOCycleInfo);
     }
-    catch (const CAException &inException) {
+    catch (const CAException& inException) {
         theAnswer = inException.GetError();
     }
     catch (...) {

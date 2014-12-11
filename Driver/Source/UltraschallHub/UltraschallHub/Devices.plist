@@ -6,35 +6,19 @@
 	<array>
 		<dict>
 			<key>UUID</key>
-			<string>617A2DCB-ABFB-442F-B9F2-BEDE1AB10181</string>
+			<string>617A2DCB</string>
 			<key>Name</key>
-			<string>Ultraschall Device</string>
+			<string>Ultraschall Default Device</string>
 			<key>Channels</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>UUID</key>
-			<string>2CA99A7F-1776-4D12-8098-39A5DF01E734</string>
+			<string>D4736D5F</string>
 			<key>Name</key>
-			<string>Ultraschall Device 4</string>
+			<string>Ultraschall Device (8 Channels)</string>
 			<key>Channels</key>
-			<integer>4</integer>
-		</dict>
-		<dict>
-			<key>UUID</key>
-			<string>043425E1-068E-42DD-98CF-412B9D877215</string>
-			<key>Name</key>
-			<string>Ultraschall Device test</string>
-			<key>Channels</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>UUID</key>
-			<string>D773083C-605A-44F8-87E0-00C88E700DE5</string>
-			<key>Name</key>
-			<string>Ultraschall Device bla</string>
-			<key>Channels</key>
-			<integer>16</integer>
+			<integer>8</integer>
 		</dict>
 	</array>
 </dict>

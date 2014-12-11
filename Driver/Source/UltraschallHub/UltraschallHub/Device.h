@@ -22,10 +22,10 @@
 #include "CAHostTimeBase.h"
 
 //	volume control ranges
-#define kUltraschallHub_Control_MinRawVolumeValue    0
-#define kUltraschallHub_Control_MaxRawVolumeValue    96
-#define kUltraschallHub_Control_MinDBVolumeValue    -96.0f
-#define kUltraschallHub_Control_MaxDbVolumeValue    0.0f
+#define kUltraschallHub_Control_MinRawVolumeValue 0
+#define kUltraschallHub_Control_MaxRawVolumeValue 96
+#define kUltraschallHub_Control_MinDBVolumeValue -96.0f
+#define kUltraschallHub_Control_MaxDbVolumeValue 0.0f
 
 //	the struct in the status buffer
 struct SimpleAudioDriverStatus {
@@ -37,7 +37,7 @@ typedef struct SimpleAudioDriverStatus SimpleAudioDriverStatus;
 class UltHub_Device : public CAObject {
 #pragma mark Construction/Destruction
 public:
-    UltHub_Device(AudioObjectID inObjectID);
+    UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels = 2);
 
     virtual void Activate();
 
@@ -48,51 +48,51 @@ protected:
 
 #pragma mark Property Operations
 public:
-    virtual bool HasProperty(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress) const;
+    virtual bool HasProperty(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress) const;
 
-    virtual bool IsPropertySettable(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress) const;
+    virtual bool IsPropertySettable(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress) const;
 
-    virtual UInt32 GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData) const;
+    virtual UInt32 GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData) const;
 
-    virtual void GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData, UInt32 inDataSize, UInt32 &outDataSize, void *outData) const;
+    virtual void GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, UInt32& outDataSize, void* outData) const;
 
-    virtual void SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData, UInt32 inDataSize, const void *inData);
+    virtual void SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, const void* inData);
 
 #pragma mark Device Property Operations
 private:
-    bool Device_HasProperty(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress) const;
+    bool Device_HasProperty(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress) const;
 
-    bool Device_IsPropertySettable(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress) const;
+    bool Device_IsPropertySettable(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress) const;
 
-    UInt32 Device_GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData) const;
+    UInt32 Device_GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData) const;
 
-    void Device_GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData, UInt32 inDataSize, UInt32 &outDataSize, void *outData) const;
+    void Device_GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, UInt32& outDataSize, void* outData) const;
 
-    void Device_SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData, UInt32 inDataSize, const void *inData);
+    void Device_SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, const void* inData);
 
 #pragma mark Stream Property Operations
 private:
-    bool Stream_HasProperty(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress) const;
+    bool Stream_HasProperty(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress) const;
 
-    bool Stream_IsPropertySettable(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress) const;
+    bool Stream_IsPropertySettable(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress) const;
 
-    UInt32 Stream_GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData) const;
+    UInt32 Stream_GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData) const;
 
-    void Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData, UInt32 inDataSize, UInt32 &outDataSize, void *outData) const;
+    void Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, UInt32& outDataSize, void* outData) const;
 
-    void Stream_SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData, UInt32 inDataSize, const void *inData);
+    void Stream_SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, const void* inData);
 
 #pragma mark Control Property Operations
 private:
-    bool Control_HasProperty(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress) const;
+    bool Control_HasProperty(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress) const;
 
-    bool Control_IsPropertySettable(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress) const;
+    bool Control_IsPropertySettable(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress) const;
 
-    UInt32 Control_GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData) const;
+    UInt32 Control_GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData) const;
 
-    void Control_GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData, UInt32 inDataSize, UInt32 &outDataSize, void *outData) const;
+    void Control_GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, UInt32& outDataSize, void* outData) const;
 
-    void Control_SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress &inAddress, UInt32 inQualifierDataSize, const void *inQualifierData, UInt32 inDataSize, const void *inData);
+    void Control_SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, const void* inData);
 
 #pragma mark IO Operations
 public:
@@ -100,30 +100,31 @@ public:
 
     void StopIO();
 
-    void GetZeroTimeStamp(Float64 &outSampleTime, UInt64 &outHostTime, UInt64 &outSeed) const;
+    void GetZeroTimeStamp(Float64& outSampleTime, UInt64& outHostTime, UInt64& outSeed) const;
 
-    void WillDoIOOperation(UInt32 inOperationID, bool &outWillDo, bool &outWillDoInPlace) const;
+    void WillDoIOOperation(UInt32 inOperationID, bool& outWillDo, bool& outWillDoInPlace) const;
 
-    void BeginIOOperation(UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo &inIOCycleInfo);
+    void BeginIOOperation(UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo& inIOCycleInfo);
 
-    void DoIOOperation(AudioObjectID inStreamObjectID, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo &inIOCycleInfo, void *ioMainBuffer, void *ioSecondaryBuffer);
+    void DoIOOperation(AudioObjectID inStreamObjectID, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo& inIOCycleInfo, void* ioMainBuffer, void* ioSecondaryBuffer);
 
-    void EndIOOperation(UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo &inIOCycleInfo);
+    void EndIOOperation(UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo& inIOCycleInfo);
 
 private:
-    void ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTime, void *outBuffer);
+    void ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTime, void* outBuffer);
 
-    void WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSampleTime, void *inBuffer);
+    void WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSampleTime, void* inBuffer);
 
 #pragma mark Implementation
 public:
-    __unused CFStringRef CopyDeviceUID() const {
+    CFStringRef CopyDeviceUID() const
+    {
         return mDeviceUID.CopyCFString();
     }
 
-    void PerformConfigChange(UInt64 inChangeAction, void *inChangeInfo);
+    void PerformConfigChange(UInt64 inChangeAction, void* inChangeInfo);
 
-    void AbortConfigChange(UInt64 inChangeAction, void *inChangeInfo);
+    void AbortConfigChange(UInt64 inChangeAction, void* inChangeInfo);
 
 private:
     enum {
@@ -137,9 +138,9 @@ private:
 
         kNumberOfControls = 2
     };
-    
-    CAMutex *mStateMutex;
-    CAMutex *mIOMutex;
+
+    CAMutex* mStateMutex;
+    CAMutex* mIOMutex;
 
     CACFString mDeviceUID;
     CACFString mDeviceName;
@@ -147,33 +148,32 @@ private:
 public:
     void setDeviceUID(CFStringRef uid) { this->mDeviceUID = uid; }
     void setDeviceName(CFStringRef name) { this->mDeviceName = name; }
-private:
 
+private:
     AudioObjectID mInputStreamObjectID;
     AudioObjectID mOutputStreamObjectID;
     bool mOutputStreamIsActive;
     bool mInputStreamIsActive;
- 
+
     UInt64 mStartCount;
-    
-    
+
     AudioObjectID mInputMasterVolumeControlObjectID;
     SInt32 mInputMasterVolumeControlRawValueShadow;
     AudioObjectID mOutputMasterVolumeControlObjectID;
     SInt32 mOutputMasterVolumeControlRawValueShadow;
     CAVolumeCurve mVolumeCurve;
 
+    SInt16 mNumChannels;
     CARingBuffer mStreamRingBuffer;
-    
+
     Float32 mMasterInputVolume;
     Float32 mMasterOutputVolume;
 
     Float64 mTicksPerFrame;
     UInt64 mAnchorHostTime;
-    
+
     UInt32 mBufferSize;
     AudioStreamBasicDescription mStreamDescription;
 };
-
 
 #endif /* defined(__UltraschallHub__Driver__) */
