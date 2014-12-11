@@ -1,4 +1,4 @@
-all: UltraschallDriver-1.0beta1.pkg
+all: package
 
 Components.plist:
 	pkgbuild --analyze --root ../Build Components.plist
@@ -24,12 +24,14 @@ postinstall:
 	echo kextload /Library/Extensions/UltraschallHub.kext >> postinstall
 	chmod +x postinstall
 	
-UltraschallDriver-1.0beta1.pkg: Components.plist 
+package: Components.plist
 	mkdir -p Build
 	make preinstall postinstall
-	pkgbuild --identifier fm.ultraschall.pkg.UltraschallDriver --version 1.0beta1 --root ../Build --component-plist Components.plist --install-location /Library/Extensions --scripts ./ Build/UltraschallDriver-1.0beta1.pkg 
+	pkgbuild --identifier fm.ultraschall.pkg.UltraschallDriver --version 1.0beta1 --root ../Build --component-plist Components.plist --install-location /Library/Extensions --scripts ./ Build/UltraschallDriver-1.2.pkg
 	make Uninstall.sh
-	hdiutil create -size 1m -srcfolder Build -fs HFS+ -volname UltraschallDriver-1.0beta1 Build/UltraschallDriver-1.0beta1.dmg 
+	
+image: package
+	hdiutil create -size 1m -srcfolder Build -fs HFS+ -volname UltraschallDriver-1.2 Build/UltraschallDriver-1.2.dmg
 	
 clean:
 	rm -f Components.plist
