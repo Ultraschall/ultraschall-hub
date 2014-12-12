@@ -32,16 +32,16 @@ UltHub_Device::UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels)
     , mOutputMasterVolumeControlObjectID(CAObjectMap::GetNextObjectID())
     , mOutputMasterVolumeControlRawValueShadow(kUltraschallHub_Control_MinRawVolumeValue)
     , mVolumeCurve()
-, mNumChannels(numChannels)
+    , mNumChannels(numChannels)
 {
     mStreamDescription.mFormatID = kAudioFormatLinearPCM;
-    mStreamDescription.mFormatFlags = kAudioFormatFlagIsFloat | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked;
-    mStreamDescription.mBytesPerPacket = 8;
+    mStreamDescription.mFormatFlags = kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved;
     mStreamDescription.mFramesPerPacket = 1;
-    mStreamDescription.mBytesPerFrame = 8;
+    mStreamDescription.mBytesPerPacket = mNumChannels * sizeof(Float32);
+    mStreamDescription.mBytesPerFrame = mNumChannels * sizeof(Float32);
     mStreamDescription.mChannelsPerFrame = mNumChannels;
     mStreamDescription.mBitsPerChannel = 32;
-    mStreamDescription.mSampleRate = 44100.0;
+    mStreamDescription.mSampleRate = 44100;
 
     //	Setup the volume curve with the one range
     mVolumeCurve.AddRange(kUltraschallHub_Control_MinRawVolumeValue, kUltraschallHub_Control_MaxRawVolumeValue, kUltraschallHub_Control_MinDBVolumeValue, kUltraschallHub_Control_MaxDbVolumeValue);
@@ -1058,25 +1058,25 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
         //	fill out the return array
         if (theNumberItemsToFetch > 0) {
             ((AudioStreamRangedDescription*)outData)[0].mFormat.mSampleRate = 44100.0;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFormatID = kAudioFormatLinearPCM;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFormatFlags = kAudioFormatFlagIsFloat | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBytesPerPacket = 8;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFramesPerPacket = 1;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBytesPerFrame = 8;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mChannelsPerFrame = 2;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBitsPerChannel = 32;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFormatID = mStreamDescription.mFormatID;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFormatFlags = mStreamDescription.mFormatFlags;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBytesPerPacket = mStreamDescription.mBytesPerPacket;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFramesPerPacket = mStreamDescription.mFramesPerPacket;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBytesPerFrame = mStreamDescription.mBytesPerFrame;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mChannelsPerFrame = mStreamDescription.mChannelsPerFrame;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBitsPerChannel = mStreamDescription.mBitsPerChannel;
             ((AudioStreamRangedDescription*)outData)[0].mSampleRateRange.mMinimum = 44100.0;
             ((AudioStreamRangedDescription*)outData)[0].mSampleRateRange.mMaximum = 44100.0;
         }
         if (theNumberItemsToFetch > 1) {
             ((AudioStreamRangedDescription*)outData)[1].mFormat.mSampleRate = 48000.0;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFormatID = kAudioFormatLinearPCM;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFormatFlags = kAudioFormatFlagIsFloat | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerPacket = 8;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFramesPerPacket = 1;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerFrame = 8;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mChannelsPerFrame = 2;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBitsPerChannel = 32;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFormatID = mStreamDescription.mFormatID;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFormatFlags = mStreamDescription.mFormatFlags;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerPacket = mStreamDescription.mBytesPerPacket;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFramesPerPacket = mStreamDescription.mFramesPerPacket;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerFrame = mStreamDescription.mBytesPerFrame;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mChannelsPerFrame = mStreamDescription.mChannelsPerFrame;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBitsPerChannel = mStreamDescription.mBitsPerChannel;
             ((AudioStreamRangedDescription*)outData)[1].mSampleRateRange.mMinimum = 48000.0;
             ((AudioStreamRangedDescription*)outData)[1].mSampleRateRange.mMaximum = 48000.0;
         }
