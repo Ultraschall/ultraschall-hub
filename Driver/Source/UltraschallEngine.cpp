@@ -277,13 +277,13 @@ bool UltraschallEngine::createAudioStreams(IOAudioSampleRate *initialSampleRate)
     
     formatArray = OSDynamicCast(OSArray, getProperty(FORMATS_KEY));
     if (formatArray == NULL) {
-		IOLog("SF formatArray is NULL\n");
+		IOLog("UntraschallEngine formatArray is NULL\n");
         goto Done;
     }
     
     sampleRateArray = OSDynamicCast(OSArray, getProperty(SAMPLE_RATES_KEY));
     if (sampleRateArray == NULL) {
-		IOLog("SF sampleRateArray is NULL\n");
+		IOLog("UntraschallEngine sampleRateArray is NULL\n");
         goto Done;
     }
     
@@ -307,13 +307,13 @@ bool UltraschallEngine::createAudioStreams(IOAudioSampleRate *initialSampleRate)
 		
         inputStream = new IOAudioStream;
         if (inputStream == NULL) {
-			IOLog("SF could not create new input IOAudioStream\n");
+			IOLog("UntraschallEngine could not create new input IOAudioStream\n");
             goto Error;
         }
         
         outputStream = new IOAudioStream;
         if (outputStream == NULL) {
-			IOLog("SF could not create new output IOAudioStream\n");
+			IOLog("UntraschallEngine could not create new output IOAudioStream\n");
 			goto Error;
         }
 
@@ -322,19 +322,19 @@ bool UltraschallEngine::createAudioStreams(IOAudioSampleRate *initialSampleRate)
 
         if (!inputStream->initWithAudioEngine(this, kIOAudioStreamDirectionInput, startingChannelID, inputStreamName) ||
             !outputStream->initWithAudioEngine(this, kIOAudioStreamDirectionOutput, startingChannelID, outputStreamName)) {
-			IOLog("SF could not init one of the streams with audio engine. \n");
+			IOLog("UntraschallEngine could not init one of the streams with audio engine. \n");
             goto Error;
         }
         
         formatIterator = OSCollectionIterator::withCollection(formatArray);
         if (!formatIterator) {
-			IOLog("SF NULL formatIterator\n");
+			IOLog("UntraschallEngine NULL formatIterator\n");
             goto Error;
         }
         
         sampleRateIterator = OSCollectionIterator::withCollection(sampleRateArray);
         if (!sampleRateIterator) {
-			IOLog("SF NULL sampleRateIterator\n");
+			IOLog("UntraschallEngine NULL sampleRateIterator\n");
             goto Error;
         }
         
@@ -343,12 +343,12 @@ bool UltraschallEngine::createAudioStreams(IOAudioSampleRate *initialSampleRate)
             IOAudioStreamFormat format;
             
             if (OSDynamicCast(OSDictionary, formatDict) == NULL) {
-				IOLog("SF error casting formatDict\n");
+				IOLog("UntraschallEngine error casting formatDict\n");
                 goto Error;
             }
             
             if (IOAudioStream::createFormatFromDictionary(formatDict, &format) == NULL) {
-				IOLog("SF error in createFormatFromDictionary()\n");
+				IOLog("UntraschallEngine error in createFormatFromDictionary()\n");
 				goto Error;
             }
             
@@ -359,7 +359,7 @@ bool UltraschallEngine::createAudioStreams(IOAudioSampleRate *initialSampleRate)
             sampleRateIterator->reset();
             while ((number = (OSNumber *)sampleRateIterator->getNextObject())) {
                 if (!OSDynamicCast(OSNumber, number)) {
-					IOLog("SF error iterating sample rates\n");
+					IOLog("UntraschallEngine error iterating sample rates\n");
                     goto Error;
                 }
                 
