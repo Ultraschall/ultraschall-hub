@@ -12,14 +12,6 @@
 			<key>Channels</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>UUID</key>
-			<string>D4736D5F</string>
-			<key>Name</key>
-			<string>Ultraschall Device (8 Channels)</string>
-			<key>Channels</key>
-			<integer>8</integer>
-		</dict>
 	</array>
 </dict>
 </plist>

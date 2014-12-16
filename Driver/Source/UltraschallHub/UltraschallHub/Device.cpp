@@ -35,12 +35,12 @@ UltHub_Device::UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels)
     , mNumChannels(numChannels)
 {
     mStreamDescription.mFormatID = kAudioFormatLinearPCM;
-    mStreamDescription.mFormatFlags = kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved;
+    mStreamDescription.mFormatFlags = kAudioFormatFlagsNativeFloatPacked;
     mStreamDescription.mFramesPerPacket = 1;
     mStreamDescription.mBytesPerPacket = mNumChannels * sizeof(Float32);
     mStreamDescription.mBytesPerFrame = mNumChannels * sizeof(Float32);
     mStreamDescription.mChannelsPerFrame = mNumChannels;
-    mStreamDescription.mBitsPerChannel = 32;
+    mStreamDescription.mBitsPerChannel = sizeof(Float32) * 8;
     mStreamDescription.mSampleRate = 44100;
 
     //	Setup the volume curve with the one range
@@ -733,8 +733,8 @@ void UltHub_Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
             ((AudioValueRange*)outData)[0].mMaximum = 44100.0;
         }
         if (theNumberItemsToFetch > 1) {
-            ((AudioValueRange*)outData)[1].mMinimum = 96000.0;
-            ((AudioValueRange*)outData)[1].mMaximum = 96000.0;
+            ((AudioValueRange*)outData)[1].mMinimum = 48000.0;
+            ((AudioValueRange*)outData)[1].mMaximum = 48000.0;
         }
 
         //	report how much we wrote
@@ -1027,7 +1027,6 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
             //	lock the state mutex
             CAMutex::Locker theStateLocker(mStateMutex);
 
-            //	This particular device always vends  16 bit native endian signed integers
             reinterpret_cast<AudioStreamBasicDescription*>(outData)->mSampleRate = static_cast<Float64>(mStreamDescription.mSampleRate);
             reinterpret_cast<AudioStreamBasicDescription*>(outData)->mFormatID = mStreamDescription.mFormatID;
             reinterpret_cast<AudioStreamBasicDescription*>(outData)->mFormatFlags = mStreamDescription.mFormatFlags;
@@ -1041,9 +1040,12 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
         break;
 
     case kAudioStreamPropertyAvailableVirtualFormats:
-    case kAudioStreamPropertyAvailablePhysicalFormats:
+    case kAudioStreamPropertyAvailablePhysicalFormats: {
         //	This returns an array of AudioStreamRangedDescriptions that describe what
         //	formats are supported.
+
+        //	lock the state mutex
+        CAMutex::Locker theStateLocker(mStateMutex);
 
         //	Calculate the number of items that have been requested. Note that this
         //	number is allowed to be smaller than the actual size of the list. In such
@@ -1084,7 +1086,7 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
         //	report how much we wrote
         outDataSize = (UInt32)(theNumberItemsToFetch * sizeof(AudioStreamRangedDescription));
         break;
-
+    }
     default:
         CAObject::GetPropertyData(inObjectID, inClientPID, inAddress, inQualifierDataSize, inQualifierData, inDataSize, outDataSize, outData);
         break;
@@ -1126,13 +1128,13 @@ void UltHub_Device::Stream_SetPropertyData(AudioObjectID inObjectID, pid_t inCli
         ThrowIf(inDataSize != sizeof(AudioStreamBasicDescription), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Stream_SetPropertyData: wrong size for the data for kAudioStreamPropertyPhysicalFormat");
 
         const AudioStreamBasicDescription* theNewFormat = reinterpret_cast<const AudioStreamBasicDescription*>(inData);
-        ThrowIf(theNewFormat->mFormatID != kAudioFormatLinearPCM, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported format ID for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mFormatFlags != (kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked), CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported format flags for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mBytesPerPacket != 4, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bytes per packet for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mFramesPerPacket != 1, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported frames per packet for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mBytesPerFrame != 4, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bytes per frame for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mChannelsPerFrame != 2, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported channels per frame for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mBitsPerChannel != 16, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bits per channel for kAudioStreamPropertyPhysicalFormat");
+        ThrowIf(theNewFormat->mFormatID != mStreamDescription.mFormatID, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported format ID for kAudioStreamPropertyPhysicalFormat");
+        ThrowIf(theNewFormat->mFormatFlags != mStreamDescription.mFormatFlags, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported format flags for kAudioStreamPropertyPhysicalFormat");
+        ThrowIf(theNewFormat->mBytesPerPacket != mStreamDescription.mBytesPerPacket, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bytes per packet for kAudioStreamPropertyPhysicalFormat");
+        ThrowIf(theNewFormat->mFramesPerPacket != mStreamDescription.mFramesPerPacket, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported frames per packet for kAudioStreamPropertyPhysicalFormat");
+        ThrowIf(theNewFormat->mBytesPerFrame != mStreamDescription.mBytesPerFrame, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bytes per frame for kAudioStreamPropertyPhysicalFormat");
+        ThrowIf(theNewFormat->mChannelsPerFrame != mStreamDescription.mChannelsPerFrame, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported channels per frame for kAudioStreamPropertyPhysicalFormat");
+        ThrowIf(theNewFormat->mBitsPerChannel != mStreamDescription.mBitsPerChannel, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bits per channel for kAudioStreamPropertyPhysicalFormat");
         ThrowIf((theNewFormat->mSampleRate != 44100.0) && (theNewFormat->mSampleRate != 48000.0), CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported sample rate for kAudioStreamPropertyPhysicalFormat");
 
         //	we need to lock around getting the current sample rate to compare against the new rate

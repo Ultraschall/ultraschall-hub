@@ -591,20 +591,17 @@ static OSStatus UltHub_BeginIOOperation(AudioServerPlugInDriverRef inDriver, Aud
 
 static OSStatus UltHub_DoIOOperation(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, AudioObjectID inStreamObjectID, UInt32 /*inClientID*/, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo* inIOCycleInfo, void* ioMainBuffer, void* ioSecondaryBuffer)
 {
-    //	This is called to actuall perform a given operation. For this device, all we need to do is
-    //	clear the buffer for the ReadInput operation.
-
     //	declare the local variables
     OSStatus theAnswer = 0;
 
     try {
         //	check the arguments
-        ThrowIf(inDriver != gAudioServerPlugInDriverRef, CAException(kAudioHardwareBadObjectError), "UltHub_EndIOOperation: bad driver reference");
-        ThrowIfNULL(inIOCycleInfo, CAException(kAudioHardwareIllegalOperationError), "UltHub_EndIOOperation: no cycle info");
+        ThrowIf(inDriver != gAudioServerPlugInDriverRef, CAException(kAudioHardwareBadObjectError), "UltHub_DoIOOperation: bad driver reference");
+        ThrowIfNULL(inIOCycleInfo, CAException(kAudioHardwareIllegalOperationError), "UltHub_DoIOOperation: no cycle info");
 
         //	get the object
         CAObjectReleaser<UltHub_Device> theDevice(CAObjectMap::CopyObjectOfClassByObjectID<UltHub_Device>(inDeviceObjectID));
-        ThrowIf(!theDevice.IsValid(), CAException(kAudioHardwareBadObjectError), "UltHub_EndIOOperation: unknown device");
+        ThrowIf(!theDevice.IsValid(), CAException(kAudioHardwareBadObjectError), "UltHub_DoIOOperation: unknown device");
 
         //	tell it to do the work
         theDevice->DoIOOperation(inStreamObjectID, inOperationID, inIOBufferFrameSize, *inIOCycleInfo, ioMainBuffer, ioSecondaryBuffer);
