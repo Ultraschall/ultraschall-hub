@@ -21,7 +21,7 @@ UltHub_Device::UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels)
     , mStateMutex(new CAMutex("Ultraschall State"))
     , mIOMutex(new CAMutex("Ultraschall IO"))
     , mStartCount(0)
-    , mBufferSize(16384)
+    , mBufferSize(8192)
     , mDeviceUID("UltraschallHub")
     , mInputStreamObjectID(CAObjectMap::GetNextObjectID())
     , mInputStreamIsActive(true)
@@ -33,6 +33,7 @@ UltHub_Device::UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels)
     , mOutputMasterVolumeControlRawValueShadow(kUltraschallHub_Control_MinRawVolumeValue)
     , mVolumeCurve()
     , mNumChannels(numChannels)
+    , mTimeline(0)
 {
     mStreamDescription.mFormatID = kAudioFormatLinearPCM;
     mStreamDescription.mFormatFlags = kAudioFormatFlagsNativeFloatPacked;
@@ -371,7 +372,7 @@ UInt32 UltHub_Device::Device_GetPropertyDataSize(AudioObjectID inObjectID, pid_t
         break;
 
     case kAudioDevicePropertyAvailableNominalSampleRates:
-        theAnswer = 2 * sizeof(AudioValueRange);
+        theAnswer = 6 * sizeof(AudioValueRange);
         break;
 
     case kAudioDevicePropertyIsHidden:
@@ -723,18 +724,34 @@ void UltHub_Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
         theNumberItemsToFetch = (UInt32)(inDataSize / sizeof(AudioValueRange));
 
         //	clamp it to the number of items we have
-        if (theNumberItemsToFetch > 2) {
-            theNumberItemsToFetch = 2;
+        if (theNumberItemsToFetch > 6) {
+            theNumberItemsToFetch = 6;
         }
 
         //	fill out the return array
         if (theNumberItemsToFetch > 0) {
-            ((AudioValueRange*)outData)[0].mMinimum = 44100.0;
-            ((AudioValueRange*)outData)[0].mMaximum = 44100.0;
+            ((AudioValueRange*)outData)[0].mMinimum = 22050.0;
+            ((AudioValueRange*)outData)[0].mMaximum = 22050.0;
         }
         if (theNumberItemsToFetch > 1) {
-            ((AudioValueRange*)outData)[1].mMinimum = 48000.0;
-            ((AudioValueRange*)outData)[1].mMaximum = 48000.0;
+            ((AudioValueRange*)outData)[1].mMinimum = 32000.0;
+            ((AudioValueRange*)outData)[1].mMaximum = 32000.0;
+        }
+        if (theNumberItemsToFetch > 2) {
+            ((AudioValueRange*)outData)[2].mMinimum = 44100.0;
+            ((AudioValueRange*)outData)[2].mMaximum = 44100.0;
+        }
+        if (theNumberItemsToFetch > 3) {
+            ((AudioValueRange*)outData)[3].mMinimum = 48000.0;
+            ((AudioValueRange*)outData)[3].mMaximum = 48000.0;
+        }
+        if (theNumberItemsToFetch > 4) {
+            ((AudioValueRange*)outData)[4].mMinimum = 88200.0;
+            ((AudioValueRange*)outData)[4].mMaximum = 88200.0;
+        }
+        if (theNumberItemsToFetch > 5) {
+            ((AudioValueRange*)outData)[5].mMinimum = 96000.0;
+            ((AudioValueRange*)outData)[5].mMaximum = 96000.0;
         }
 
         //	report how much we wrote
@@ -814,12 +831,13 @@ void UltHub_Device::Device_SetPropertyData(AudioObjectID inObjectID, pid_t inCli
             }
 
             //	make sure that the new value is different than the old value
-            UInt64 theNewSampleRate = static_cast<UInt64>(*reinterpret_cast<const Float64*>(inData));
+            UInt64 theNewSampleRate = static_cast<Float64>(*reinterpret_cast<const Float64*>(inData));
             if (theOldSampleRate != theNewSampleRate) {
+                Float64* data = new Float64(theNewSampleRate);
                 //	we dispatch this so that the change can happen asynchronously
                 AudioObjectID theDeviceObjectID = GetObjectID();
                 CADispatchQueue::GetGlobalSerialQueue().Dispatch(false, ^{
-                    UltHub_PlugIn::Host_RequestDeviceConfigurationChange(theDeviceObjectID, theNewSampleRate, NULL);
+                    UltHub_PlugIn::Host_RequestDeviceConfigurationChange(theDeviceObjectID, kUltraschallHub_SampleRateChange, data);
                 });
             }
         }
@@ -927,7 +945,7 @@ UInt32 UltHub_Device::Stream_GetPropertyDataSize(AudioObjectID inObjectID, pid_t
 
     case kAudioStreamPropertyAvailableVirtualFormats:
     case kAudioStreamPropertyAvailablePhysicalFormats:
-        theAnswer = 2 * sizeof(AudioStreamRangedDescription);
+        theAnswer = 3 * sizeof(AudioStreamRangedDescription);
         break;
 
     default:
@@ -1053,34 +1071,46 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
         theNumberItemsToFetch = (UInt32)(inDataSize / sizeof(AudioStreamRangedDescription));
 
         //	clamp it to the number of items we have
-        if (theNumberItemsToFetch > 2) {
-            theNumberItemsToFetch = 2;
+        if (theNumberItemsToFetch > 3) {
+            theNumberItemsToFetch = 3;
         }
 
         //	fill out the return array
         if (theNumberItemsToFetch > 0) {
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mSampleRate = 44100.0;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFormatID = mStreamDescription.mFormatID;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFormatFlags = mStreamDescription.mFormatFlags;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBytesPerPacket = mStreamDescription.mBytesPerPacket;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFramesPerPacket = mStreamDescription.mFramesPerPacket;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBytesPerFrame = mStreamDescription.mBytesPerFrame;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mChannelsPerFrame = mStreamDescription.mChannelsPerFrame;
-            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBitsPerChannel = mStreamDescription.mBitsPerChannel;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mSampleRate = kAudioStreamAnyRate;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFormatID = kAudioFormatLinearPCM;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFormatFlags = kAudioFormatFlagsNativeFloatPacked;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBytesPerPacket = mNumChannels * sizeof(Float32);
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mFramesPerPacket = 1;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBytesPerFrame = mNumChannels * sizeof(Float32);
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mChannelsPerFrame = mNumChannels;
+            ((AudioStreamRangedDescription*)outData)[0].mFormat.mBitsPerChannel = sizeof(Float32) * 8;
             ((AudioStreamRangedDescription*)outData)[0].mSampleRateRange.mMinimum = 44100.0;
-            ((AudioStreamRangedDescription*)outData)[0].mSampleRateRange.mMaximum = 44100.0;
+            ((AudioStreamRangedDescription*)outData)[0].mSampleRateRange.mMaximum = 96000.0;
         }
         if (theNumberItemsToFetch > 1) {
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mSampleRate = 48000.0;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFormatID = mStreamDescription.mFormatID;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFormatFlags = mStreamDescription.mFormatFlags;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerPacket = mStreamDescription.mBytesPerPacket;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFramesPerPacket = mStreamDescription.mFramesPerPacket;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerFrame = mStreamDescription.mBytesPerFrame;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mChannelsPerFrame = mStreamDescription.mChannelsPerFrame;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBitsPerChannel = mStreamDescription.mBitsPerChannel;
-            ((AudioStreamRangedDescription*)outData)[1].mSampleRateRange.mMinimum = 48000.0;
-            ((AudioStreamRangedDescription*)outData)[1].mSampleRateRange.mMaximum = 48000.0;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mSampleRate = kAudioStreamAnyRate;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mFormatID = kAudioFormatLinearPCM;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mBytesPerPacket = mNumChannels * 3;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mFramesPerPacket = 1;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mBytesPerFrame = mNumChannels * 3;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mChannelsPerFrame = mNumChannels;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mBitsPerChannel = 24;
+            ((AudioStreamRangedDescription*)outData)[2].mSampleRateRange.mMinimum = 44100.0;
+            ((AudioStreamRangedDescription*)outData)[2].mSampleRateRange.mMaximum = 96000.0;
+        }
+        if (theNumberItemsToFetch > 2) {
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mSampleRate = kAudioStreamAnyRate;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFormatID = kAudioFormatLinearPCM;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerPacket = mNumChannels * sizeof(int16_t);
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mFramesPerPacket = 1;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerFrame = mNumChannels * sizeof(int16_t);
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mChannelsPerFrame = mNumChannels;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBitsPerChannel = sizeof(int16_t) * 8;
+            ((AudioStreamRangedDescription*)outData)[1].mSampleRateRange.mMinimum = 44100.0;
+            ((AudioStreamRangedDescription*)outData)[1].mSampleRateRange.mMaximum = 96000.0;
         }
 
         //	report how much we wrote
@@ -1122,35 +1152,59 @@ void UltHub_Device::Stream_SetPropertyData(AudioObjectID inObjectID, pid_t inCli
     case kAudioStreamPropertyVirtualFormat:
     case kAudioStreamPropertyPhysicalFormat: {
         //	Changing the stream format needs to be handled via the
-        //	RequestConfigChange/PerformConfigChange machinery. Note that because this
-        //	device only supports 2 channel 32 bit float data, the only thing that can
-        //	change is the sample rate.
+        //	RequestConfigChange/PerformConfigChange machinery.
         ThrowIf(inDataSize != sizeof(AudioStreamBasicDescription), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Stream_SetPropertyData: wrong size for the data for kAudioStreamPropertyPhysicalFormat");
 
         const AudioStreamBasicDescription* theNewFormat = reinterpret_cast<const AudioStreamBasicDescription*>(inData);
-        ThrowIf(theNewFormat->mFormatID != mStreamDescription.mFormatID, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported format ID for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mFormatFlags != mStreamDescription.mFormatFlags, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported format flags for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mBytesPerPacket != mStreamDescription.mBytesPerPacket, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bytes per packet for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mFramesPerPacket != mStreamDescription.mFramesPerPacket, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported frames per packet for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mBytesPerFrame != mStreamDescription.mBytesPerFrame, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bytes per frame for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mChannelsPerFrame != mStreamDescription.mChannelsPerFrame, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported channels per frame for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf(theNewFormat->mBitsPerChannel != mStreamDescription.mBitsPerChannel, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bits per channel for kAudioStreamPropertyPhysicalFormat");
-        ThrowIf((theNewFormat->mSampleRate != 44100.0) && (theNewFormat->mSampleRate != 48000.0), CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported sample rate for kAudioStreamPropertyPhysicalFormat");
 
-        //	we need to lock around getting the current sample rate to compare against the new rate
-        UInt64 theOldSampleRate = 0;
-        {
-            CAMutex::Locker theStateLocker(mStateMutex);
-            theOldSampleRate = (UInt64)mStreamDescription.mSampleRate;
+        ThrowIf(theNewFormat->mFormatID != kAudioFormatLinearPCM, CAException(kAudioDeviceUnsupportedFormatError),
+                "UltHub_Device::Stream_SetPropertyData: unsupported format ID for kAudioStreamPropertyPhysicalFormat");
+
+        ThrowIf(theNewFormat->mChannelsPerFrame != mStreamDescription.mChannelsPerFrame, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported channels per frame for kAudioStreamPropertyPhysicalFormat");
+
+        ThrowIf(theNewFormat->mFramesPerPacket != mStreamDescription.mFramesPerPacket, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported frames per packet for kAudioStreamPropertyPhysicalFormat");
+
+        if (theNewFormat->mFormatFlags == kAudioFormatFlagsNativeFloatPacked) {
+            ThrowIf(theNewFormat->mBitsPerChannel != sizeof(Float32) * 8, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bits per channel for kAudioStreamPropertyPhysicalFormat");
+            ThrowIf(theNewFormat->mBytesPerPacket != mNumChannels * sizeof(Float32), CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bytes per packet for kAudioStreamPropertyPhysicalFormat");
+            ThrowIf(theNewFormat->mBytesPerFrame != mNumChannels * sizeof(Float32), CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported frames per packet for kAudioStreamPropertyPhysicalFormat");
+        }
+        else if (theNewFormat->mFormatFlags == (kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked)) {
+            if (theNewFormat->mBitsPerChannel == 24) {
+                ThrowIf(theNewFormat->mBytesPerPacket != mNumChannels * 3, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bytes per packet for kAudioStreamPropertyPhysicalFormat");
+                ThrowIf(theNewFormat->mBytesPerFrame != mNumChannels * 3, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported frames per packet for kAudioStreamPropertyPhysicalFormat");
+            }
+            else if (theNewFormat->mBitsPerChannel == sizeof(int16_t) * 8) {
+                ThrowIf(theNewFormat->mBytesPerPacket != mNumChannels * sizeof(int16_t), CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bytes per packet for kAudioStreamPropertyPhysicalFormat");
+                ThrowIf(theNewFormat->mBytesPerFrame != mNumChannels * sizeof(int16_t), CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported frames per packet for kAudioStreamPropertyPhysicalFormat");
+            }
+            else {
+                ThrowIf(true, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported bits per channel for kAudioStreamPropertyPhysicalFormat");
+            }
+        }
+        else {
+            ThrowIf(true, CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported format flags for kAudioStreamPropertyPhysicalFormat");
         }
 
-        //	make sure that the new value is different than the old value
-        UInt64 theNewSampleRate = static_cast<UInt64>(*reinterpret_cast<const Float64*>(inData));
-        if (theNewSampleRate != theOldSampleRate) {
+        //  ThrowIf((theNewFormat->mSampleRate != 44100.0) && (theNewFormat->mSampleRate != 48000.0), CAException(kAudioDeviceUnsupportedFormatError), "UltHub_Device::Stream_SetPropertyData: unsupported sample rate for kAudioStreamPropertyPhysicalFormat");
+
+        bool isChanged = false;
+        //	we need to lock around getting the current stream description to compare against the new one
+        {
+            CAMutex::Locker theStateLocker(mStateMutex);
+            isChanged = (theNewFormat->mSampleRate != mStreamDescription.mSampleRate
+                         || theNewFormat->mFormatFlags != mStreamDescription.mFormatFlags
+                         || theNewFormat->mBytesPerPacket != mStreamDescription.mBytesPerPacket
+                         || theNewFormat->mBytesPerFrame != mStreamDescription.mBytesPerFrame
+                         || theNewFormat->mBitsPerChannel != mStreamDescription.mBitsPerChannel);
+        }
+
+        if (isChanged) {
+            AudioStreamBasicDescription* format = new AudioStreamBasicDescription(*theNewFormat);
             //	we dispatch this so that the change can happen asynchronously
             AudioObjectID theDeviceObjectID = GetObjectID();
             CADispatchQueue::GetGlobalSerialQueue().Dispatch(false, ^{
-                    UltHub_PlugIn::Host_RequestDeviceConfigurationChange(theDeviceObjectID, theNewSampleRate, NULL);
+                UltHub_PlugIn::Host_RequestDeviceConfigurationChange(theDeviceObjectID, kUltraschallHub_StreamFormatChange, format);
             });
         }
     } break;
@@ -1390,7 +1444,7 @@ void UltHub_Device::Control_SetPropertyData(AudioObjectID inObjectID, pid_t inCl
         //	For the scalar volume, we clamp the new value to [0, 1]. Note that if this
         //	value changes, it implies that the dB value changed too.
         {
-            ThrowIf(inDataSize != sizeof(Float32), CAException(kAudioHardwareBadPropertySizeError), "NullAudio_SetControlPropertyData: wrong size for the data for kAudioLevelControlPropertyScalarValue");
+            ThrowIf(inDataSize != sizeof(Float32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Control_SetPropertyData: wrong size for the data for kAudioLevelControlPropertyScalarValue");
             theNewVolumeValue = *((const Float32*)inData);
             theNewVolumeValue = std::min(1.0f, std::max(0.0f, theNewVolumeValue));
             CAMutex::Locker theStateLocker(mStateMutex);
@@ -1409,7 +1463,7 @@ void UltHub_Device::Control_SetPropertyData(AudioObjectID inObjectID, pid_t inCl
         //	the value is tracked. Note that if this value changes, it implies that the
         //	scalar value changes as well.
         {
-            ThrowIf(inDataSize != sizeof(Float32), CAException(kAudioHardwareBadPropertySizeError), "NullAudio_SetControlPropertyData: wrong size for the data for kAudioLevelControlPropertyScalarValue");
+            ThrowIf(inDataSize != sizeof(Float32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Control_SetPropertyData: wrong size for the data for kAudioLevelControlPropertyScalarValue");
             theNewVolumeValue = *((const Float32*)inData);
             theNewVolumeValue = std::min(kUltraschallHub_Control_MaxDbVolumeValue, std::max(kUltraschallHub_Control_MinDBVolumeValue, theNewVolumeValue));
             theNewVolumeValue = mVolumeCurve.ConvertDBToScalar(theNewVolumeValue);
@@ -1454,6 +1508,9 @@ void UltHub_Device::StartIO()
 
         mTicksPerFrame = CAHostTimeBase::GetFrequency() / mStreamDescription.mSampleRate;
         mAnchorHostTime = CAHostTimeBase::GetCurrentTime();
+        mTimeline++;
+        if (mTimeline == UINT64_MAX)
+            mTimeline = 0;
     }
     ++mStartCount;
 }
@@ -1475,6 +1532,13 @@ void UltHub_Device::StopIO()
 void UltHub_Device::GetZeroTimeStamp(Float64& outSampleTime, UInt64& outHostTime, UInt64& outSeed) const
 {
     static UInt64 mNumberTimeStamps = 0;
+    static UInt64 currentTimeLine = 0;
+
+    if (mTimeline != currentTimeLine) {
+        currentTimeLine = mTimeline;
+        mNumberTimeStamps = 0;
+    }
+
     //	accessing the mapped memory requires holding the IO mutex
     CAMutex::Locker theIOLocker(mIOMutex);
 
@@ -1497,7 +1561,7 @@ void UltHub_Device::GetZeroTimeStamp(Float64& outSampleTime, UInt64& outHostTime
     //	set the return values
     outSampleTime = mNumberTimeStamps * mBufferSize;
     outHostTime = mAnchorHostTime + (mNumberTimeStamps * theHostTicksPerRingBuffer);
-    outSeed = 1;
+    outSeed = mTimeline;
 }
 
 void UltHub_Device::WillDoIOOperation(UInt32 inOperationID, bool& outWillDo, bool& outWillDoInPlace) const
@@ -1564,6 +1628,15 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
     CARingBufferError error = mStreamRingBuffer.Fetch(bufferList, inIOBufferFrameSize, inSampleTime);
 
     if (error != kCARingBufferError_OK) {
+        if (error == kCARingBufferError_CPUOverload) {
+            DebugMessage("UltHub_Device::ReadInputData: kCARingBufferError_CPUOverload");
+        }
+        else if (error == kCARingBufferError_TooMuch) {
+            DebugMessage("UltHub_Device::ReadInputData: kCARingBufferError_TooMuch");
+        }
+        else {
+            DebugMessage("UltHub_Device::ReadInputData: RingBufferError Unknown");
+        }
     }
 }
 
@@ -1583,22 +1656,49 @@ void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSample
 
     CARingBufferError error = mStreamRingBuffer.Store(bufferList, inIOBufferFrameSize, inSampleTime);
     if (error != kCARingBufferError_OK) {
+        if (error == kCARingBufferError_CPUOverload) {
+            DebugMessage("UltHub_Device::ReadInputData: kCARingBufferError_CPUOverload");
+        }
+        else if (error == kCARingBufferError_TooMuch) {
+            DebugMessage("UltHub_Device::ReadInputData: kCARingBufferError_TooMuch");
+        }
+        else {
+            DebugMessage("UltHub_Device::ReadInputData: RingBufferError Unknown");
+        }
     }
 }
 
 #pragma mark Implementation
 
-void UltHub_Device::PerformConfigChange(UInt64 inChangeAction, void* /*inChangeInfo*/)
+void UltHub_Device::PerformConfigChange(UInt64 inChangeAction, void* inChangeInfo)
 {
 
-    //	this device only supports chagning the sample rate, which is stored in inChangeAction
-    UInt64 theNewSampleRate = inChangeAction;
+    if (inChangeAction == kUltraschallHub_StreamFormatChange) {
+        AudioStreamBasicDescription* theNewFormat = reinterpret_cast<AudioStreamBasicDescription*>(inChangeInfo);
+        ThrowIfNULL(theNewFormat, CAException(kAudioHardwareIllegalOperationError), "UltHub_Device::PerformConfigChange: illegal data for kUltraschallHub_DeviceConfigurationChange");
 
-    //	make sure we support the new sample rate
-    if ((theNewSampleRate == 44100) || (theNewSampleRate == 48000)) {
-        //	we need to lock the state lock around telling the hardware about the new sample rate
+        // we need to be holding the IO and State lock to do this
         CAMutex::Locker theStateLocker(mStateMutex);
-        mStreamDescription.mSampleRate = theNewSampleRate;
+        CAMutex::Locker theIOLocker(mIOMutex);
+
+        mStreamDescription.mSampleRate = theNewFormat->mSampleRate;
+        mStreamDescription.mFormatFlags = theNewFormat->mFormatFlags;
+        mStreamDescription.mBytesPerPacket = theNewFormat->mBytesPerPacket;
+        mStreamDescription.mBytesPerFrame = theNewFormat->mBytesPerFrame;
+        mStreamDescription.mBitsPerChannel = theNewFormat->mBitsPerChannel;
+
+        delete theNewFormat;
+    }
+    else if (inChangeAction == kUltraschallHub_SampleRateChange) {
+        Float64* theNewSampleRate = reinterpret_cast<Float64*>(inChangeInfo);
+        ThrowIfNULL(theNewSampleRate, CAException(kAudioHardwareIllegalOperationError), "UltHub_Device::PerformConfigChange: illegal data for kUltraschallHub_DeviceConfigurationChange");
+
+        // we need to be holding the IO and State lock to do this
+        CAMutex::Locker theStateLocker(mStateMutex);
+        CAMutex::Locker theIOLocker(mIOMutex);
+
+        mStreamDescription.mSampleRate = *theNewSampleRate;
+        delete theNewSampleRate;
     }
 }
 

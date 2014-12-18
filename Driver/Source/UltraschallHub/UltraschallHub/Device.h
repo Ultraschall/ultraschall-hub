@@ -27,6 +27,9 @@
 #define kUltraschallHub_Control_MinDBVolumeValue -96.0f
 #define kUltraschallHub_Control_MaxDbVolumeValue 0.0f
 
+#define kUltraschallHub_StreamFormatChange 1
+#define kUltraschallHub_SampleRateChange 2
+
 //	the struct in the status buffer
 struct SimpleAudioDriverStatus {
     volatile UInt64 mSampleTime;
@@ -171,6 +174,7 @@ private:
 
     Float64 mTicksPerFrame;
     UInt64 mAnchorHostTime;
+    UInt64 mTimeline;
 
     UInt32 mBufferSize;
     AudioStreamBasicDescription mStreamDescription;
