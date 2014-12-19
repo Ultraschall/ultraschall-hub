@@ -197,6 +197,7 @@ CFPropertyListRef CreateMyPropertyListFromFile(CFURLRef fileURL)
 {
     CFDataRef resourceData;
     SInt32 errorCode;
+    // TODO: move to new api
     Boolean status = CFURLCreateDataAndPropertiesFromResource(
         kCFAllocatorDefault, fileURL, &resourceData,
         NULL, NULL, &errorCode);
@@ -268,7 +269,6 @@ void UltHub_PlugIn::InitializeDevices()
         }
     }
 
-    CFRelease(myBundle);
     CFRelease(settingsURL);
     CFRelease(propertyList);
 
