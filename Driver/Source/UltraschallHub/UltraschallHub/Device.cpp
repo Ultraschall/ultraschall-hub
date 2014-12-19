@@ -199,6 +199,7 @@ bool UltHub_Device::Device_HasProperty(AudioObjectID inObjectID, pid_t inClientP
     case kAudioObjectPropertyControlList:
     case kAudioDevicePropertyNominalSampleRate:
     case kAudioDevicePropertyAvailableNominalSampleRates:
+    case kAudioDevicePropertyIcon:
     case kAudioDevicePropertyIsHidden:
     case kAudioDevicePropertyZeroTimeStampPeriod:
     case kAudioDevicePropertyStreams:
@@ -245,6 +246,7 @@ bool UltHub_Device::Device_IsPropertySettable(AudioObjectID inObjectID, pid_t in
     case kAudioObjectPropertyControlList:
     case kAudioDevicePropertySafetyOffset:
     case kAudioDevicePropertyAvailableNominalSampleRates:
+    case kAudioDevicePropertyIcon:
     case kAudioDevicePropertyIsHidden:
     case kAudioDevicePropertyPreferredChannelsForStereo:
     case kAudioDevicePropertyPreferredChannelLayout:
@@ -373,6 +375,10 @@ UInt32 UltHub_Device::Device_GetPropertyDataSize(AudioObjectID inObjectID, pid_t
 
     case kAudioDevicePropertyAvailableNominalSampleRates:
         theAnswer = 6 * sizeof(AudioValueRange);
+        break;
+
+    case kAudioDevicePropertyIcon:
+        theAnswer = sizeof(CFURLRef);
         break;
 
     case kAudioDevicePropertyIsHidden:
@@ -691,10 +697,9 @@ void UltHub_Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
         break;
 
     case kAudioDevicePropertySafetyOffset:
-        //	This property returns the how close to now the HAL can read and write. For
-        //	this, device, the value is 0 due to the fact that it always vends silence.
+        //	This property returns the how close to now the HAL can read and write.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertySafetyOffset for the device");
-        *reinterpret_cast<UInt32*>(outData) = 0;
+        *reinterpret_cast<UInt32*>(outData) = 96;
         outDataSize = sizeof(UInt32);
         break;
 
@@ -757,6 +762,17 @@ void UltHub_Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
         //	report how much we wrote
         outDataSize = (UInt32)(theNumberItemsToFetch * sizeof(AudioValueRange));
         break;
+
+    case kAudioDevicePropertyIcon: {
+        //	This is a CFURL that points to the device's Icon in the plug-in's resource bundle.
+        ThrowIf(inDataSize < sizeof(CFURLRef), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertyIcon for the device");
+        CFBundleRef theBundle = CFBundleGetBundleWithIdentifier(CFSTR(kUltraschallHub_BundleID));
+        ThrowIf(theBundle == NULL, CAException(kAudioHardwareUnspecifiedError), "UltHub_Device::Device_GetPropertyData:: could not get the plug-in bundle for kAudioDevicePropertyIcon");
+        CFURLRef theURL = CFBundleCopyResourceURL(theBundle, CFSTR("UltraschallHubDevice.icns"), NULL, NULL);
+        ThrowIf(theURL == NULL, CAException(kAudioHardwareUnspecifiedError), "UltHub_Device::Device_GetPropertyData:: could not get the URL for kAudioDevicePropertyIcon");
+        *((CFURLRef*)outData) = theURL;
+        outDataSize = sizeof(CFURLRef);
+    } break;
 
     case kAudioDevicePropertyIsHidden:
         //	This returns whether or not the device is visible to clients.
@@ -1089,28 +1105,28 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
             ((AudioStreamRangedDescription*)outData)[0].mSampleRateRange.mMaximum = 96000.0;
         }
         if (theNumberItemsToFetch > 1) {
-            ((AudioStreamRangedDescription*)outData)[2].mFormat.mSampleRate = kAudioStreamAnyRate;
-            ((AudioStreamRangedDescription*)outData)[2].mFormat.mFormatID = kAudioFormatLinearPCM;
-            ((AudioStreamRangedDescription*)outData)[2].mFormat.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked;
-            ((AudioStreamRangedDescription*)outData)[2].mFormat.mBytesPerPacket = mNumChannels * 3;
-            ((AudioStreamRangedDescription*)outData)[2].mFormat.mFramesPerPacket = 1;
-            ((AudioStreamRangedDescription*)outData)[2].mFormat.mBytesPerFrame = mNumChannels * 3;
-            ((AudioStreamRangedDescription*)outData)[2].mFormat.mChannelsPerFrame = mNumChannels;
-            ((AudioStreamRangedDescription*)outData)[2].mFormat.mBitsPerChannel = 24;
-            ((AudioStreamRangedDescription*)outData)[2].mSampleRateRange.mMinimum = 44100.0;
-            ((AudioStreamRangedDescription*)outData)[2].mSampleRateRange.mMaximum = 96000.0;
-        }
-        if (theNumberItemsToFetch > 2) {
             ((AudioStreamRangedDescription*)outData)[1].mFormat.mSampleRate = kAudioStreamAnyRate;
             ((AudioStreamRangedDescription*)outData)[1].mFormat.mFormatID = kAudioFormatLinearPCM;
             ((AudioStreamRangedDescription*)outData)[1].mFormat.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerPacket = mNumChannels * sizeof(int16_t);
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerPacket = mNumChannels * 3;
             ((AudioStreamRangedDescription*)outData)[1].mFormat.mFramesPerPacket = 1;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerFrame = mNumChannels * sizeof(int16_t);
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBytesPerFrame = mNumChannels * 3;
             ((AudioStreamRangedDescription*)outData)[1].mFormat.mChannelsPerFrame = mNumChannels;
-            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBitsPerChannel = sizeof(int16_t) * 8;
+            ((AudioStreamRangedDescription*)outData)[1].mFormat.mBitsPerChannel = 24;
             ((AudioStreamRangedDescription*)outData)[1].mSampleRateRange.mMinimum = 44100.0;
             ((AudioStreamRangedDescription*)outData)[1].mSampleRateRange.mMaximum = 96000.0;
+        }
+        if (theNumberItemsToFetch > 2) {
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mSampleRate = kAudioStreamAnyRate;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mFormatID = kAudioFormatLinearPCM;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mBytesPerPacket = mNumChannels * sizeof(int16_t);
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mFramesPerPacket = 1;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mBytesPerFrame = mNumChannels * sizeof(int16_t);
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mChannelsPerFrame = mNumChannels;
+            ((AudioStreamRangedDescription*)outData)[2].mFormat.mBitsPerChannel = sizeof(int16_t) * 8;
+            ((AudioStreamRangedDescription*)outData)[2].mSampleRateRange.mMinimum = 44100.0;
+            ((AudioStreamRangedDescription*)outData)[2].mSampleRateRange.mMaximum = 96000.0;
         }
 
         //	report how much we wrote
@@ -1655,6 +1671,7 @@ void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSample
     bufferList->mBuffers[0] = buffer;
 
     CARingBufferError error = mStreamRingBuffer.Store(bufferList, inIOBufferFrameSize, inSampleTime);
+
     if (error != kCARingBufferError_OK) {
         if (error == kCARingBufferError_CPUOverload) {
             DebugMessage("UltHub_Device::ReadInputData: kCARingBufferError_CPUOverload");
