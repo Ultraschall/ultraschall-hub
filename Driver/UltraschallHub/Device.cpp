@@ -1627,6 +1627,12 @@ void UltHub_Device::EndIOOperation(UInt32 /*inOperationID*/, UInt32 /*inIOBuffer
 {
 }
 
+inline void MakeBufferSilent (AudioBufferList * ioData)
+{
+    for(UInt32 i=0; i<ioData->mNumberBuffers;i++)
+        memset(ioData->mBuffers[i].mData, 0, ioData->mBuffers[i].mDataByteSize);
+}
+
 void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTime, void* outBuffer)
 {
     //	we need to be holding the IO lock to do this
@@ -1644,6 +1650,7 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
     CARingBufferError error = mStreamRingBuffer.Fetch(bufferList, inIOBufferFrameSize, inSampleTime);
 
     if (error != kCARingBufferError_OK) {
+        MakeBufferSilent(bufferList);
         if (error == kCARingBufferError_CPUOverload) {
             DebugMessage("UltHub_Device::ReadInputData: kCARingBufferError_CPUOverload");
         }
