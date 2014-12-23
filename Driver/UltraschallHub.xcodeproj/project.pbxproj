@@ -20,7 +20,6 @@
 		28E6D61319F03D0300FB5630 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E6D61219F03D0300FB5630 /* CoreAudio.framework */; };
 		28E6D61519F0457000FB5630 /* UltraschallHubDevice.icns in Resources */ = {isa = PBXBuildFile; fileRef = 28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */; };
 		28FFC8941A0615FB00BDA4E5 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2897B85D19F3061B004D7D77 /* CoreFoundation.framework */; };
-		28FFC8961A06160900BDA4E5 /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FFC8951A06160900BDA4E5 /* libpthread.dylib */; };
 		B02F2086E812182335B8C036 /* CACFString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02F21A024FFB3904CD69074 /* CACFString.cpp */; };
 		B02F296B69F0804BFF2AC296 /* CADispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02F2A523A020DD15EFEEF3E /* CADispatchQueue.cpp */; };
 		B02F299B6949718F45CF6789 /* Factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02F251A4B52761BFC735DD5 /* Factory.cpp */; };
@@ -56,7 +55,6 @@
 		28E6D60919F03CD700FB5630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28E6D61219F03D0300FB5630 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = UltraschallHubDevice.icns; sourceTree = "<group>"; };
-		28FFC8951A06160900BDA4E5 /* libpthread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpthread.dylib; path = usr/lib/libpthread.dylib; sourceTree = SDKROOT; };
 		B02F209CA5E06C0695507944 /* CADispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADispatchQueue.h; sourceTree = "<group>"; };
 		B02F20BFDB9A9E6634E8CF6F /* CACFString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CACFString.h; sourceTree = "<group>"; };
 		B02F21A024FFB3904CD69074 /* CACFString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CACFString.cpp; sourceTree = "<group>"; };
@@ -73,7 +71,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28FFC8961A06160900BDA4E5 /* libpthread.dylib in Frameworks */,
 				28FFC8941A0615FB00BDA4E5 /* CoreFoundation.framework in Frameworks */,
 				28E6D61319F03D0300FB5630 /* CoreAudio.framework in Frameworks */,
 			);
@@ -117,7 +114,6 @@
 		28DAF26519FC08090071172B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				28FFC8951A06160900BDA4E5 /* libpthread.dylib */,
 				28E6D61219F03D0300FB5630 /* CoreAudio.framework */,
 				2897B85D19F3061B004D7D77 /* CoreFoundation.framework */,
 			);

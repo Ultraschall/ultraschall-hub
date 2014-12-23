@@ -1,4 +1,4 @@
-#include <sys/cdefs.h> //
+//
 //  PlugIn.h
 //  UltraschallHub
 //

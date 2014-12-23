@@ -1,5 +1,4 @@
-#include <mach/mach_time.h>
-#include <sys/cdefs.h> //
+//
 //  Driver.cpp
 //  UltraschallHub
 //
@@ -21,7 +20,7 @@ UltHub_Device::UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels)
     , mStateMutex(new CAMutex("Ultraschall State"))
     , mIOMutex(new CAMutex("Ultraschall IO"))
     , mStartCount(0)
-    , mBufferSize(8192)
+    , mBufferSize(16224)
     , mDeviceUID("UltraschallHub")
     , mInputStreamObjectID(CAObjectMap::GetNextObjectID())
     , mInputStreamIsActive(true)
@@ -1029,7 +1028,7 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
         //	such as a speaker or headphones, or a microphone. Values for this property
         //	are defined in <CoreAudio/AudioHardwareBase.h>
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Stream_GetPropertyData: not enough space for the return value of kAudioStreamPropertyTerminalType for the stream");
-        *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? kAudioStreamTerminalTypeLine : kAudioStreamTerminalTypeSpeaker;
+        *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? kAudioStreamTerminalTypeLine : kAudioStreamTerminalTypeLine;
         outDataSize = sizeof(UInt32);
         break;
 
