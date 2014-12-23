@@ -27,6 +27,10 @@ class UltHub_Device;
 #define kUltraschallHub_BundleID "fm.ultraschall.UltraschallHub"
 #define kUltraschallHub_Manufacturer "fm.ultraschall"
 
+enum {
+    kAudioPlugInPropertyUltraschallSettings = 'ults'
+};
+
 class UltHub_PlugIn : public CAObject {
 public:
     static UltHub_PlugIn& GetInstance();
@@ -43,6 +47,13 @@ protected:
 private:
     static void StaticInitializer();
 
+#pragma mark Settings
+    bool ValidateSettings(CFPropertyListRef propertyListRef);
+    bool WriteSettings();
+    CFPropertyListRef ReadSettings();
+    
+    CFPropertyListRef mCurrentSettings;
+    
 #pragma mark Property Operations
 public:
     virtual bool HasProperty(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress) const;
