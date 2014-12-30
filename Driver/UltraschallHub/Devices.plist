@@ -14,9 +14,9 @@
 		</dict>
 		<dict>
 			<key>UUID</key>
-			<string>UltraschallHub:82A47E47</string>
+			<string>UltraschallHub:659169DB</string>
 			<key>Name</key>
-			<string>USH (Stream)</string>
+			<string>UltraschallHub Default Device</string>
 			<key>Channels</key>
 			<integer>2</integer>
 		</dict>
@@ -25,6 +25,22 @@
 			<string>UltraschallHub:94AF43F5</string>
 			<key>Name</key>
 			<string>USH (Aux)</string>
+			<key>Channels</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>UUID</key>
+			<string>UltraschallHub:82A47E47</string>
+			<key>Name</key>
+			<string>USH (Stream)</string>
+			<key>Channels</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>UUID</key>
+			<string>UltraschallHub:0111A798</string>
+			<key>Name</key>
+			<string>USH (Einspieler)</string>
 			<key>Channels</key>
 			<integer>2</integer>
 		</dict>
@@ -43,22 +59,6 @@
 			<string>USH (Skype Gast)</string>
 			<key>Channels</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>UUID</key>
-			<string>UltraschallHub:0111A798</string>
-			<key>Name</key>
-			<string>USH (Einspieler)</string>
-			<key>Channels</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>UUID</key>
-			<string>UltraschallHub:659169DB</string>
-			<key>Name</key>
-			<string>UltraschallHub Default Device</string>
-			<key>Channels</key>
-			<integer>2</integer>
 		</dict>
 	</array>
 </dict>
