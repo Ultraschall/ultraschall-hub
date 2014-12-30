@@ -12,7 +12,7 @@
 #include "CADispatchQueue.h"
 #include "CADebugMacros.h"
 #include "CABitOperations.h"
-
+#include "CACFDictionary.h"
 #include "Device.h"
 
 UltHub_PlugIn& UltHub_PlugIn::GetInstance()
@@ -26,6 +26,7 @@ UltHub_PlugIn::UltHub_PlugIn()
     , mDeviceInfoList()
     , mMutex(new CAMutex("Ultraschall Plugin"))
 {
+    mCurrentSettings = NULL;
     mCurrentSettings = ReadSettings();
 }
 
@@ -107,12 +108,8 @@ bool UltHub_PlugIn::ValidateSettings(CFPropertyListRef propertyListRef)
     return false;
 }
 
-CFPropertyListRef UltHub_PlugIn::ReadSettings()
+CFPropertyListRef UltHub_PlugIn::ReadSettings() const
 {
-    if (mCurrentSettings != NULL) {
-        CFRelease(mCurrentSettings);
-    }
-
     CFBundleRef myBundle = CFBundleGetBundleWithIdentifier(CFSTR(kUltraschallHub_BundleID));
     CFURLRef settingsURL = CFBundleCopyResourceURL(myBundle, CFSTR("Devices"), CFSTR("plist"), NULL);
 
@@ -123,11 +120,16 @@ CFPropertyListRef UltHub_PlugIn::ReadSettings()
                                                               NULL, NULL, &errorCode);
 
     if (!status) {
+        CFRelease(settingsURL);
         // Handle the error
+        return NULL;
     }
     // Reconstitute the dictionary using the XML data
     CFErrorRef myError;
     CFPropertyListRef propertyList = CFPropertyListCreateWithData(kCFAllocatorDefault, resourceData, kCFPropertyListImmutable, NULL, &myError);
+
+    if (propertyList != NULL) {
+    }
 
     // Handle any errors
     CFRelease(resourceData);
@@ -167,6 +169,7 @@ bool UltHub_PlugIn::HasProperty(AudioObjectID inObjectID, pid_t inClientPID, con
     case kAudioPlugInPropertyResourceBundle:
     case kAudioObjectPropertyCustomPropertyInfoList:
     case kAudioPlugInPropertyUltraschallSettings:
+    case kAudioPlugInPropertyUltraschallDump:
         theAnswer = true;
         break;
 
@@ -185,6 +188,7 @@ bool UltHub_PlugIn::IsPropertySettable(AudioObjectID inObjectID, pid_t inClientP
     case kAudioPlugInPropertyTranslateUIDToDevice:
     case kAudioPlugInPropertyResourceBundle:
     case kAudioObjectPropertyCustomPropertyInfoList:
+    case kAudioPlugInPropertyUltraschallDump:
         theAnswer = false;
         break;
 
@@ -221,11 +225,15 @@ UInt32 UltHub_PlugIn::GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClie
         break;
 
     case kAudioObjectPropertyCustomPropertyInfoList:
-        theAnswer = 1 * sizeof(AudioServerPlugInCustomPropertyInfo);
+        theAnswer = (UInt32)(kAudioPlugInPropertyUltraschallNumberOfObjects * sizeof(AudioServerPlugInCustomPropertyInfo));
         break;
 
     case kAudioPlugInPropertyUltraschallSettings:
         theAnswer = sizeof(CFPropertyListRef);
+        break;
+
+    case kAudioPlugInPropertyUltraschallDump:
+        theAnswer = sizeof(CFStringRef);
         break;
 
     default:
@@ -294,8 +302,8 @@ void UltHub_PlugIn::GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
         theNumberItemsToFetch = (UInt32)(inDataSize / sizeof(AudioServerPlugInCustomPropertyInfo));
 
         //	clamp it to the number of items we have
-        if (theNumberItemsToFetch > 1) {
-            theNumberItemsToFetch = 1;
+        if (theNumberItemsToFetch > kAudioPlugInPropertyUltraschallNumberOfObjects) {
+            theNumberItemsToFetch = kAudioPlugInPropertyUltraschallNumberOfObjects;
         }
 
         if (theNumberItemsToFetch > 0) {
@@ -304,20 +312,36 @@ void UltHub_PlugIn::GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
             ((AudioServerPlugInCustomPropertyInfo*)outData)[0].mQualifierDataType = kAudioServerPlugInCustomPropertyDataTypeNone;
         }
 
+        if (theNumberItemsToFetch > 1) {
+            ((AudioServerPlugInCustomPropertyInfo*)outData)[1].mSelector = kAudioPlugInPropertyUltraschallDump;
+            ((AudioServerPlugInCustomPropertyInfo*)outData)[1].mPropertyDataType = kAudioServerPlugInCustomPropertyDataTypeCFString;
+            ((AudioServerPlugInCustomPropertyInfo*)outData)[1].mQualifierDataType = kAudioServerPlugInCustomPropertyDataTypeNone;
+        }
+
         //	report how much we wrote
         outDataSize = (UInt32)(theNumberItemsToFetch * sizeof(AudioServerPlugInCustomPropertyInfo));
         break;
     }
 
     case kAudioPlugInPropertyUltraschallSettings: {
+        //	check the arguments
+        ThrowIf(inDataSize < sizeof(AudioObjectID), CAException(kAudioHardwareBadPropertySizeError), "UltHub_GetPlugInPropertyData: not enough space for the return value of kAudioPlugInPropertyUltraschallSettings");
+
+        CACFDictionary test;
+        test.AddBool(CFSTR("TEST"), true);
+        CFPropertyListRef data = test.AsPropertyList();
+        *reinterpret_cast<CFPropertyListRef*>(outData) = data;
+        outDataSize = sizeof(CFPropertyListRef);
+        break;
+    }
+
+    case kAudioPlugInPropertyUltraschallDump: {
         CAMutex::Locker theLocker(mMutex);
         //	check the arguments
-        ThrowIf(inDataSize < sizeof(CFPropertyListRef), CAException(kAudioHardwareBadPropertySizeError), "UltHub_GetPlugInPropertyData: not enough space for the return value of kAudioPlugInPropertyUltraschallSettings");
-
-        CFPropertyListRef theSettings = mCurrentSettings;
-
-        *reinterpret_cast<CFPropertyListRef*>(outData) = theSettings;
-        outDataSize = sizeof(CFPropertyListRef);
+        ThrowIf(inDataSize < sizeof(AudioObjectID), CAException(kAudioHardwareBadPropertySizeError), "UltHub_GetPlugInPropertyData: not enough space for the return value of kAudioPlugInPropertyUltraschallSettings");
+        
+        *reinterpret_cast<CFStringRef*>(outData) = CFSTR("");
+        outDataSize = sizeof(CFStringRef);
         break;
     }
     default:
@@ -336,6 +360,8 @@ void UltHub_PlugIn::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
 
         CFPropertyListRef theNewSettings = *reinterpret_cast<const CFPropertyListRef*>(inData);
         if (ValidateSettings(theNewSettings)) {
+            if (mCurrentSettings != NULL)
+                CFRelease(mCurrentSettings);
             mCurrentSettings = theNewSettings;
             WriteSettings();
             _RemoveAllDevices();
@@ -399,9 +425,18 @@ void UltHub_PlugIn::InitializeDevices()
     }
 
     //	this will change the owned object list and the device list
-    AudioObjectPropertyAddress theChangedProperties[] = { kAudioObjectPropertyOwnedObjects, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster,
-                                                          kAudioPlugInPropertyDeviceList, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster };
-    Host_PropertiesChanged(GetObjectID(), 2, theChangedProperties);
+    AudioObjectPropertyAddress theChangedProperties[] = { kAudioObjectPropertyOwnedObjects,
+                                                          kAudioObjectPropertyScopeGlobal,
+                                                          kAudioObjectPropertyElementMaster,
+
+                                                          kAudioPlugInPropertyUltraschallSettings,
+                                                          kAudioObjectPropertyScopeGlobal,
+                                                          kAudioObjectPropertyElementMaster,
+
+                                                          kAudioPlugInPropertyDeviceList,
+                                                          kAudioObjectPropertyScopeGlobal,
+                                                          kAudioObjectPropertyElementMaster };
+    Host_PropertiesChanged(GetObjectID(), 3, theChangedProperties);
 }
 
 void UltHub_PlugIn::AddDevice(UltHub_Device* inDevice)

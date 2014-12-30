@@ -13,6 +13,7 @@
 
 #include <CoreAudio/AudioServerPlugIn.h>
 #include <CoreAudio/AudioHardwareBase.h>
+#include <CoreAudio/CoreAudioTypes.h>
 
 #include "CACFString.h"
 #include "CAMutex.h"
@@ -20,6 +21,7 @@
 #include "CAObject.h"
 #include "CARingBuffer.h"
 #include "CAHostTimeBase.h"
+#include "CAStreamRangedDescription.h"
 
 //	volume control ranges
 #define kUltraschallHub_Control_MinRawVolumeValue 0
@@ -153,31 +155,36 @@ public:
     void setDeviceName(CFStringRef name) { this->mDeviceName = name; }
 
 private:
+    // IO
+    UInt64 mStartCount;
+
+    // Timing / Clock
+    Float64 mTicksPerFrame;
+    UInt64 mAnchorHostTime;
+    UInt64 mTimeline;
+
+    // Audio Ring Buffer
+    CARingBuffer mRingBuffer;
+    UInt32 mRingBufferSize;
+
+    // Steam
+    typedef std::vector<CAStreamBasicDescription> StreamDescriptionList;
+    StreamDescriptionList mStreamDescriptions;
+    AudioStreamBasicDescription mStreamDescription;
+
     AudioObjectID mInputStreamObjectID;
     AudioObjectID mOutputStreamObjectID;
     bool mOutputStreamIsActive;
     bool mInputStreamIsActive;
 
-    UInt64 mStartCount;
-
+    // Controls
     AudioObjectID mInputMasterVolumeControlObjectID;
     SInt32 mInputMasterVolumeControlRawValueShadow;
     AudioObjectID mOutputMasterVolumeControlObjectID;
     SInt32 mOutputMasterVolumeControlRawValueShadow;
     CAVolumeCurve mVolumeCurve;
-
-    SInt16 mNumChannels;
-    CARingBuffer mStreamRingBuffer;
-
     Float32 mMasterInputVolume;
     Float32 mMasterOutputVolume;
-
-    Float64 mTicksPerFrame;
-    UInt64 mAnchorHostTime;
-    UInt64 mTimeline;
-
-    UInt32 mBufferSize;
-    AudioStreamBasicDescription mStreamDescription;
 };
 
 #endif /* defined(__UltraschallHub__Driver__) */
