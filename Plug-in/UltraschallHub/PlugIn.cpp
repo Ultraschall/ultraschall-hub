@@ -508,7 +508,7 @@ void UltHub_PlugIn::_RemoveAllDevices()
     }
 }
 
-#pragma mark Host Accesss
+#pragma mark Host Access
 pthread_once_t UltHub_PlugIn::sStaticInitializer = PTHREAD_ONCE_INIT;
 UltHub_PlugIn* UltHub_PlugIn::sInstance = NULL;
 AudioServerPlugInHostRef UltHub_PlugIn::sHost = NULL;

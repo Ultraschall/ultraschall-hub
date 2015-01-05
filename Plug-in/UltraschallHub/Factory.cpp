@@ -489,7 +489,7 @@ static OSStatus UltHub_StopIO(AudioServerPlugInDriverRef inDriver, AudioObjectID
     return theAnswer;
 }
 
-static OSStatus UltHub_GetZeroTimeStamp(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 inClientID, Float64* outSampleTime, UInt64* outHostTime, UInt64* outSeed)
+static OSStatus UltHub_GetZeroTimeStamp(AudioServerPlugInDriverRef inDriver, AudioObjectID inDeviceObjectID, UInt32 /*inClientID*/, Float64* outSampleTime, UInt64* outHostTime, UInt64* outSeed)
 {
     //	This method returns the current zero time stamp for the device. The HAL models the timing of
     //	a device as a series of time stamps that relate the sample time to a host time. The zero
