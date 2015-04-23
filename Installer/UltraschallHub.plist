@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <installer-gui-script minSpecVersion="1">
-    <title>UltraschallHub 0.8.2</title>
+    <title>UltraschallHub 0.9.6</title>
     <organization>fm.ultraschall</organization>
     <pkg-ref id="fm.ultraschall.UltraschallHub"/>
     <options customize="never" require-scripts="true"/>
     <background file="Background.png" mime-type="image/png"/>
     <license file="LICENSE" mime-type="text/plain"/>
-    <os-version min="10.9"/>
+    <os-version min="10.8"/>
     <choices-outline>
         <line choice="default">
             <line choice="fm.ultraschall.UltraschallHub-PlugIn"/>
@@ -16,5 +16,5 @@
     <choice id="fm.ultraschall.UltraschallHub-PlugIn" visible="false">
         <pkg-ref id="fm.ultraschall.UltraschallHub-PlugIn"/>
     </choice>
-    <pkg-ref id="fm.ultraschall.UltraschallHub-PlugIn" version="0.8.2" onConclusion="none">UltraschallHub-PlugIn.0.8.2.pkg</pkg-ref>
+    <pkg-ref id="fm.ultraschall.UltraschallHub-PlugIn" version="0.9.6" onConclusion="none">UltraschallHub-PlugIn.0.9.6.pkg</pkg-ref>
 </installer-gui-script>

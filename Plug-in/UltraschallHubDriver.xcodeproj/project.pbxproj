@@ -232,7 +232,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 28E6D60019F03CD700FB5630 /* Build configuration list for PBXProject "UltraschallHub" */;
+			buildConfigurationList = 28E6D60019F03CD700FB5630 /* Build configuration list for PBXProject "UltraschallHubDriver" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -394,7 +394,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		28E6D60019F03CD700FB5630 /* Build configuration list for PBXProject "UltraschallHub" */ = {
+		28E6D60019F03CD700FB5630 /* Build configuration list for PBXProject "UltraschallHubDriver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				28E6D60A19F03CD700FB5630 /* Debug */,
