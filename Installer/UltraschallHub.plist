@@ -2,19 +2,18 @@
 <installer-gui-script minSpecVersion="1">
     <title>UltraschallHub 0.9.6</title>
     <organization>fm.ultraschall</organization>
-    <pkg-ref id="fm.ultraschall.UltraschallHub"/>
     <options customize="never" require-scripts="true"/>
     <background file="Background.png" mime-type="image/png"/>
     <license file="LICENSE" mime-type="text/plain"/>
     <os-version min="10.8"/>
     <choices-outline>
         <line choice="default">
-            <line choice="fm.ultraschall.UltraschallHub-PlugIn"/>
+            <line choice="fm.ultraschall.UltraschallHubDriver"/>
         </line>
     </choices-outline>
     <choice id="default"/>
-    <choice id="fm.ultraschall.UltraschallHub-PlugIn" visible="false">
-        <pkg-ref id="fm.ultraschall.UltraschallHub-PlugIn"/>
+    <choice id="fm.ultraschall.UltraschallHubDriver" visible="false">
+        <pkg-ref id="fm.ultraschall.UltraschallHubDriver"/>
     </choice>
-    <pkg-ref id="fm.ultraschall.UltraschallHub-PlugIn" version="0.9.6" onConclusion="none">UltraschallHub-PlugIn.0.9.6.pkg</pkg-ref>
+    <pkg-ref id="fm.ultraschall.UltraschallHubDriver" version="0.9.6" onConclusion="none">UltraschallHubDriver.0.9.6.pkg</pkg-ref>
 </installer-gui-script>
