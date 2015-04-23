@@ -16,7 +16,7 @@
 			<key>UUID</key>
 			<string>UltraschallHub:82A47E47</string>
 			<key>Name</key>
-			<string>UHS Skype Microphone</string>
+			<string>USH Skype Microphone</string>
 			<key>Channels</key>
 			<integer>1</integer>
 		</dict>
