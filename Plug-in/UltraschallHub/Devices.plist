@@ -6,22 +6,6 @@
 	<array>
 		<dict>
 			<key>UUID</key>
-			<string>UltraschallHub:D5BE903B</string>
-			<key>Name</key>
-			<string>UltraschallHub Schaltzentrale</string>
-			<key>Channels</key>
-			<integer>16</integer>
-		</dict>
-		<dict>
-			<key>UUID</key>
-			<string>UltraschallHub:659169DB</string>
-			<key>Name</key>
-			<string>UltraschallHub Default Device</string>
-			<key>Channels</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>UUID</key>
 			<string>UltraschallHub:94AF43F5</string>
 			<key>Name</key>
 			<string>USH (Aux)</string>
