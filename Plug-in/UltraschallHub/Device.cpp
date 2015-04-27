@@ -697,7 +697,7 @@ void UltHub_Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
     case kAudioDevicePropertySafetyOffset:
         //	This property returns the how close to now the HAL can read and write.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertySafetyOffset for the device");
-        *reinterpret_cast<UInt32*>(outData) = 1024;
+        *reinterpret_cast<UInt32*>(outData) = 64;
         outDataSize = sizeof(UInt32);
         break;
 
