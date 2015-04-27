@@ -389,7 +389,7 @@ UInt32 UltHub_Device::Device_GetPropertyDataSize(AudioObjectID inObjectID, pid_t
         break;
 
     case kAudioDevicePropertyPreferredChannelLayout:
-        theAnswer = offsetof(AudioChannelLayout, mChannelDescriptions) + (2 * sizeof(AudioChannelDescription));
+        theAnswer = offsetof(AudioChannelLayout, mChannelDescriptions) + (mStreamDescription.mChannelsPerFrame * sizeof(AudioChannelDescription));
         break;
 
     case kAudioDevicePropertyZeroTimeStampPeriod:
@@ -783,13 +783,22 @@ void UltHub_Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
         //	by default. For this device, we return a stereo ACL.
         {
             //	calcualte how big the
-            UInt32 theACLSize = offsetof(AudioChannelLayout, mChannelDescriptions) + (2 * sizeof(AudioChannelDescription));
+            UInt32 theACLSize = offsetof(AudioChannelLayout, mChannelDescriptions) + (mStreamDescription.mChannelsPerFrame * sizeof(AudioChannelDescription));
             ThrowIf(inDataSize < theACLSize, CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertyPreferredChannelLayout for the device");
             ((AudioChannelLayout*)outData)->mChannelLayoutTag = kAudioChannelLayoutTag_UseChannelDescriptions;
             ((AudioChannelLayout*)outData)->mChannelBitmap = 0;
-            ((AudioChannelLayout*)outData)->mNumberChannelDescriptions = 2;
-            for (theItemIndex = 0; theItemIndex < 2; ++theItemIndex) {
-                ((AudioChannelLayout*)outData)->mChannelDescriptions[theItemIndex].mChannelLabel = kAudioChannelLabel_Left + theItemIndex;
+            ((AudioChannelLayout*)outData)->mNumberChannelDescriptions = mStreamDescription.mChannelsPerFrame;
+            for (theItemIndex = 0; theItemIndex < mStreamDescription.mChannelsPerFrame; ++theItemIndex)
+            {
+                if (theItemIndex <= 2) {
+                    if (mStreamDescription.mChannelsPerFrame == 1) {
+                        ((AudioChannelLayout*)outData)->mChannelDescriptions[theItemIndex].mChannelLabel = kAudioChannelLabel_Mono;
+                    } else {
+                        ((AudioChannelLayout*)outData)->mChannelDescriptions[theItemIndex].mChannelLabel = kAudioChannelLabel_Left + theItemIndex;
+                    }
+                } else {
+                    ((AudioChannelLayout*)outData)->mChannelDescriptions[theItemIndex].mChannelLabel = kAudioChannelLabel_Unused;
+                }
                 ((AudioChannelLayout*)outData)->mChannelDescriptions[theItemIndex].mChannelFlags = 0;
                 ((AudioChannelLayout*)outData)->mChannelDescriptions[theItemIndex].mCoordinates[0] = 0;
                 ((AudioChannelLayout*)outData)->mChannelDescriptions[theItemIndex].mCoordinates[1] = 0;
