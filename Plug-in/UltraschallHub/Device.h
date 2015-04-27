@@ -185,6 +185,8 @@ private:
     CAVolumeCurve mVolumeCurve;
     Float32 mMasterInputVolume;
     Float32 mMasterOutputVolume;
+    
+    const int mSafetyOffset = 32;
 };
 
 #endif /* defined(__UltraschallHub__Driver__) */

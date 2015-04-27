@@ -21,7 +21,7 @@ UltHub_Device::UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels)
     , mStateMutex(new CAMutex("Ultraschall State"))
     , mIOMutex(new CAMutex("Ultraschall IO"))
     , mStartCount(0)
-    , mRingBufferSize(16224)
+    , mRingBufferSize(1024*8)
     , mDeviceUID("UltraschallHub")
     , mInputStreamObjectID(CAObjectMap::GetNextObjectID())
     , mInputStreamIsActive(true)
@@ -697,7 +697,7 @@ void UltHub_Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
     case kAudioDevicePropertySafetyOffset:
         //	This property returns the how close to now the HAL can read and write.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertySafetyOffset for the device");
-        *reinterpret_cast<UInt32*>(outData) = 64;
+        *reinterpret_cast<UInt32*>(outData) = mSafetyOffset;
         outDataSize = sizeof(UInt32);
         break;
 
@@ -1499,7 +1499,7 @@ void UltHub_Device::GetZeroTimeStamp(Float64& outSampleTime, UInt64& outHostTime
 
     //	accessing the mapped memory requires holding the IO mutex
     CAMutex::Locker theIOLocker(mIOMutex);
-
+    
     UInt64 theCurrentHostTime;
     Float64 theHostTicksPerRingBuffer;
     Float64 theHostTickOffset;
@@ -1575,10 +1575,6 @@ inline void MakeBufferSilent(AudioBufferList* ioData)
         memset(ioData->mBuffers[i].mData, 0, ioData->mBuffers[i].mDataByteSize);
 }
 
-inline void CalculateVolume(void* data, Float32 volume)
-{
-}
-
 void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTime, void* outBuffer)
 {
     //	we need to be holding the IO lock to do this
@@ -1652,7 +1648,6 @@ void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSample
 
 void UltHub_Device::PerformConfigChange(UInt64 inChangeAction, void* inChangeInfo)
 {
-
     if (inChangeAction == kUltraschallHub_StreamFormatChange) {
         AudioStreamBasicDescription* theNewFormat = reinterpret_cast<AudioStreamBasicDescription*>(inChangeInfo);
         ThrowIfNULL(theNewFormat, CAException(kAudioHardwareIllegalOperationError), "UltHub_Device::PerformConfigChange: illegal data for kUltraschallHub_DeviceConfigurationChange");
