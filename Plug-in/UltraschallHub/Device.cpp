@@ -1469,6 +1469,8 @@ void UltHub_Device::StartIO()
         mTimeline++;
         if (mTimeline == UINT64_MAX)
             mTimeline = 0;
+        
+        DebugMessage("UltHub_Device::StartIO");
     }
     ++mStartCount;
 }
@@ -1481,25 +1483,29 @@ void UltHub_Device::StopIO()
     //	we tell the hardware to stop if this is the last stop call
     if (mStartCount == 1) {
         mStartCount = 0;
+        DebugMessage("UltHub_Device::StopIO: last");
     }
     else if (mStartCount > 1) {
         --mStartCount;
+        DebugMessage("UltHub_Device::StopIO");
     }
 }
 
 void UltHub_Device::GetZeroTimeStamp(Float64& outSampleTime, UInt64& outHostTime, UInt64& outSeed) const
 {
+    //DebugMessage("UltHub_Device::GetZeroTimeStamp");
+    
     static UInt64 mNumberTimeStamps = 0;
     static UInt64 currentTimeLine = 0;
 
+    //	accessing the mapped memory requires holding the IO mutex
+    CAMutex::Locker theIOLocker(mIOMutex);
+    
     if (mTimeline != currentTimeLine) {
         currentTimeLine = mTimeline;
         mNumberTimeStamps = 0;
     }
 
-    //	accessing the mapped memory requires holding the IO mutex
-    CAMutex::Locker theIOLocker(mIOMutex);
-    
     UInt64 theCurrentHostTime;
     Float64 theHostTicksPerRingBuffer;
     Float64 theHostTickOffset;
@@ -1552,6 +1558,7 @@ void UltHub_Device::BeginIOOperation(UInt32 /*inOperationID*/, UInt32 /*inIOBuff
 
 void UltHub_Device::DoIOOperation(AudioObjectID /*inStreamObjectID*/, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo& inIOCycleInfo, void* ioMainBuffer, void* /*ioSecondaryBuffer*/)
 {
+//    DebugMessageN4("UltHub_Device::DoIOOperation: inIOCycleInfo.mIOCycleCounter=%llu inIOCycleInfo.mMasterHostTicksPerFrame=%f inIOCycleInfo.mDeviceHostTicksPerFrame=%f inIOCycleInfo.mNominalIOBufferFrameSize=%i", inIOCycleInfo.mIOCycleCounter, inIOCycleInfo.mMasterHostTicksPerFrame, inIOCycleInfo.mDeviceHostTicksPerFrame, inIOCycleInfo.mNominalIOBufferFrameSize);
     switch (inOperationID) {
     case kAudioServerPlugInIOOperationReadInput:
         ReadInputData(inIOBufferFrameSize, inIOCycleInfo.mInputTime.mSampleTime, ioMainBuffer);
@@ -1589,7 +1596,7 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
     bufferList->mNumberBuffers = 1;
     bufferList->mBuffers[0] = buffer;
 
-    CARingBufferError error = mRingBuffer.Fetch(bufferList, inIOBufferFrameSize, inSampleTime);
+    CARingBufferError error = mRingBuffer.Fetch(bufferList, inIOBufferFrameSize, inSampleTime - mSafetyOffset);
 
     if (error != kCARingBufferError_OK) {
         MakeBufferSilent(bufferList);
@@ -1608,6 +1615,7 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
         vDSP_vsmul((Float32*)outBuffer + channel, mStreamDescription.mChannelsPerFrame, &mMasterOutputVolume,
                    (Float32*)outBuffer + channel, mStreamDescription.mChannelsPerFrame, inIOBufferFrameSize);
     }
+    //DebugMessageN2("UltHub_Device::ReadInputData: inIOBufferFrameSize = %i inSampleTime = %f", inIOBufferFrameSize, inSampleTime);
 }
 
 void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSampleTime, void* inBuffer)
@@ -1629,19 +1637,20 @@ void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSample
                    (Float32*)inBuffer + channel, mStreamDescription.mChannelsPerFrame, inIOBufferFrameSize);
     }
 
-    CARingBufferError error = mRingBuffer.Store(bufferList, inIOBufferFrameSize, inSampleTime);
+    CARingBufferError error = mRingBuffer.Store(bufferList, inIOBufferFrameSize, inSampleTime + mSafetyOffset);
 
     if (error != kCARingBufferError_OK) {
         if (error == kCARingBufferError_CPUOverload) {
-            DebugMessage("UltHub_Device::ReadInputData: kCARingBufferError_CPUOverload");
+            DebugMessage("UltHub_Device::WriteOutputData: kCARingBufferError_CPUOverload");
         }
         else if (error == kCARingBufferError_TooMuch) {
-            DebugMessage("UltHub_Device::ReadInputData: kCARingBufferError_TooMuch");
+            DebugMessage("UltHub_Device::WriteOutputData: kCARingBufferError_TooMuch");
         }
         else {
-            DebugMessage("UltHub_Device::ReadInputData: RingBufferError Unknown");
+            DebugMessage("UltHub_Device::WriteOutputData: RingBufferError Unknown");
         }
     }
+    //DebugMessageN2("UltHub_Device::WriteOutputData: inIOBufferFrameSize = %i inSampleTime = %f", inIOBufferFrameSize, inSampleTime);
 }
 
 #pragma mark Implementation
@@ -1663,6 +1672,8 @@ void UltHub_Device::PerformConfigChange(UInt64 inChangeAction, void* inChangeInf
         mStreamDescription.mBitsPerChannel = theNewFormat->mBitsPerChannel;
 
         delete theNewFormat;
+        
+        DebugMessageN4("UltHub_Device::PerformConfigChange: kUltraschallHub_StreamFormatChange SampleRate=%f BytesPerPacket=%i BytesPerFrame=%i BitsPerChannel=%i", mStreamDescription.mSampleRate, mStreamDescription.mBytesPerPacket, mStreamDescription.mBytesPerFrame, mStreamDescription.mBitsPerChannel);
     }
     else if (inChangeAction == kUltraschallHub_SampleRateChange) {
         Float64* theNewSampleRate = reinterpret_cast<Float64*>(inChangeInfo);
@@ -1673,7 +1684,10 @@ void UltHub_Device::PerformConfigChange(UInt64 inChangeAction, void* inChangeInf
         CAMutex::Locker theIOLocker(mIOMutex);
 
         mStreamDescription.mSampleRate = *theNewSampleRate;
+
         delete theNewSampleRate;
+        
+        DebugMessageN1("UltHub_Device::PerformConfigChange: kUltraschallHub_SampleRateChange %f", mStreamDescription.mSampleRate);
     }
 }
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-VERSION="0.9.7"
+VERSION="0.9.7.4"
 CONFIGURATION="Release"
 
 echo "Build UltraschallHub $VERSION"
@@ -21,19 +21,6 @@ mkdir ../Plug-in/Payload
 cp -rf ../Plug-in/build/$CONFIGURATION/*.driver ../Plug-in/Payload/
 pkgbuild --root ../Plug-in/Payload --identifier fm.ultraschall.UltraschallHubDriver --scripts ../Plug-in/Scripts --install-location /Library/Audio/Plug-ins/HAL ./Payload/UltraschallHubDriver.$VERSION.pkg > /dev/null
 rm -rf ../Plug-in/Payload
-
-echo "Build Application"
-xcodebuild -project "../Application/UltraschallHub.xcodeproj" -configuration $CONFIGURATION clean > /dev/null
-xcodebuild -project "../Application/UltraschallHub.xcodeproj" -configuration $CONFIGURATION build > /dev/null
-
-echo "Create Application Package"
-if [ -d ../Application/Payload ]; then
-  rm -rf ../Application/Payload
-fi
-mkdir ../Application/Payload
-cp -rf ../Application/build/$CONFIGURATION/*.app ../Application/Payload/
-pkgbuild --root ../Application/Payload --identifier fm.ultraschall.UltraschallHub --scripts ../Application/Scripts --install-location /Applications ./Payload/UltraschallHub.$VERSION.pkg > /dev/null
-rm -rf ../Application/Payload
 
 echo "Create Installer"
 productbuild --distribution UltraschallHub.plist --package-path Payload --resources Resources ./Package/UltraschallHub.$VERSION.pkg > /dev/null
@@ -58,7 +45,7 @@ echo '
            set arrangement of theViewOptions to not arranged
            set icon size of theViewOptions to 72
            set background picture of theViewOptions to file ".background:Background.png"
-           set position of item "UltraschallHub.0.9.7.pkg" of container window to {150, 100}
+           set position of item "UltraschallHub.0.9.7.4.pkg" of container window to {150, 100}
            update without registering applications
            delay 5
            close
