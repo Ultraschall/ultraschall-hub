@@ -1558,7 +1558,9 @@ void UltHub_Device::BeginIOOperation(UInt32 /*inOperationID*/, UInt32 /*inIOBuff
 
 void UltHub_Device::DoIOOperation(AudioObjectID /*inStreamObjectID*/, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo& inIOCycleInfo, void* ioMainBuffer, void* /*ioSecondaryBuffer*/)
 {
-//    DebugMessageN4("UltHub_Device::DoIOOperation: inIOCycleInfo.mIOCycleCounter=%llu inIOCycleInfo.mMasterHostTicksPerFrame=%f inIOCycleInfo.mDeviceHostTicksPerFrame=%f inIOCycleInfo.mNominalIOBufferFrameSize=%i", inIOCycleInfo.mIOCycleCounter, inIOCycleInfo.mMasterHostTicksPerFrame, inIOCycleInfo.mDeviceHostTicksPerFrame, inIOCycleInfo.mNominalIOBufferFrameSize);
+    if (inIOCycleInfo.mIOCycleCounter == 1) {
+        DebugMessageN4("UltHub_Device::DoIOOperation: inIOCycleInfo.mIOCycleCounter=%llu inIOCycleInfo.mMasterHostTicksPerFrame=%f inIOCycleInfo.mDeviceHostTicksPerFrame=%f inIOCycleInfo.mNominalIOBufferFrameSize=%i", inIOCycleInfo.mIOCycleCounter, inIOCycleInfo.mMasterHostTicksPerFrame, inIOCycleInfo.mDeviceHostTicksPerFrame, inIOCycleInfo.mNominalIOBufferFrameSize);
+    }
     switch (inOperationID) {
     case kAudioServerPlugInIOOperationReadInput:
         ReadInputData(inIOBufferFrameSize, inIOCycleInfo.mInputTime.mSampleTime, ioMainBuffer);
@@ -1599,7 +1601,6 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
     CARingBufferError error = mRingBuffer.Fetch(&bufferList, inIOBufferFrameSize, inSampleTime - mSafetyOffset);
 
     if (error != kCARingBufferError_OK) {
-        MakeBufferSilent(bufferList);
         if (error == kCARingBufferError_CPUOverload) {
             DebugMessage("UltHub_Device::ReadInputData: kCARingBufferError_CPUOverload");
         }
@@ -1609,13 +1610,14 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
         else {
             DebugMessage("UltHub_Device::ReadInputData: RingBufferError Unknown");
         }
+        MakeBufferSilent(&bufferList);
+        DebugMessageN2("UltHub_Device::ReadInputData: inIOBufferFrameSize = %i inSampleTime = %f", inIOBufferFrameSize, inSampleTime);
     }
 
     for (int channel = 0; channel < mStreamDescription.mChannelsPerFrame; ++channel) {
         vDSP_vsmul((Float32*)outBuffer + channel, mStreamDescription.mChannelsPerFrame, &mMasterOutputVolume,
                    (Float32*)outBuffer + channel, mStreamDescription.mChannelsPerFrame, inIOBufferFrameSize);
     }
-    //DebugMessageN2("UltHub_Device::ReadInputData: inIOBufferFrameSize = %i inSampleTime = %f", inIOBufferFrameSize, inSampleTime);
 }
 
 void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSampleTime, void* inBuffer)
@@ -1649,8 +1651,8 @@ void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSample
         else {
             DebugMessage("UltHub_Device::WriteOutputData: RingBufferError Unknown");
         }
+        DebugMessageN2("UltHub_Device::WriteOutputData: inIOBufferFrameSize = %i inSampleTime = %f", inIOBufferFrameSize, inSampleTime);
     }
-    //DebugMessageN2("UltHub_Device::WriteOutputData: inIOBufferFrameSize = %i inSampleTime = %f", inIOBufferFrameSize, inSampleTime);
 }
 
 #pragma mark Implementation
