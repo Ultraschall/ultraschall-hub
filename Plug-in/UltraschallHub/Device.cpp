@@ -1592,11 +1592,11 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
     buffer.mNumberChannels = mStreamDescription.mChannelsPerFrame;
     buffer.mData = outBuffer;
 
-    AudioBufferList* bufferList = new AudioBufferList();
-    bufferList->mNumberBuffers = 1;
-    bufferList->mBuffers[0] = buffer;
+    AudioBufferList bufferList;
+    bufferList.mNumberBuffers = 1;
+    bufferList.mBuffers[0] = buffer;
 
-    CARingBufferError error = mRingBuffer.Fetch(bufferList, inIOBufferFrameSize, inSampleTime - mSafetyOffset);
+    CARingBufferError error = mRingBuffer.Fetch(&bufferList, inIOBufferFrameSize, inSampleTime - mSafetyOffset);
 
     if (error != kCARingBufferError_OK) {
         MakeBufferSilent(bufferList);
@@ -1628,16 +1628,16 @@ void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSample
     buffer.mNumberChannels = mStreamDescription.mChannelsPerFrame;
     buffer.mData = inBuffer;
 
-    AudioBufferList* bufferList = new AudioBufferList();
-    bufferList->mNumberBuffers = 1;
-    bufferList->mBuffers[0] = buffer;
+    AudioBufferList bufferList;
+    bufferList.mNumberBuffers = 1;
+    bufferList.mBuffers[0] = buffer;
 
     for (int channel = 0; channel < mStreamDescription.mChannelsPerFrame; ++channel) {
         vDSP_vsmul((Float32*)inBuffer + channel, mStreamDescription.mChannelsPerFrame, &mMasterInputVolume,
                    (Float32*)inBuffer + channel, mStreamDescription.mChannelsPerFrame, inIOBufferFrameSize);
     }
 
-    CARingBufferError error = mRingBuffer.Store(bufferList, inIOBufferFrameSize, inSampleTime + mSafetyOffset);
+    CARingBufferError error = mRingBuffer.Store(&bufferList, inIOBufferFrameSize, inSampleTime + mSafetyOffset);
 
     if (error != kCARingBufferError_OK) {
         if (error == kCARingBufferError_CPUOverload) {
