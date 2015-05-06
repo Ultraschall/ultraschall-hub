@@ -1,5 +1,5 @@
 #!/bin/sh
-VERSION="0.9.7.4"
+VERSION="0.9.7.5"
 CONFIGURATION="Release"
 
 echo "Build UltraschallHub $VERSION"
@@ -45,7 +45,7 @@ echo '
            set arrangement of theViewOptions to not arranged
            set icon size of theViewOptions to 72
            set background picture of theViewOptions to file ".background:Background.png"
-           set position of item "UltraschallHub.0.9.7.4.pkg" of container window to {150, 100}
+           set position of item "UltraschallHub.0.9.7.5.pkg" of container window to {150, 100}
            update without registering applications
            delay 5
            close
