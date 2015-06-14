@@ -27,12 +27,6 @@ class UltHub_Device;
 #define kUltraschallHub_BundleID "fm.ultraschall.audio.UltraschallHub"
 #define kUltraschallHub_Manufacturer "fm.ultraschall"
 
-enum {
-    kAudioPlugInPropertyUltraschallSettings = 'ults',
-    kAudioPlugInPropertyUltraschallDump = 'ultd',
-    kAudioPlugInPropertyUltraschallNumberOfObjects = 2
-};
-
 class UltHub_PlugIn : public CAObject {
 public:
     static UltHub_PlugIn& GetInstance();

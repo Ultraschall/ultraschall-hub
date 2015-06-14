@@ -216,10 +216,6 @@ UInt32 UltHub_PlugIn::GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClie
         theAnswer = sizeof(CFStringRef);
         break;
 
-    case kAudioObjectPropertyCustomPropertyInfoList:
-        theAnswer = (UInt32)(kAudioPlugInPropertyUltraschallNumberOfObjects * sizeof(AudioServerPlugInCustomPropertyInfo));
-        break;
-
     default:
         theAnswer = CAObject::GetPropertyDataSize(inObjectID, inClientPID, inAddress, inQualifierDataSize, inQualifierData);
     };
@@ -286,22 +282,6 @@ void UltHub_PlugIn::GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
 void UltHub_PlugIn::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, const void* inData)
 {
     switch (inAddress.mSelector) {
-    case kAudioPlugInPropertyUltraschallSettings: {
-        CAMutex::Locker theLocker(mMutex);
-        //	check the arguments
-        ThrowIf(inDataSize != sizeof(CFPropertyListRef), CAException(kAudioHardwareBadPropertySizeError), "UltHub_PlugIn::SetPropertyData: wrong size for the data for kAudioPlugInPropertyUltraschallSettings");
-
-        CFPropertyListRef theNewSettings = *reinterpret_cast<const CFPropertyListRef*>(inData);
-        if (ValidateSettings(theNewSettings)) {
-            if (mCurrentSettings != NULL)
-                CFRelease(mCurrentSettings);
-            mCurrentSettings = theNewSettings;
-            WriteSettings();
-            _RemoveAllDevices();
-            InitializeDevices();
-        }
-        break;
-    }
 
     default:
         CAObject::SetPropertyData(inObjectID, inClientPID, inAddress, inQualifierDataSize, inQualifierData, inDataSize, inData);
@@ -362,7 +342,6 @@ void UltHub_PlugIn::InitializeDevices()
                                                           kAudioObjectPropertyScopeGlobal,
                                                           kAudioObjectPropertyElementMaster,
 
-                                                          kAudioPlugInPropertyUltraschallSettings,
                                                           kAudioObjectPropertyScopeGlobal,
                                                           kAudioObjectPropertyElementMaster,
 
