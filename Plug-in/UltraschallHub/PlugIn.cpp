@@ -168,8 +168,6 @@ bool UltHub_PlugIn::HasProperty(AudioObjectID inObjectID, pid_t inClientPID, con
     case kAudioPlugInPropertyTranslateUIDToDevice:
     case kAudioPlugInPropertyResourceBundle:
     case kAudioObjectPropertyCustomPropertyInfoList:
-    case kAudioPlugInPropertyUltraschallSettings:
-    case kAudioPlugInPropertyUltraschallDump:
         theAnswer = true;
         break;
 
@@ -187,13 +185,7 @@ bool UltHub_PlugIn::IsPropertySettable(AudioObjectID inObjectID, pid_t inClientP
     case kAudioPlugInPropertyDeviceList:
     case kAudioPlugInPropertyTranslateUIDToDevice:
     case kAudioPlugInPropertyResourceBundle:
-    case kAudioObjectPropertyCustomPropertyInfoList:
-    case kAudioPlugInPropertyUltraschallDump:
         theAnswer = false;
-        break;
-
-    case kAudioPlugInPropertyUltraschallSettings:
-        theAnswer = true;
         break;
 
     default:
@@ -226,14 +218,6 @@ UInt32 UltHub_PlugIn::GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClie
 
     case kAudioObjectPropertyCustomPropertyInfoList:
         theAnswer = (UInt32)(kAudioPlugInPropertyUltraschallNumberOfObjects * sizeof(AudioServerPlugInCustomPropertyInfo));
-        break;
-
-    case kAudioPlugInPropertyUltraschallSettings:
-        theAnswer = sizeof(CFPropertyListRef);
-        break;
-
-    case kAudioPlugInPropertyUltraschallDump:
-        theAnswer = sizeof(CFStringRef);
         break;
 
     default:
@@ -293,57 +277,6 @@ void UltHub_PlugIn::GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
         outDataSize = sizeof(CFStringRef);
         break;
 
-    case kAudioObjectPropertyCustomPropertyInfoList: {
-        UInt32 theNumberItemsToFetch;
-
-        //	Calculate the number of items that have been requested. Note that this
-        //	number is allowed to be smaller than the actual size of the list. In such
-        //	case, only that number of items will be returned
-        theNumberItemsToFetch = (UInt32)(inDataSize / sizeof(AudioServerPlugInCustomPropertyInfo));
-
-        //	clamp it to the number of items we have
-        if (theNumberItemsToFetch > kAudioPlugInPropertyUltraschallNumberOfObjects) {
-            theNumberItemsToFetch = kAudioPlugInPropertyUltraschallNumberOfObjects;
-        }
-
-        if (theNumberItemsToFetch > 0) {
-            ((AudioServerPlugInCustomPropertyInfo*)outData)[0].mSelector = kAudioPlugInPropertyUltraschallSettings;
-            ((AudioServerPlugInCustomPropertyInfo*)outData)[0].mPropertyDataType = kAudioServerPlugInCustomPropertyDataTypeCFPropertyList;
-            ((AudioServerPlugInCustomPropertyInfo*)outData)[0].mQualifierDataType = kAudioServerPlugInCustomPropertyDataTypeNone;
-        }
-
-        if (theNumberItemsToFetch > 1) {
-            ((AudioServerPlugInCustomPropertyInfo*)outData)[1].mSelector = kAudioPlugInPropertyUltraschallDump;
-            ((AudioServerPlugInCustomPropertyInfo*)outData)[1].mPropertyDataType = kAudioServerPlugInCustomPropertyDataTypeCFString;
-            ((AudioServerPlugInCustomPropertyInfo*)outData)[1].mQualifierDataType = kAudioServerPlugInCustomPropertyDataTypeNone;
-        }
-
-        //	report how much we wrote
-        outDataSize = (UInt32)(theNumberItemsToFetch * sizeof(AudioServerPlugInCustomPropertyInfo));
-        break;
-    }
-
-    case kAudioPlugInPropertyUltraschallSettings: {
-        //	check the arguments
-        ThrowIf(inDataSize < sizeof(AudioObjectID), CAException(kAudioHardwareBadPropertySizeError), "UltHub_GetPlugInPropertyData: not enough space for the return value of kAudioPlugInPropertyUltraschallSettings");
-
-        CACFDictionary test;
-        test.AddBool(CFSTR("TEST"), true);
-        CFPropertyListRef data = test.AsPropertyList();
-        *reinterpret_cast<CFPropertyListRef*>(outData) = data;
-        outDataSize = sizeof(CFPropertyListRef);
-        break;
-    }
-
-    case kAudioPlugInPropertyUltraschallDump: {
-        CAMutex::Locker theLocker(mMutex);
-        //	check the arguments
-        ThrowIf(inDataSize < sizeof(AudioObjectID), CAException(kAudioHardwareBadPropertySizeError), "UltHub_GetPlugInPropertyData: not enough space for the return value of kAudioPlugInPropertyUltraschallSettings");
-        
-        *reinterpret_cast<CFStringRef*>(outData) = CFSTR("");
-        outDataSize = sizeof(CFStringRef);
-        break;
-    }
     default:
         CAObject::GetPropertyData(inObjectID, inClientPID, inAddress, inQualifierDataSize, inQualifierData, inDataSize, outDataSize, outData);
         break;
