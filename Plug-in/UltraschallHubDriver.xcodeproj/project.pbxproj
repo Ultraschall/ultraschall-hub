@@ -27,6 +27,8 @@
 		288F7B961A05EA9400C95ED7 /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 288F7B941A05EA9400C95ED7 /* Device.cpp */; };
 		288F7B991A05EAB400C95ED7 /* PlugIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 288F7B971A05EAB400C95ED7 /* PlugIn.cpp */; };
 		2897B85C19F2F8C5004D7D77 /* Devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2897B85B19F2F8C5004D7D77 /* Devices.plist */; };
+		28E3AF8F1B2E01E1003941F8 /* TransportManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28E3AF8D1B2E01E1003941F8 /* TransportManager.cpp */; };
+		28E3AF931B2E05B8003941F8 /* AudioEndPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28E3AF911B2E05B8003941F8 /* AudioEndPoint.cpp */; };
 		28E6D61319F03D0300FB5630 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E6D61219F03D0300FB5630 /* CoreAudio.framework */; };
 		28E6D61519F0457000FB5630 /* UltraschallHubDevice.icns in Resources */ = {isa = PBXBuildFile; fileRef = 28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */; };
 		28FFC8941A0615FB00BDA4E5 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2897B85D19F3061B004D7D77 /* CoreFoundation.framework */; };
@@ -79,6 +81,10 @@
 		288F7B981A05EAB400C95ED7 /* PlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugIn.h; sourceTree = "<group>"; };
 		2897B85B19F2F8C5004D7D77 /* Devices.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Devices.plist; sourceTree = "<group>"; };
 		2897B85D19F3061B004D7D77 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		28E3AF8D1B2E01E1003941F8 /* TransportManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransportManager.cpp; sourceTree = "<group>"; };
+		28E3AF8E1B2E01E1003941F8 /* TransportManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TransportManager.hpp; sourceTree = "<group>"; };
+		28E3AF911B2E05B8003941F8 /* AudioEndPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioEndPoint.cpp; sourceTree = "<group>"; };
+		28E3AF921B2E05B8003941F8 /* AudioEndPoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioEndPoint.hpp; sourceTree = "<group>"; };
 		28E6D60519F03CD700FB5630 /* UltraschallHub.driver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraschallHub.driver; sourceTree = BUILT_PRODUCTS_DIR; };
 		28E6D60919F03CD700FB5630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28E6D61219F03D0300FB5630 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -156,6 +162,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		28E3AF901B2E059D003941F8 /* TransportManager */ = {
+			isa = PBXGroup;
+			children = (
+				28E3AF8D1B2E01E1003941F8 /* TransportManager.cpp */,
+				28E3AF8E1B2E01E1003941F8 /* TransportManager.hpp */,
+				28E3AF911B2E05B8003941F8 /* AudioEndPoint.cpp */,
+				28E3AF921B2E05B8003941F8 /* AudioEndPoint.hpp */,
+			);
+			name = TransportManager;
+			sourceTree = "<group>";
+		};
 		28E6D5FC19F03CD700FB5630 = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +193,7 @@
 		28E6D60719F03CD700FB5630 /* UltraschallHub */ = {
 			isa = PBXGroup;
 			children = (
+				28E3AF901B2E059D003941F8 /* TransportManager */,
 				2872838D1A51CC7E0001B524 /* PublicUtility */,
 				28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */,
 				B02F251A4B52761BFC735DD5 /* Factory.cpp */,
@@ -224,7 +242,7 @@
 		28E6D5FD19F03CD700FB5630 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = ultraschall.fm;
 				TargetAttributes = {
 					28E6D60419F03CD700FB5630 = {
@@ -272,6 +290,7 @@
 				287283B11A51CC7E0001B524 /* CADebugger.cpp in Sources */,
 				287283B61A51CC7F0001B524 /* CAMutex.cpp in Sources */,
 				287283B91A51CC7F0001B524 /* CAVolumeCurve.cpp in Sources */,
+				28E3AF931B2E05B8003941F8 /* AudioEndPoint.cpp in Sources */,
 				288F7B991A05EAB400C95ED7 /* PlugIn.cpp in Sources */,
 				287283B71A51CC7F0001B524 /* CAObject.cpp in Sources */,
 				287283AE1A51CC7E0001B524 /* CACFDictionary.cpp in Sources */,
@@ -279,6 +298,7 @@
 				288F7B961A05EA9400C95ED7 /* Device.cpp in Sources */,
 				287283AD1A51CC7E0001B524 /* CACFArray.cpp in Sources */,
 				287283BF1A51CCA40001B524 /* CAStreamRangedDescription.cpp in Sources */,
+				28E3AF8F1B2E01E1003941F8 /* TransportManager.cpp in Sources */,
 				287283B51A51CC7F0001B524 /* CAHostTimeBase.cpp in Sources */,
 				287283B31A51CC7E0001B524 /* CADebugPrintf.cpp in Sources */,
 				B02F299B6949718F45CF6789 /* Factory.cpp in Sources */,
@@ -294,9 +314,6 @@
 		28E6D60A19F03CD700FB5630 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -310,21 +327,19 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -334,9 +349,6 @@
 		28E6D60B19F03CD700FB5630 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -352,14 +364,13 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -368,10 +379,12 @@
 		28E6D60D19F03CD700FB5630 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
 				INFOPLIST_FILE = UltraschallHub/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Audio/Plug-Ins/HAL/";
+				PRODUCT_BUNDLE_IDENTIFIER = "fm.ultraschall.audio.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = driver;
@@ -381,10 +394,12 @@
 		28E6D60E19F03CD700FB5630 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
 				INFOPLIST_FILE = UltraschallHub/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Audio/Plug-Ins/HAL/";
+				PRODUCT_BUNDLE_IDENTIFIER = "fm.ultraschall.audio.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = driver;

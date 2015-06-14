@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AudioServerPlugin_MachServices</key>
-	<array>
-		<string>fm.ultraschall.UltraschallHubXPCService</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -13,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>fm.ultraschall.audio.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -39,6 +35,6 @@
 		</array>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2014 ultraschall.fm. All rights reserved.</string>
+	<string>Copyright © 2015 ultraschall.fm. All rights reserved.</string>
 </dict>
 </plist>

@@ -22,16 +22,12 @@
 #include "CAObject.h"
 #include "CAMutex.h"
 
+#include "TransportManager.hpp"
+
 class UltHub_Device;
 
 #define kUltraschallHub_BundleID "fm.ultraschall.audio.UltraschallHub"
 #define kUltraschallHub_Manufacturer "fm.ultraschall"
-
-enum {
-    kAudioPlugInPropertyUltraschallSettings = 'ults',
-    kAudioPlugInPropertyUltraschallDump = 'ultd',
-    kAudioPlugInPropertyUltraschallNumberOfObjects = 2
-};
 
 class UltHub_PlugIn : public CAObject {
 public:
@@ -84,14 +80,15 @@ private:
 
     struct DeviceInfo {
         AudioObjectID mDeviceObjectID;
+        CFStringRef mDeviceUUID;
 
         DeviceInfo()
-            : mDeviceObjectID(0)
+            : mDeviceObjectID(0), mDeviceUUID(CFSTR(""))
         {
         }
 
-        DeviceInfo(AudioObjectID inDeviceObjectID)
-            : mDeviceObjectID(inDeviceObjectID)
+        DeviceInfo(AudioObjectID inDeviceObjectID, CFStringRef inDeviceUUID)
+            : mDeviceObjectID(inDeviceObjectID), mDeviceUUID(inDeviceUUID)
         {
         }
     };
@@ -127,6 +124,8 @@ private:
     static pthread_once_t sStaticInitializer;
     static UltHub_PlugIn* sInstance;
     static AudioServerPlugInHostRef sHost;
+    
+    TransportManager* mTransportManager;
 };
 
 #endif /* defined(__UltraschallHub__PlugIn__) */

@@ -153,6 +153,7 @@ private:
 public:
     void setDeviceUID(CFStringRef uid) { this->mDeviceUID = uid; }
     void setDeviceName(CFStringRef name) { this->mDeviceName = name; }
+    CFStringRef getDeviceUID() { return this->mDeviceUID.GetCFString(); }
 
 private:
     // IO

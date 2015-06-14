@@ -12,38 +12,6 @@
 			<key>Channels</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>UUID</key>
-			<string>UltraschallHub:82A47E47</string>
-			<key>Name</key>
-			<string>USH Skype Microphone</string>
-			<key>Channels</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>UUID</key>
-			<string>UltraschallHub:0111A798</string>
-			<key>Name</key>
-			<string>USH Skype Speakers</string>
-			<key>Channels</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>UUID</key>
-			<string>UltraschallHub:D4A43AE3</string>
-			<key>Name</key>
-			<string>USH Stream</string>
-			<key>Channels</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>UUID</key>
-			<string>UltraschallHub:11F4EF70</string>
-			<key>Name</key>
-			<string>USH Aux</string>
-			<key>Channels</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 </dict>
 </plist>
