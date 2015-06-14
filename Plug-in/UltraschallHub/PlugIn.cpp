@@ -172,7 +172,6 @@ bool UltHub_PlugIn::HasProperty(AudioObjectID inObjectID, pid_t inClientPID, con
     case kAudioPlugInPropertyDeviceList:
     case kAudioPlugInPropertyTranslateUIDToDevice:
     case kAudioPlugInPropertyResourceBundle:
-    case kAudioObjectPropertyCustomPropertyInfoList:
         theAnswer = true;
         break;
 
@@ -298,7 +297,7 @@ void UltHub_PlugIn::GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
 void UltHub_PlugIn::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const AudioObjectPropertyAddress& inAddress, UInt32 inQualifierDataSize, const void* inQualifierData, UInt32 inDataSize, const void* inData)
 {
     switch (inAddress.mSelector) {
-            
+
         default:
             CAObject::SetPropertyData(inObjectID, inClientPID, inAddress, inQualifierDataSize, inQualifierData, inDataSize, inData);
             break;
