@@ -167,7 +167,6 @@ bool UltHub_PlugIn::HasProperty(AudioObjectID inObjectID, pid_t inClientPID, con
     case kAudioPlugInPropertyDeviceList:
     case kAudioPlugInPropertyTranslateUIDToDevice:
     case kAudioPlugInPropertyResourceBundle:
-    case kAudioObjectPropertyCustomPropertyInfoList:
         theAnswer = true;
         break;
 
