@@ -29,6 +29,15 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "28E6D60419F03CD700FB5630"
+            BuildableName = "UltraschallHub.driver"
+            BlueprintName = "UltraschallHub"
+            ReferencedContainer = "container:UltraschallHubDriver.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

@@ -9,8 +9,6 @@
 #ifndef __UltraschallHub__Driver__
 #define __UltraschallHub__Driver__
 
-#define CoreAudio_Debug 1
-
 #include <CoreAudio/AudioServerPlugIn.h>
 #include <CoreAudio/AudioHardwareBase.h>
 #include <CoreAudio/CoreAudioTypes.h>

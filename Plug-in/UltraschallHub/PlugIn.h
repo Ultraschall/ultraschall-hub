@@ -11,11 +11,6 @@
 
 #include <vector>
 
-#define CoreAudio_StopOnFailure 1
-#define CoreAudio_TimeStampMessages 1
-#define CoreAudio_ThreadStampMessages 1
-#define CoreAudio_FlushDebugMessages 1
-
 #include <CoreAudio/AudioServerPlugIn.h>
 #include <CoreAudio/AudioHardwareBase.h>
 
