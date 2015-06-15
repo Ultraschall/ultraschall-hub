@@ -149,7 +149,8 @@
 				287283AB1A51CC7E0001B524 /* CAVolumeCurve.cpp */,
 				287283AC1A51CC7E0001B524 /* CAVolumeCurve.h */,
 			);
-			path = PublicUtility;
+			name = PublicUtility;
+			path = UltraschallHub/PublicUtility;
 			sourceTree = "<group>";
 		};
 		28DAF26519FC08090071172B /* Frameworks */ = {
@@ -177,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				28DAF26519FC08090071172B /* Frameworks */,
+				2872838D1A51CC7E0001B524 /* PublicUtility */,
 				28E6D60719F03CD700FB5630 /* UltraschallHub */,
 				28E6D60619F03CD700FB5630 /* Products */,
 			);
@@ -194,7 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				28E3AF901B2E059D003941F8 /* TransportManager */,
-				2872838D1A51CC7E0001B524 /* PublicUtility */,
 				28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */,
 				B02F251A4B52761BFC735DD5 /* Factory.cpp */,
 				B02F23839362FF14BD731C8E /* Factory.h */,
@@ -325,6 +326,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -360,6 +362,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;

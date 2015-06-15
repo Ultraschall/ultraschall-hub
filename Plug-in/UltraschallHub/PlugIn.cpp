@@ -42,9 +42,9 @@ void UltHub_PlugIn::Activate()
 {
     CAObject::Activate();
 
-//    AudioObjectID theNewObjectID = CAObjectMap::GetNextObjectID();
-//    mTransportManager = new TransportManager(theNewObjectID);
-//    CAObjectMap::MapObject(theNewObjectID, mTransportManager);
+    AudioObjectID theNewObjectID = CAObjectMap::GetNextObjectID();
+    mTransportManager = new TransportManager(theNewObjectID);
+    CAObjectMap::MapObject(theNewObjectID, mTransportManager);
     
     InitializeDevices();
 }
