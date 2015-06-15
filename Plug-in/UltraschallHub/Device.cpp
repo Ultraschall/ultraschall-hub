@@ -697,7 +697,7 @@ void UltHub_Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
     case kAudioDevicePropertySafetyOffset:
         //	This property returns the how close to now the HAL can read and write.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertySafetyOffset for the device");
-        *reinterpret_cast<UInt32*>(outData) = mSafetyOffset;
+        *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? mSafetyOffsetInput : mSafetyOffsetOutput;
         outDataSize = sizeof(UInt32);
         break;
 
@@ -1020,7 +1020,7 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
     case kAudioStreamPropertyDirection:
         //	This returns whether the stream is an input stream or an output stream.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Stream_GetPropertyData: not enough space for the return value of kAudioStreamPropertyDirection for the stream");
-        *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? 1 : 0;
+        *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? mLatencyInput : mLatencyOutput;
         outDataSize = sizeof(UInt32);
         break;
 
@@ -1046,7 +1046,7 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
     case kAudioStreamPropertyLatency:
         //	This property returns any additonal presentation latency the stream has.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Stream_GetPropertyData: not enough space for the return value of kAudioStreamPropertyStartingChannel for the stream");
-        *reinterpret_cast<UInt32*>(outData) = 0;
+        *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? 0 : 1;
         outDataSize = sizeof(UInt32);
         break;
 
@@ -1598,7 +1598,7 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
     bufferList.mNumberBuffers = 1;
     bufferList.mBuffers[0] = buffer;
 
-    CARingBufferError error = mRingBuffer.Fetch(&bufferList, inIOBufferFrameSize, inSampleTime - mSafetyOffset);
+    CARingBufferError error = mRingBuffer.Fetch(&bufferList, inIOBufferFrameSize, inSampleTime);
 
     if (error != kCARingBufferError_OK) {
         if (error == kCARingBufferError_CPUOverload) {
@@ -1639,7 +1639,7 @@ void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSample
                    (Float32*)inBuffer + channel, mStreamDescription.mChannelsPerFrame, inIOBufferFrameSize);
     }
 
-    CARingBufferError error = mRingBuffer.Store(&bufferList, inIOBufferFrameSize, inSampleTime + mSafetyOffset);
+    CARingBufferError error = mRingBuffer.Store(&bufferList, inIOBufferFrameSize, inSampleTime);
 
     if (error != kCARingBufferError_OK) {
         if (error == kCARingBufferError_CPUOverload) {

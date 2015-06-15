@@ -187,7 +187,10 @@ private:
     Float32 mMasterInputVolume;
     Float32 mMasterOutputVolume;
     
-    const int mSafetyOffset = 32;
+    const int mSafetyOffsetInput = 64;
+    const int mSafetyOffsetOutput = 0;
+    const int mLatencyInput = 1;
+    const int mLatencyOutput = 0;
 };
 
 #endif /* defined(__UltraschallHub__Driver__) */
