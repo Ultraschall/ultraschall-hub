@@ -1046,7 +1046,7 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
     case kAudioStreamPropertyLatency:
         //	This property returns any additonal presentation latency the stream has.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Stream_GetPropertyData: not enough space for the return value of kAudioStreamPropertyStartingChannel for the stream");
-        *reinterpret_cast<UInt32*>(outData) = 0;
+        *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? 0 : 1;
         outDataSize = sizeof(UInt32);
         break;
 
