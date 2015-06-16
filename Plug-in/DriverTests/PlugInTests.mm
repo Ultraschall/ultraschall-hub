@@ -43,6 +43,8 @@
     
 }
 
+#pragma mark Audio Object Properties
+
 - (void)testAudioObjectPropertyName {
     CAPropertyAddress address(kAudioObjectPropertyName);
     XCTAssertTrue(self.pluginObject->HasProperty(address));
@@ -55,6 +57,23 @@
     XCTAssertNotNil(result);
     XCTAssertFalse([result isEqualToString:@""]);
 }
+
+- (void)testAudioObjectPropertyOwnedObjects {
+    CAPropertyAddress address(kAudioObjectPropertyOwnedObjects);
+    XCTAssertTrue(self.pluginObject->HasProperty(address));
+    UInt32 ioNumberItems = self.pluginObject->GetPropertyData_ArraySize<AudioObjectID>(address);
+    XCTAssertGreaterThan(ioNumberItems, 0);
+    
+    CAAutoArrayDelete<AudioObjectID> outArray(ioNumberItems);
+    self.pluginObject->GetPropertyData_Array<AudioObjectID>(address, ioNumberItems, outArray);
+    
+    XCTAssertGreaterThan(ioNumberItems, 0);
+    for (int index = 0; index < ioNumberItems; index++) {
+        XCTAssertGreaterThan(outArray[index], 0);
+    }
+}
+
+#pragma mark Audio PlugIn Properties
 
 - (void)testAudioPlugInPropertyBundleID {
     CAPropertyAddress address(kAudioPlugInPropertyBundleID);

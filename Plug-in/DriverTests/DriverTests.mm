@@ -70,6 +70,8 @@
     [super tearDown];
 }
 
+#pragma mark Audio Object Properties
+
 - (void)testAudioObjectPropertyName {
     CAPropertyAddress address(kAudioObjectPropertyName);
     UInt32 dataSize = self.audioDevice->GetPropertyDataSize(address, 0, NULL);
@@ -81,6 +83,8 @@
     XCTAssertNotNil(result);
     XCTAssertFalse([result isEqualToString:@""]);
 }
+
+#pragma mark Audio Device Properties
 
 - (void)testAudioDevicePropertyConfigurationApplication {
     CAPropertyAddress address(kAudioDevicePropertyConfigurationApplication);
@@ -96,11 +100,29 @@
 }
 
 - (void)testAudioDevicePropertyDeviceUID {
+    CAPropertyAddress address(kAudioDevicePropertyDeviceUID);
+    XCTAssertTrue(self.audioDevice->HasProperty(address));
+    UInt32 dataSize = self.audioDevice->GetPropertyDataSize(address, 0, NULL);
+    XCTAssertGreaterThan(dataSize, 0);
     
+    CFStringRef data = self.audioDevice->GetPropertyData_CFString(address);
+    
+    NSString *result = (NSString *)CFBridgingRelease(data);
+    XCTAssertNotNil(result);
+    XCTAssertFalse([result isEqualToString:@""]);
 }
 
 - (void)testAudioDevicePropertyModelUID {
+    CAPropertyAddress address(kAudioDevicePropertyModelUID);
+    XCTAssertTrue(self.audioDevice->HasProperty(address));
+    UInt32 dataSize = self.audioDevice->GetPropertyDataSize(address, 0, NULL);
+    XCTAssertGreaterThan(dataSize, 0);
     
+    CFStringRef data = self.audioDevice->GetPropertyData_CFString(address);
+    
+    NSString *result = (NSString *)CFBridgingRelease(data);
+    XCTAssertNotNil(result);
+    XCTAssertFalse([result isEqualToString:@""]);
 }
 
 - (void)testAudioDevicePropertyTransportType {
