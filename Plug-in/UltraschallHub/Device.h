@@ -13,6 +13,8 @@
 #include <CoreAudio/AudioHardwareBase.h>
 #include <CoreAudio/CoreAudioTypes.h>
 
+#include "PlugIn.h"
+
 #include "CACFString.h"
 #include "CAMutex.h"
 #include "CAVolumeCurve.h"
@@ -40,7 +42,7 @@ typedef struct SimpleAudioDriverStatus SimpleAudioDriverStatus;
 class UltHub_Device : public CAObject {
 #pragma mark Construction/Destruction
 public:
-    UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels = 2);
+    UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels = 2, UltHub_PlugIn *inPlugin = nullptr);
 
     virtual void Activate();
 
@@ -189,6 +191,8 @@ private:
     const int mSafetyOffsetOutput = 0;
     const int mLatencyInput = 1;
     const int mLatencyOutput = 0;
+    
+    UltHub_PlugIn* plugin;
 };
 
 #endif /* defined(__UltraschallHub__Driver__) */

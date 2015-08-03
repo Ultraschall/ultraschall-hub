@@ -16,8 +16,9 @@
 
 #pragma mark Construction/Destruction
 
-UltHub_Device::UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels)
+UltHub_Device::UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels, UltHub_PlugIn *inPlugin)
     : CAObject(inObjectID, kAudioDeviceClassID, kAudioObjectClassID, kAudioObjectPlugInObject)
+    , plugin(inPlugin)
     , mStateMutex(new CAMutex("Ultraschall State"))
     , mIOMutex(new CAMutex("Ultraschall IO"))
     , mStartCount(0)
@@ -563,7 +564,7 @@ void UltHub_Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
         //	be synchronized with others or doesn't know should return 0 for this
         //	property.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertyClockDomain for the device");
-        *reinterpret_cast<UInt32*>(outData) = 0;
+        *reinterpret_cast<UInt32*>(outData) = 1337;
         outDataSize = sizeof(UInt32);
         break;
 

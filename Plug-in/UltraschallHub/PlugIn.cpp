@@ -328,10 +328,10 @@ void UltHub_PlugIn::InitializeDevices()
                                     AudioObjectID theNewDeviceObjectID = CAObjectMap::GetNextObjectID();
                                     SInt16 c = 0;
                                     if (CFNumberGetValue(channels, kCFNumberSInt16Type, &c)) {
-                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID, c);
+                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID, c, this);
                                     }
                                     else {
-                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID);
+                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID, 2, this);
                                     }
                                     theNewDevice->setDeviceUID(uuid);
                                     theNewDevice->setDeviceName(name);
