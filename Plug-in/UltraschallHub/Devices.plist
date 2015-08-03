@@ -6,6 +6,14 @@
 	<array>
 		<dict>
 			<key>UUID</key>
+			<string>UltraschallHub:94AF43F6</string>
+			<key>Name</key>
+			<string>USH Test</string>
+			<key>Channels</key>
+			<integer>4</integer>
+		</dict>
+		<dict>
+			<key>UUID</key>
 			<string>UltraschallHub:94AF43F5</string>
 			<key>Name</key>
 			<string>USH Soundboard</string>

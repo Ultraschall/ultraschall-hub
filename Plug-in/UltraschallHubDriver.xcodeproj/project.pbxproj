@@ -36,6 +36,7 @@
 		288F7B961A05EA9400C95ED7 /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 288F7B941A05EA9400C95ED7 /* Device.cpp */; };
 		288F7B991A05EAB400C95ED7 /* PlugIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 288F7B971A05EAB400C95ED7 /* PlugIn.cpp */; };
 		2897B85C19F2F8C5004D7D77 /* Devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2897B85B19F2F8C5004D7D77 /* Devices.plist */; };
+		28A1C90B1B327BB700F8EC0A /* IOTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28A1C90A1B327BB700F8EC0A /* IOTests.mm */; };
 		28E3AF8F1B2E01E1003941F8 /* TransportManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28E3AF8D1B2E01E1003941F8 /* TransportManager.cpp */; };
 		28E3AF931B2E05B8003941F8 /* AudioEndPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28E3AF911B2E05B8003941F8 /* AudioEndPoint.cpp */; };
 		28E6D61319F03D0300FB5630 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E6D61219F03D0300FB5630 /* CoreAudio.framework */; };
@@ -115,6 +116,7 @@
 		288F7B981A05EAB400C95ED7 /* PlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugIn.h; sourceTree = "<group>"; };
 		2897B85B19F2F8C5004D7D77 /* Devices.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Devices.plist; sourceTree = "<group>"; };
 		2897B85D19F3061B004D7D77 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		28A1C90A1B327BB700F8EC0A /* IOTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOTests.mm; sourceTree = "<group>"; };
 		28E3AF8D1B2E01E1003941F8 /* TransportManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransportManager.cpp; sourceTree = "<group>"; };
 		28E3AF8E1B2E01E1003941F8 /* TransportManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TransportManager.hpp; sourceTree = "<group>"; };
 		28E3AF911B2E05B8003941F8 /* AudioEndPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioEndPoint.cpp; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			children = (
 				28709EA71B2EE3290069742D /* PlugInTests.mm */,
 				28709E9C1B2EE25E0069742D /* DriverTests.mm */,
+				28A1C90A1B327BB700F8EC0A /* IOTests.mm */,
 				28709E9E1B2EE25E0069742D /* Info.plist */,
 			);
 			path = DriverTests;
@@ -332,6 +335,7 @@
 				TargetAttributes = {
 					28709E991B2EE25E0069742D = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 53LA4N6GG6;
 					};
 					28E6D60419F03CD700FB5630 = {
 						CreatedOnToolsVersion = 6.1;
@@ -385,6 +389,7 @@
 				28709EB81B2EE4120069742D /* CACFString.cpp in Sources */,
 				28709EB31B2EE3B70069742D /* CAHALAudioStream.cpp in Sources */,
 				28709EA81B2EE3290069742D /* PlugInTests.mm in Sources */,
+				28A1C90B1B327BB700F8EC0A /* IOTests.mm in Sources */,
 				28709EB41B2EE3B70069742D /* CAHALAudioSystemObject.cpp in Sources */,
 				28709E9D1B2EE25E0069742D /* DriverTests.mm in Sources */,
 				28709EB11B2EE3B70069742D /* CAHALAudioDevice.cpp in Sources */,
@@ -437,6 +442,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -444,9 +451,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = DriverTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_BUNDLE_IDENTIFIER = fm.ultraschall.audio.DriverTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -456,15 +464,18 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = DriverTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_BUNDLE_IDENTIFIER = fm.ultraschall.audio.DriverTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -539,7 +550,7 @@
 		28E6D60D19F03CD700FB5630 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
 				INFOPLIST_FILE = UltraschallHub/Info.plist;
@@ -554,7 +565,7 @@
 		28E6D60E19F03CD700FB5630 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
 				INFOPLIST_FILE = UltraschallHub/Info.plist;
