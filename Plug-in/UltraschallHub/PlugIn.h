@@ -11,16 +11,13 @@
 
 #include <vector>
 
-#define CoreAudio_StopOnFailure 1
-#define CoreAudio_TimeStampMessages 1
-#define CoreAudio_ThreadStampMessages 1
-#define CoreAudio_FlushDebugMessages 1
-
 #include <CoreAudio/AudioServerPlugIn.h>
 #include <CoreAudio/AudioHardwareBase.h>
 
 #include "CAObject.h"
 #include "CAMutex.h"
+
+#include "TransportManager.hpp"
 
 class UltHub_Device;
 
@@ -78,14 +75,15 @@ private:
 
     struct DeviceInfo {
         AudioObjectID mDeviceObjectID;
+        CFStringRef mDeviceUUID;
 
         DeviceInfo()
-            : mDeviceObjectID(0)
+            : mDeviceObjectID(0), mDeviceUUID(CFSTR(""))
         {
         }
 
-        DeviceInfo(AudioObjectID inDeviceObjectID)
-            : mDeviceObjectID(inDeviceObjectID)
+        DeviceInfo(AudioObjectID inDeviceObjectID, CFStringRef inDeviceUUID)
+            : mDeviceObjectID(inDeviceObjectID), mDeviceUUID(inDeviceUUID)
         {
         }
     };
@@ -121,6 +119,8 @@ private:
     static pthread_once_t sStaticInitializer;
     static UltHub_PlugIn* sInstance;
     static AudioServerPlugInHostRef sHost;
+    
+    TransportManager* mTransportManager;
 };
 
 #endif /* defined(__UltraschallHub__PlugIn__) */

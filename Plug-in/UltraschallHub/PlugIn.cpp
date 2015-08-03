@@ -14,6 +14,7 @@
 #include "CABitOperations.h"
 #include "CACFDictionary.h"
 #include "Device.h"
+#include "TransportManager.hpp"
 
 UltHub_PlugIn& UltHub_PlugIn::GetInstance()
 {
@@ -41,6 +42,10 @@ void UltHub_PlugIn::Activate()
 {
     CAObject::Activate();
 
+    AudioObjectID theNewObjectID = CAObjectMap::GetNextObjectID();
+    mTransportManager = new TransportManager(theNewObjectID);
+    CAObjectMap::MapObject(theNewObjectID, mTransportManager);
+    
     InitializeDevices();
 }
 
@@ -90,7 +95,7 @@ bool UltHub_PlugIn::ValidateSettings(CFPropertyListRef propertyListRef)
                                         return false;
 
                                     SInt16 c = 0;
-                                    if (CFNumberGetValue(channels, CFNumberType::kCFNumberSInt16Type, &c)) {
+                                    if (CFNumberGetValue(channels, kCFNumberSInt16Type, &c)) {
                                         if (c != 1 || !IsPowerOfTwo(c)) {
                                             return false;
                                         }
@@ -254,14 +259,25 @@ void UltHub_PlugIn::GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
         }
         break;
 
-    case kAudioPlugInPropertyTranslateUIDToDevice:
+    case kAudioPlugInPropertyTranslateUIDToDevice: {
         //	This property translates the UID passed in the qualifier as a CFString into the
         //	AudioObjectID for the device the UID refers to or kAudioObjectUnknown if no device
         //	has the UID.
         ThrowIf(inQualifierDataSize < sizeof(CFStringRef), CAException(kAudioHardwareBadPropertySizeError), "UltHub_PlugIn::GetPropertyData: the qualifier size is too small for kAudioPlugInPropertyTranslateUIDToDevice");
         ThrowIf(inDataSize < sizeof(AudioObjectID), CAException(kAudioHardwareBadPropertySizeError), "UltHub_PlugIn::GetPropertyData: not enough space for the return value of kAudioPlugInPropertyTranslateUIDToDevice");
+        CAMutex::Locker theLocker(mMutex);
+        
+        AudioObjectID audioObjectID = kAudioObjectUnknown;
+        for (UInt32 theDeviceIndex = 0; theDeviceIndex < mDeviceInfoList.size(); ++theDeviceIndex) {
+            if(CFStringCompare(*((CFStringRef*)inQualifierData), mDeviceInfoList[theDeviceIndex].mDeviceUUID, 0) == kCFCompareEqualTo){
+                audioObjectID = mDeviceInfoList[theDeviceIndex].mDeviceObjectID;
+                break;
+            }
+        }
+        
+        *((AudioObjectID*)outData) = audioObjectID;
         outDataSize = sizeof(AudioObjectID);
-        break;
+    } break;
 
     case kAudioPlugInPropertyResourceBundle:
         //	The resource bundle is a path relative to the path of the plug-in's bundle.
@@ -282,9 +298,9 @@ void UltHub_PlugIn::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
 {
     switch (inAddress.mSelector) {
 
-    default:
-        CAObject::SetPropertyData(inObjectID, inClientPID, inAddress, inQualifierDataSize, inQualifierData, inDataSize, inData);
-        break;
+        default:
+            CAObject::SetPropertyData(inObjectID, inClientPID, inAddress, inQualifierDataSize, inQualifierData, inDataSize, inData);
+            break;
     };
 }
 
@@ -311,11 +327,11 @@ void UltHub_PlugIn::InitializeDevices()
                                     //	make the new device object
                                     AudioObjectID theNewDeviceObjectID = CAObjectMap::GetNextObjectID();
                                     SInt16 c = 0;
-                                    if (CFNumberGetValue(channels, CFNumberType::kCFNumberSInt16Type, &c)) {
-                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID, c);
+                                    if (CFNumberGetValue(channels, kCFNumberSInt16Type, &c)) {
+                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID, c, this);
                                     }
                                     else {
-                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID);
+                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID, 2, this);
                                     }
                                     theNewDevice->setDeviceUID(uuid);
                                     theNewDevice->setDeviceName(name);
@@ -366,7 +382,7 @@ void UltHub_PlugIn::_AddDevice(UltHub_Device* inDevice)
 {
     if (inDevice != NULL) {
         //  Initialize an DeviceInfo to describe the new device
-        DeviceInfo theDeviceInfo(inDevice->GetObjectID());
+        DeviceInfo theDeviceInfo(inDevice->GetObjectID(), inDevice->getDeviceUID());
 
         //  put the device info in the list
         mDeviceInfoList.push_back(theDeviceInfo);

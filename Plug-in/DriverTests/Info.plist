@@ -6,8 +6,6 @@
 	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -17,24 +15,10 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.9.7.5</string>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
-	<string>ULTS</string>
+	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>CFPlugInFactories</key>
-	<dict>
-		<key>5678E38B-391D-4DCE-975F-C09F5404610D</key>
-		<string>UltHub_Create</string>
-	</dict>
-	<key>CFPlugInTypes</key>
-	<dict>
-		<key>443ABAB8-E7B3-491A-B985-BEB9187030DB</key>
-		<array>
-			<string>5678E38B-391D-4DCE-975F-C09F5404610D</string>
-		</array>
-	</dict>
-	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2015 ultraschall.fm. All rights reserved.</string>
 </dict>
 </plist>
