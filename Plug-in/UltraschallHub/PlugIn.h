@@ -17,8 +17,6 @@
 #include "CAObject.h"
 #include "CAMutex.h"
 
-#include "TransportManager.hpp"
-
 class UltHub_Device;
 
 #define kUltraschallHub_BundleID "fm.ultraschall.audio.UltraschallHub"
@@ -119,8 +117,6 @@ private:
     static pthread_once_t sStaticInitializer;
     static UltHub_PlugIn* sInstance;
     static AudioServerPlugInHostRef sHost;
-    
-    TransportManager* mTransportManager;
 };
 
 #endif /* defined(__UltraschallHub__PlugIn__) */

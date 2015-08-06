@@ -1494,13 +1494,8 @@ void UltHub_Device::StopIO()
 
 void UltHub_Device::GetZeroTimeStamp(Float64& outSampleTime, UInt64& outHostTime, UInt64& outSeed) const
 {
-    //DebugMessage("UltHub_Device::GetZeroTimeStamp");
-    
     static UInt64 mNumberTimeStamps = 0;
     static UInt64 currentTimeLine = 0;
-
-    //	accessing the mapped memory requires holding the IO mutex
-    CAMutex::Locker theIOLocker(mIOMutex);
     
     if (mTimeline != currentTimeLine) {
         currentTimeLine = mTimeline;

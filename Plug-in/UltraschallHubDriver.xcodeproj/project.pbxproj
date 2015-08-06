@@ -37,8 +37,6 @@
 		288F7B991A05EAB400C95ED7 /* PlugIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 288F7B971A05EAB400C95ED7 /* PlugIn.cpp */; };
 		2897B85C19F2F8C5004D7D77 /* Devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2897B85B19F2F8C5004D7D77 /* Devices.plist */; };
 		28A1C90B1B327BB700F8EC0A /* IOTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28A1C90A1B327BB700F8EC0A /* IOTests.mm */; };
-		28E3AF8F1B2E01E1003941F8 /* TransportManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28E3AF8D1B2E01E1003941F8 /* TransportManager.cpp */; };
-		28E3AF931B2E05B8003941F8 /* AudioEndPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28E3AF911B2E05B8003941F8 /* AudioEndPoint.cpp */; };
 		28E6D61319F03D0300FB5630 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E6D61219F03D0300FB5630 /* CoreAudio.framework */; };
 		28E6D61519F0457000FB5630 /* UltraschallHubDevice.icns in Resources */ = {isa = PBXBuildFile; fileRef = 28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */; };
 		28EA332D1B2F6AF6003655A9 /* CAHostTimeBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283A31A51CC7E0001B524 /* CAHostTimeBase.cpp */; };
@@ -117,10 +115,6 @@
 		2897B85B19F2F8C5004D7D77 /* Devices.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Devices.plist; sourceTree = "<group>"; };
 		2897B85D19F3061B004D7D77 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		28A1C90A1B327BB700F8EC0A /* IOTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOTests.mm; sourceTree = "<group>"; };
-		28E3AF8D1B2E01E1003941F8 /* TransportManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransportManager.cpp; sourceTree = "<group>"; };
-		28E3AF8E1B2E01E1003941F8 /* TransportManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TransportManager.hpp; sourceTree = "<group>"; };
-		28E3AF911B2E05B8003941F8 /* AudioEndPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioEndPoint.cpp; sourceTree = "<group>"; };
-		28E3AF921B2E05B8003941F8 /* AudioEndPoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioEndPoint.hpp; sourceTree = "<group>"; };
 		28E6D60519F03CD700FB5630 /* UltraschallHub.driver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraschallHub.driver; sourceTree = BUILT_PRODUCTS_DIR; };
 		28E6D60919F03CD700FB5630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28E6D61219F03D0300FB5630 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -230,17 +224,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		28E3AF901B2E059D003941F8 /* TransportManager */ = {
-			isa = PBXGroup;
-			children = (
-				28E3AF8D1B2E01E1003941F8 /* TransportManager.cpp */,
-				28E3AF8E1B2E01E1003941F8 /* TransportManager.hpp */,
-				28E3AF911B2E05B8003941F8 /* AudioEndPoint.cpp */,
-				28E3AF921B2E05B8003941F8 /* AudioEndPoint.hpp */,
-			);
-			name = TransportManager;
-			sourceTree = "<group>";
-		};
 		28E6D5FC19F03CD700FB5630 = {
 			isa = PBXGroup;
 			children = (
@@ -264,7 +247,6 @@
 		28E6D60719F03CD700FB5630 /* UltraschallHub */ = {
 			isa = PBXGroup;
 			children = (
-				28E3AF901B2E059D003941F8 /* TransportManager */,
 				28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */,
 				B02F251A4B52761BFC735DD5 /* Factory.cpp */,
 				B02F23839362FF14BD731C8E /* Factory.h */,
@@ -407,7 +389,6 @@
 				287283B11A51CC7E0001B524 /* CADebugger.cpp in Sources */,
 				287283B61A51CC7F0001B524 /* CAMutex.cpp in Sources */,
 				287283B91A51CC7F0001B524 /* CAVolumeCurve.cpp in Sources */,
-				28E3AF931B2E05B8003941F8 /* AudioEndPoint.cpp in Sources */,
 				288F7B991A05EAB400C95ED7 /* PlugIn.cpp in Sources */,
 				287283B71A51CC7F0001B524 /* CAObject.cpp in Sources */,
 				287283AE1A51CC7E0001B524 /* CACFDictionary.cpp in Sources */,
@@ -415,7 +396,6 @@
 				288F7B961A05EA9400C95ED7 /* Device.cpp in Sources */,
 				287283AD1A51CC7E0001B524 /* CACFArray.cpp in Sources */,
 				287283BF1A51CCA40001B524 /* CAStreamRangedDescription.cpp in Sources */,
-				28E3AF8F1B2E01E1003941F8 /* TransportManager.cpp in Sources */,
 				287283B51A51CC7F0001B524 /* CAHostTimeBase.cpp in Sources */,
 				287283B31A51CC7E0001B524 /* CADebugPrintf.cpp in Sources */,
 				B02F299B6949718F45CF6789 /* Factory.cpp in Sources */,

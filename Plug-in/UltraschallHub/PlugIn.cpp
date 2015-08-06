@@ -14,7 +14,6 @@
 #include "CABitOperations.h"
 #include "CACFDictionary.h"
 #include "Device.h"
-#include "TransportManager.hpp"
 
 UltHub_PlugIn& UltHub_PlugIn::GetInstance()
 {
@@ -41,11 +40,6 @@ UltHub_PlugIn::~UltHub_PlugIn()
 void UltHub_PlugIn::Activate()
 {
     CAObject::Activate();
-
-    AudioObjectID theNewObjectID = CAObjectMap::GetNextObjectID();
-    mTransportManager = new TransportManager(theNewObjectID);
-    CAObjectMap::MapObject(theNewObjectID, mTransportManager);
-    
     InitializeDevices();
 }
 
