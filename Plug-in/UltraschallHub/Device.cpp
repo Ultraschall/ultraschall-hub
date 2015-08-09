@@ -1591,6 +1591,16 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
     bufferList.mNumberBuffers = 1;
     bufferList.mBuffers[0] = buffer;
     
+    CARingBuffer::SampleTime startTime;
+    CARingBuffer::SampleTime endTime;
+    mRingBuffer.GetTimeBounds(startTime, endTime);
+    auto readEndTime = (endTime - inIOBufferFrameSize);
+    
+    if (static_cast<CARingBuffer::SampleTime>(inSampleTime) > readEndTime) {
+        DebugMessage("UltHub_Device::ReadInputData: ClockDrift");
+        inSampleTime = readEndTime;
+    }
+    
     CARingBufferError error;
     {
         //	we need to be holding the IO lock to do this
@@ -1631,6 +1641,15 @@ void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSample
     for (int channel = 0; channel < mStreamDescription.mChannelsPerFrame; ++channel) {
         vDSP_vsmul((Float32*)inBuffer + channel, mStreamDescription.mChannelsPerFrame, &mMasterInputVolume,
                    (Float32*)inBuffer + channel, mStreamDescription.mChannelsPerFrame, inIOBufferFrameSize);
+    }
+    
+    CARingBuffer::SampleTime startTime;
+    CARingBuffer::SampleTime endTime;
+    mRingBuffer.GetTimeBounds(startTime, endTime);
+    
+    if (static_cast<CARingBuffer::SampleTime>(inSampleTime) > endTime) {
+        DebugMessage("UltHub_Device::WriteOutputData: ClockDrift");
+        inSampleTime = endTime;
     }
 
     CARingBufferError error;
