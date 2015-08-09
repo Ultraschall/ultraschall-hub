@@ -16,9 +16,8 @@
 
 #pragma mark Construction/Destruction
 
-UltHub_Device::UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels, UltHub_PlugIn *inPlugin)
+UltHub_Device::UltHub_Device(AudioObjectID inObjectID, SInt16 numChannels)
     : CAObject(inObjectID, kAudioDeviceClassID, kAudioObjectClassID, kAudioObjectPlugInObject)
-    , plugin(inPlugin)
     , mStateMutex(new CAMutex("Ultraschall State"))
     , mIOMutex(new CAMutex("Ultraschall IO"))
     , mStartCount(0)
@@ -1484,6 +1483,7 @@ void UltHub_Device::StopIO()
     //	we tell the hardware to stop if this is the last stop call
     if (mStartCount == 1) {
         mStartCount = 0;
+        mRingBuffer.Deallocate();
         DebugMessage("UltHub_Device::StopIO: last");
     }
     else if (mStartCount > 1) {
@@ -1582,9 +1582,6 @@ inline void MakeBufferSilent(AudioBufferList* ioData)
 
 void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTime, void* outBuffer)
 {
-    //	we need to be holding the IO lock to do this
-    CAMutex::Locker theIOLocker(mIOMutex);
-
     AudioBuffer buffer;
     buffer.mDataByteSize = inIOBufferFrameSize * mStreamDescription.mBytesPerFrame;
     buffer.mNumberChannels = mStreamDescription.mChannelsPerFrame;
@@ -1593,9 +1590,13 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
     AudioBufferList bufferList;
     bufferList.mNumberBuffers = 1;
     bufferList.mBuffers[0] = buffer;
-
-    CARingBufferError error = mRingBuffer.Fetch(&bufferList, inIOBufferFrameSize, inSampleTime);
-
+    
+    CARingBufferError error;
+    {
+        //	we need to be holding the IO lock to do this
+        CAMutex::Locker theIOLocker(mIOMutex);
+        error = mRingBuffer.Fetch(&bufferList, inIOBufferFrameSize, inSampleTime);
+    }
     if (error != kCARingBufferError_OK) {
         if (error == kCARingBufferError_CPUOverload) {
             DebugMessage("UltHub_Device::ReadInputData: kCARingBufferError_CPUOverload");
@@ -1618,9 +1619,6 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
 
 void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSampleTime, void* inBuffer)
 {
-    //	we need to be holding the IO lock to do this
-    CAMutex::Locker theIOLocker(mIOMutex);
-
     AudioBuffer buffer;
     buffer.mDataByteSize = inIOBufferFrameSize * mStreamDescription.mBytesPerFrame;
     buffer.mNumberChannels = mStreamDescription.mChannelsPerFrame;
@@ -1635,8 +1633,12 @@ void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSample
                    (Float32*)inBuffer + channel, mStreamDescription.mChannelsPerFrame, inIOBufferFrameSize);
     }
 
-    CARingBufferError error = mRingBuffer.Store(&bufferList, inIOBufferFrameSize, inSampleTime);
-
+    CARingBufferError error;
+    {
+        //	we need to be holding the IO lock to do this
+        CAMutex::Locker theIOLocker(mIOMutex);
+        error = mRingBuffer.Store(&bufferList, inIOBufferFrameSize, inSampleTime);
+    }
     if (error != kCARingBufferError_OK) {
         if (error == kCARingBufferError_CPUOverload) {
             DebugMessage("UltHub_Device::WriteOutputData: kCARingBufferError_CPUOverload");
