@@ -37,6 +37,31 @@
 		288F7B991A05EAB400C95ED7 /* PlugIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 288F7B971A05EAB400C95ED7 /* PlugIn.cpp */; };
 		2897B85C19F2F8C5004D7D77 /* Devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2897B85B19F2F8C5004D7D77 /* Devices.plist */; };
 		28A1C90B1B327BB700F8EC0A /* IOTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28A1C90A1B327BB700F8EC0A /* IOTests.mm */; };
+		28DA55591B778726003D20DE /* PlugInTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28DA55581B778726003D20DE /* PlugInTests.mm */; };
+		28DA55621B778BBC003D20DE /* CAAudioValueRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283C11A51CEAF0001B524 /* CAAudioValueRange.cpp */; };
+		28DA55631B778BBC003D20DE /* CACFArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283911A51CC7E0001B524 /* CACFArray.cpp */; };
+		28DA55641B778BBC003D20DE /* CACFDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283931A51CC7E0001B524 /* CACFDictionary.cpp */; };
+		28DA55651B778BBC003D20DE /* CACFNumber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283951A51CC7E0001B524 /* CACFNumber.cpp */; };
+		28DA55661B778BBC003D20DE /* CACFString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283981A51CC7E0001B524 /* CACFString.cpp */; };
+		28DA55671B778BBC003D20DE /* CADebugger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2872839A1A51CC7E0001B524 /* CADebugger.cpp */; };
+		28DA55681B778BBC003D20DE /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2872839C1A51CC7E0001B524 /* CADebugMacros.cpp */; };
+		28DA55691B778BBC003D20DE /* CADebugPrintf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2872839E1A51CC7E0001B524 /* CADebugPrintf.cpp */; };
+		28DA556A1B778BBC003D20DE /* CADispatchQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283A01A51CC7E0001B524 /* CADispatchQueue.cpp */; };
+		28DA556B1B778BBC003D20DE /* CAHostTimeBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283A31A51CC7E0001B524 /* CAHostTimeBase.cpp */; };
+		28DA556C1B778BBC003D20DE /* CAMutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283A51A51CC7E0001B524 /* CAMutex.cpp */; };
+		28DA556D1B778BBC003D20DE /* CAObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283A71A51CC7E0001B524 /* CAObject.cpp */; };
+		28DA556E1B778BBC003D20DE /* CARingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283A91A51CC7E0001B524 /* CARingBuffer.cpp */; };
+		28DA556F1B778BBC003D20DE /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283BA1A51CCA40001B524 /* CAStreamBasicDescription.cpp */; };
+		28DA55701B778BBC003D20DE /* CAStreamRangedDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283BC1A51CCA40001B524 /* CAStreamRangedDescription.cpp */; };
+		28DA55711B778BBC003D20DE /* CAVolumeCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283AB1A51CC7E0001B524 /* CAVolumeCurve.cpp */; };
+		28DA55721B778BDA003D20DE /* Factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02F251A4B52761BFC735DD5 /* Factory.cpp */; };
+		28DA55731B778BDC003D20DE /* PlugIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 288F7B971A05EAB400C95ED7 /* PlugIn.cpp */; };
+		28DA55741B778BE2003D20DE /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 288F7B941A05EA9400C95ED7 /* Device.cpp */; };
+		28DA55751B778BF4003D20DE /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 287283C41A52067B0001B524 /* Accelerate.framework */; };
+		28DA55761B778BF9003D20DE /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E6D61219F03D0300FB5630 /* CoreAudio.framework */; };
+		28DA55771B778BFF003D20DE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2897B85D19F3061B004D7D77 /* CoreFoundation.framework */; };
+		28DA557C1B778CD4003D20DE /* DeviceTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28DA557B1B778CD4003D20DE /* DeviceTests.mm */; };
+		28DA557D1B778D8E003D20DE /* DeviceTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28DA557B1B778CD4003D20DE /* DeviceTests.mm */; };
 		28E6D61319F03D0300FB5630 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E6D61219F03D0300FB5630 /* CoreAudio.framework */; };
 		28E6D61519F0457000FB5630 /* UltraschallHubDevice.icns in Resources */ = {isa = PBXBuildFile; fileRef = 28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */; };
 		28EA332D1B2F6AF6003655A9 /* CAHostTimeBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283A31A51CC7E0001B524 /* CAHostTimeBase.cpp */; };
@@ -53,10 +78,17 @@
 			remoteGlobalIDString = 28E6D60419F03CD700FB5630;
 			remoteInfo = UltraschallHub;
 		};
+		28DA555E1B77877B003D20DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28E6D5FD19F03CD700FB5630 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28E6D60419F03CD700FB5630;
+			remoteInfo = UltraschallHub;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		28709E9A1B2EE25E0069742D /* DriverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DriverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28709E9A1B2EE25E0069742D /* IntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28709E9C1B2EE25E0069742D /* DriverTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DriverTests.mm; sourceTree = "<group>"; };
 		28709E9E1B2EE25E0069742D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28709EA71B2EE3290069742D /* PlugInTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlugInTests.mm; sourceTree = "<group>"; };
@@ -115,6 +147,10 @@
 		2897B85B19F2F8C5004D7D77 /* Devices.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Devices.plist; sourceTree = "<group>"; };
 		2897B85D19F3061B004D7D77 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		28A1C90A1B327BB700F8EC0A /* IOTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOTests.mm; sourceTree = "<group>"; };
+		28DA55561B778726003D20DE /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28DA55581B778726003D20DE /* PlugInTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PlugInTests.mm; sourceTree = "<group>"; };
+		28DA555A1B778726003D20DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28DA557B1B778CD4003D20DE /* DeviceTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceTests.mm; sourceTree = "<group>"; };
 		28E6D60519F03CD700FB5630 /* UltraschallHub.driver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraschallHub.driver; sourceTree = BUILT_PRODUCTS_DIR; };
 		28E6D60919F03CD700FB5630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28E6D61219F03D0300FB5630 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -134,6 +170,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28DA55531B778726003D20DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28DA55771B778BFF003D20DE /* CoreFoundation.framework in Frameworks */,
+				28DA55761B778BF9003D20DE /* CoreAudio.framework in Frameworks */,
+				28DA55751B778BF4003D20DE /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28E6D60219F03CD700FB5630 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -147,7 +193,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		28709E9B1B2EE25E0069742D /* DriverTests */ = {
+		28709E9B1B2EE25E0069742D /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
 				28709EA71B2EE3290069742D /* PlugInTests.mm */,
@@ -155,6 +201,7 @@
 				28A1C90A1B327BB700F8EC0A /* IOTests.mm */,
 				28709E9E1B2EE25E0069742D /* Info.plist */,
 			);
+			name = IntegrationTests;
 			path = DriverTests;
 			sourceTree = "<group>";
 		};
@@ -214,6 +261,17 @@
 			path = UltraschallHub/PublicUtility;
 			sourceTree = "<group>";
 		};
+		28DA55571B778726003D20DE /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				28DA55581B778726003D20DE /* PlugInTests.mm */,
+				28DA557B1B778CD4003D20DE /* DeviceTests.mm */,
+				28DA555A1B778726003D20DE /* Info.plist */,
+			);
+			name = UnitTests;
+			path = "Plug-InTests";
+			sourceTree = "<group>";
+		};
 		28DAF26519FC08090071172B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,7 +288,8 @@
 				28DAF26519FC08090071172B /* Frameworks */,
 				2872838D1A51CC7E0001B524 /* PublicUtility */,
 				28E6D60719F03CD700FB5630 /* UltraschallHub */,
-				28709E9B1B2EE25E0069742D /* DriverTests */,
+				28709E9B1B2EE25E0069742D /* IntegrationTests */,
+				28DA55571B778726003D20DE /* UnitTests */,
 				28E6D60619F03CD700FB5630 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -239,7 +298,8 @@
 			isa = PBXGroup;
 			children = (
 				28E6D60519F03CD700FB5630 /* UltraschallHub.driver */,
-				28709E9A1B2EE25E0069742D /* DriverTests.xctest */,
+				28709E9A1B2EE25E0069742D /* IntegrationTests.xctest */,
+				28DA55561B778726003D20DE /* UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,9 +331,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		28709E991B2EE25E0069742D /* DriverTests */ = {
+		28709E991B2EE25E0069742D /* IntegrationTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 28709EA11B2EE25E0069742D /* Build configuration list for PBXNativeTarget "DriverTests" */;
+			buildConfigurationList = 28709EA11B2EE25E0069742D /* Build configuration list for PBXNativeTarget "IntegrationTests" */;
 			buildPhases = (
 				28709E961B2EE25E0069742D /* Sources */,
 				28709E971B2EE25E0069742D /* Frameworks */,
@@ -284,9 +344,27 @@
 			dependencies = (
 				28709EA31B2EE2880069742D /* PBXTargetDependency */,
 			);
-			name = DriverTests;
+			name = IntegrationTests;
 			productName = DriverTests;
-			productReference = 28709E9A1B2EE25E0069742D /* DriverTests.xctest */;
+			productReference = 28709E9A1B2EE25E0069742D /* IntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		28DA55551B778726003D20DE /* UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28DA555B1B778726003D20DE /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildPhases = (
+				28DA55521B778726003D20DE /* Sources */,
+				28DA55531B778726003D20DE /* Frameworks */,
+				28DA55541B778726003D20DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				28DA555F1B77877B003D20DE /* PBXTargetDependency */,
+			);
+			name = UnitTests;
+			productName = "Plug-InTests";
+			productReference = 28DA55561B778726003D20DE /* UnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		28E6D60419F03CD700FB5630 /* UltraschallHub */ = {
@@ -319,6 +397,10 @@
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 53LA4N6GG6;
 					};
+					28DA55551B778726003D20DE = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 53LA4N6GG6;
+					};
 					28E6D60419F03CD700FB5630 = {
 						CreatedOnToolsVersion = 6.1;
 					};
@@ -337,13 +419,21 @@
 			projectRoot = "";
 			targets = (
 				28E6D60419F03CD700FB5630 /* UltraschallHub */,
-				28709E991B2EE25E0069742D /* DriverTests */,
+				28709E991B2EE25E0069742D /* IntegrationTests */,
+				28DA55551B778726003D20DE /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		28709E981B2EE25E0069742D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28DA55541B778726003D20DE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -366,6 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28DA557C1B778CD4003D20DE /* DeviceTests.mm in Sources */,
 				28EA332E1B2F6B30003655A9 /* CADebugger.cpp in Sources */,
 				28EA332D1B2F6AF6003655A9 /* CAHostTimeBase.cpp in Sources */,
 				28709EB81B2EE4120069742D /* CACFString.cpp in Sources */,
@@ -376,6 +467,34 @@
 				28709E9D1B2EE25E0069742D /* DriverTests.mm in Sources */,
 				28709EB11B2EE3B70069742D /* CAHALAudioDevice.cpp in Sources */,
 				28709EB21B2EE3B70069742D /* CAHALAudioObject.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28DA55521B778726003D20DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28DA55621B778BBC003D20DE /* CAAudioValueRange.cpp in Sources */,
+				28DA55721B778BDA003D20DE /* Factory.cpp in Sources */,
+				28DA55731B778BDC003D20DE /* PlugIn.cpp in Sources */,
+				28DA55741B778BE2003D20DE /* Device.cpp in Sources */,
+				28DA55631B778BBC003D20DE /* CACFArray.cpp in Sources */,
+				28DA55641B778BBC003D20DE /* CACFDictionary.cpp in Sources */,
+				28DA55651B778BBC003D20DE /* CACFNumber.cpp in Sources */,
+				28DA55661B778BBC003D20DE /* CACFString.cpp in Sources */,
+				28DA55671B778BBC003D20DE /* CADebugger.cpp in Sources */,
+				28DA55681B778BBC003D20DE /* CADebugMacros.cpp in Sources */,
+				28DA55691B778BBC003D20DE /* CADebugPrintf.cpp in Sources */,
+				28DA556A1B778BBC003D20DE /* CADispatchQueue.cpp in Sources */,
+				28DA556B1B778BBC003D20DE /* CAHostTimeBase.cpp in Sources */,
+				28DA556C1B778BBC003D20DE /* CAMutex.cpp in Sources */,
+				28DA556D1B778BBC003D20DE /* CAObject.cpp in Sources */,
+				28DA556E1B778BBC003D20DE /* CARingBuffer.cpp in Sources */,
+				28DA556F1B778BBC003D20DE /* CAStreamBasicDescription.cpp in Sources */,
+				28DA55701B778BBC003D20DE /* CAStreamRangedDescription.cpp in Sources */,
+				28DA55711B778BBC003D20DE /* CAVolumeCurve.cpp in Sources */,
+				28DA557D1B778D8E003D20DE /* DeviceTests.mm in Sources */,
+				28DA55591B778726003D20DE /* PlugInTests.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +531,11 @@
 			isa = PBXTargetDependency;
 			target = 28E6D60419F03CD700FB5630 /* UltraschallHub */;
 			targetProxy = 28709EA21B2EE2880069742D /* PBXContainerItemProxy */;
+		};
+		28DA555F1B77877B003D20DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28E6D60419F03CD700FB5630 /* UltraschallHub */;
+			targetProxy = 28DA555E1B77877B003D20DE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -454,6 +578,53 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_BUNDLE_IDENTIFIER = fm.ultraschall.audio.DriverTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		28DA555C1B778726003D20DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Plug-InTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.8plugs.Plug-InTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		28DA555D1B778726003D20DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Plug-InTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.8plugs.Plug-InTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -560,7 +731,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		28709EA11B2EE25E0069742D /* Build configuration list for PBXNativeTarget "DriverTests" */ = {
+		28709EA11B2EE25E0069742D /* Build configuration list for PBXNativeTarget "IntegrationTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				28709E9F1B2EE25E0069742D /* Debug */,
@@ -568,6 +739,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		28DA555B1B778726003D20DE /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28DA555C1B778726003D20DE /* Debug */,
+				28DA555D1B778726003D20DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		28E6D60019F03CD700FB5630 /* Build configuration list for PBXProject "UltraschallHubDriver" */ = {
 			isa = XCConfigurationList;

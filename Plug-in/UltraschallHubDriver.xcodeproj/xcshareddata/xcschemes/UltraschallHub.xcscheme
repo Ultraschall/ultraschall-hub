@@ -27,15 +27,16 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
       enableAddressSanitizer = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "28709E991B2EE25E0069742D"
-               BuildableName = "DriverTests.xctest"
-               BlueprintName = "DriverTests"
+               BlueprintIdentifier = "28DA55551B778726003D20DE"
+               BuildableName = "UnitTests.xctest"
+               BlueprintName = "UnitTests"
                ReferencedContainer = "container:UltraschallHubDriver.xcodeproj">
             </BuildableReference>
          </TestableReference>
