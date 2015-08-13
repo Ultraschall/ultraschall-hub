@@ -1,6 +1,6 @@
 ////
-////  PlugInTests.mm
-////  PlugInTests
+////  FactoryTests.m
+////  UltraschallHubDriver
 ////
 ////  Created by Daniel Lindenfelser on 09/08/15.
 ////  Copyright © 2015 ultraschall.fm. All rights reserved.
@@ -8,13 +8,13 @@
 //
 //#import <XCTest/XCTest.h>
 //
-//#include "PlugIn.h"
+//#include "Factory.h"
 //
-//@interface PlugInTests : XCTestCase
+//@interface FactoryTests : XCTestCase
 //
 //@end
 //
-//@implementation PlugInTests
+//@implementation FactoryTests
 //
 //- (void)setUp {
 //    [super setUp];
@@ -26,8 +26,15 @@
 //    [super tearDown];
 //}
 //
-//- (void)testPluginLoad {
-//    UltHub_PlugIn::GetInstance();
+//- (void)testCreate {
+//
+//}
+//
+//- (void)testPerformanceExample {
+//    // This is an example of a performance test case.
+//    [self measureBlock:^{
+//        // Put the code you want to measure the time of here.
+//    }];
 //}
 //
 //@end

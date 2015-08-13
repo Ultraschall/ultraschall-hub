@@ -41,6 +41,20 @@ UInt32 deviceObjectID = -1;
     XCTAssert(theDevice.IsValid(), "unknown device");
 }
 
+- (void)testClock {
+    CAObjectReleaser<UltHub_Device> theDevice(CAObjectMap::CopyObjectOfClassByObjectID<UltHub_Device>(deviceObjectID));
+    XCTAssert(theDevice.IsValid(), "unknown device");
+    [self measureBlock:^{
+        Float64 outSampleTime;
+        UInt64 outHostTime;
+        UInt64 outSeed;
+        for (auto i = 0; i < 1000000; i++) {
+            theDevice->GetZeroTimeStamp(outSampleTime, outHostTime, outSeed);
+        }
+    }];
+    
+}
+
 - (void)testPerformanceWrite {
     CAObjectReleaser<UltHub_Device> theDevice(CAObjectMap::CopyObjectOfClassByObjectID<UltHub_Device>(deviceObjectID));
     XCTAssert(theDevice.IsValid(), "unknown device");

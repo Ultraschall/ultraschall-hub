@@ -105,7 +105,9 @@ public:
 
     void StopIO();
 
-    void GetZeroTimeStamp(Float64& outSampleTime, UInt64& outHostTime, UInt64& outSeed) const;
+    void ResetIO();
+    
+    void GetZeroTimeStamp(Float64& outSampleTime, UInt64& outHostTime, UInt64& outSeed);
 
     void WillDoIOOperation(UInt32 inOperationID, bool& outWillDo, bool& outWillDoInPlace) const;
 
@@ -158,11 +160,13 @@ public:
 private:
     // IO
     UInt64 mStartCount;
-
+    
     // Timing / Clock
     Float64 mTicksPerFrame;
     UInt64 mAnchorHostTime;
     UInt64 mTimeline;
+    UInt64 mNumberTimeStamps = 0;
+    UInt64 mCurrentTimeLine = 0;
 
     // Audio Ring Buffer
     CARingBuffer mRingBuffer;
@@ -187,9 +191,10 @@ private:
     Float32 mMasterInputVolume;
     Float32 mMasterOutputVolume;
     
-    const int mSafetyOffsetInput = 64;
-    const int mSafetyOffsetOutput = 0;
-    const int mLatencyInput = 1;
+    // IO
+    const int mSafetyOffsetInput = 0;
+    const int mSafetyOffsetOutput = 128;
+    const int mLatencyInput = 0;
     const int mLatencyOutput = 0;
 };
 

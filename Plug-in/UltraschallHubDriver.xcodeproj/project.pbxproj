@@ -62,6 +62,8 @@
 		28DA55771B778BFF003D20DE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2897B85D19F3061B004D7D77 /* CoreFoundation.framework */; };
 		28DA557C1B778CD4003D20DE /* DeviceTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28DA557B1B778CD4003D20DE /* DeviceTests.mm */; };
 		28DA557D1B778D8E003D20DE /* DeviceTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28DA557B1B778CD4003D20DE /* DeviceTests.mm */; };
+		28DA557F1B77B107003D20DE /* FactoryTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28DA557E1B77B107003D20DE /* FactoryTests.mm */; };
+		28DA55801B77B254003D20DE /* Devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2897B85B19F2F8C5004D7D77 /* Devices.plist */; };
 		28E6D61319F03D0300FB5630 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E6D61219F03D0300FB5630 /* CoreAudio.framework */; };
 		28E6D61519F0457000FB5630 /* UltraschallHubDevice.icns in Resources */ = {isa = PBXBuildFile; fileRef = 28E6D61419F0457000FB5630 /* UltraschallHubDevice.icns */; };
 		28EA332D1B2F6AF6003655A9 /* CAHostTimeBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287283A31A51CC7E0001B524 /* CAHostTimeBase.cpp */; };
@@ -151,6 +153,7 @@
 		28DA55581B778726003D20DE /* PlugInTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PlugInTests.mm; sourceTree = "<group>"; };
 		28DA555A1B778726003D20DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28DA557B1B778CD4003D20DE /* DeviceTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceTests.mm; sourceTree = "<group>"; };
+		28DA557E1B77B107003D20DE /* FactoryTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FactoryTests.mm; sourceTree = "<group>"; };
 		28E6D60519F03CD700FB5630 /* UltraschallHub.driver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraschallHub.driver; sourceTree = BUILT_PRODUCTS_DIR; };
 		28E6D60919F03CD700FB5630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28E6D61219F03D0300FB5630 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -264,6 +267,7 @@
 		28DA55571B778726003D20DE /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				28DA557E1B77B107003D20DE /* FactoryTests.mm */,
 				28DA55581B778726003D20DE /* PlugInTests.mm */,
 				28DA557B1B778CD4003D20DE /* DeviceTests.mm */,
 				28DA555A1B778726003D20DE /* Info.plist */,
@@ -437,6 +441,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28DA55801B77B254003D20DE /* Devices.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +469,7 @@
 				28709EA81B2EE3290069742D /* PlugInTests.mm in Sources */,
 				28A1C90B1B327BB700F8EC0A /* IOTests.mm in Sources */,
 				28709EB41B2EE3B70069742D /* CAHALAudioSystemObject.cpp in Sources */,
+				28DA557F1B77B107003D20DE /* FactoryTests.mm in Sources */,
 				28709E9D1B2EE25E0069742D /* DriverTests.mm in Sources */,
 				28709EB11B2EE3B70069742D /* CAHALAudioDevice.cpp in Sources */,
 				28709EB21B2EE3B70069742D /* CAHALAudioObject.cpp in Sources */,
@@ -603,7 +609,7 @@
 				INFOPLIST_FILE = "Plug-InTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "de.8plugs.Plug-InTests";
+				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.UnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -624,7 +630,7 @@
 				INFOPLIST_FILE = "Plug-InTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "de.8plugs.Plug-InTests";
+				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.UnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

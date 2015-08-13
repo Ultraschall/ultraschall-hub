@@ -109,7 +109,7 @@ bool UltHub_PlugIn::ValidateSettings(CFPropertyListRef propertyListRef)
 
 CFPropertyListRef UltHub_PlugIn::ReadSettings() const
 {
-    CFBundleRef myBundle = CFBundleGetBundleWithIdentifier(CFSTR(kUltraschallHub_BundleID));
+    CFBundleRef myBundle = CFBundleGetBundleWithIdentifier(bundleIdentifier);
     CFURLRef settingsURL = CFBundleCopyResourceURL(myBundle, CFSTR("Devices"), CFSTR("plist"), NULL);
 
     CFDataRef resourceData;
@@ -117,7 +117,11 @@ CFPropertyListRef UltHub_PlugIn::ReadSettings() const
     // TODO: move to new api
     Boolean status = CFURLCreateDataAndPropertiesFromResource(kCFAllocatorDefault, settingsURL, &resourceData,
                                                               NULL, NULL, &errorCode);
-
+    
+    
+    //CFDictionaryRef p;
+    //CFURLCopyResourcePropertyForKey(settingsURL, CFSTR("root"), &p, &errorCode);
+    
     if (!status) {
         CFRelease(settingsURL);
         // Handle the error
@@ -302,50 +306,82 @@ void UltHub_PlugIn::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
 
 void UltHub_PlugIn::InitializeDevices()
 {
-    if (CFGetTypeID(mCurrentSettings) == CFDictionaryGetTypeID()) {
-        CFDictionaryRef root = (CFDictionaryRef)mCurrentSettings;
-        if (CFDictionaryContainsKey(root, CFSTR("Devices"))) {
-            CFArrayRef devices = (CFArrayRef)CFDictionaryGetValue(root, CFSTR("Devices"));
-            if (devices != NULL) {
-                for (int index = 0; index < CFArrayGetCount(devices); index++) {
-                    CFDictionaryRef device = (CFDictionaryRef)CFArrayGetValueAtIndex(devices, index);
-                    if (device != NULL) {
-                        if (CFDictionaryContainsKey(device, CFSTR("UUID"))) {
-                            if (CFDictionaryContainsKey(device, CFSTR("Name"))) {
-                                if (CFDictionaryContainsKey(device, CFSTR("Channels"))) {
-                                    CFStringRef uuid = (CFStringRef)CFDictionaryGetValue(device, CFSTR("UUID"));
-                                    CFStringRef name = (CFStringRef)CFDictionaryGetValue(device, CFSTR("Name"));
-                                    CFNumberRef channels = (CFNumberRef)CFDictionaryGetValue(device, CFSTR("Channels"));
+//    if (CFGetTypeID(mCurrentSettings) == CFDictionaryGetTypeID()) {
+//        CFDictionaryRef root = (CFDictionaryRef)mCurrentSettings;
+//        if (CFDictionaryContainsKey(root, CFSTR("Devices"))) {
+//            CFArrayRef devices = (CFArrayRef)CFDictionaryGetValue(root, CFSTR("Devices"));
+//            if (devices != NULL) {
+//                for (int index = 0; index < CFArrayGetCount(devices); index++) {
+//                    CFDictionaryRef device = (CFDictionaryRef)CFArrayGetValueAtIndex(devices, index);
+//                    if (device != NULL) {
+//                        if (CFDictionaryContainsKey(device, CFSTR("UUID"))) {
+//                            if (CFDictionaryContainsKey(device, CFSTR("Name"))) {
+//                                if (CFDictionaryContainsKey(device, CFSTR("Channels"))) {
+//                                    CFStringRef uuid = (CFStringRef)CFDictionaryGetValue(device, CFSTR("UUID"));
+//                                    CFRetain(uuid);
+//                                    CFStringRef name = (CFStringRef)CFDictionaryGetValue(device, CFSTR("Name"));
+//                                    CFRetain(name);
+//                                    CFNumberRef channels = (CFNumberRef)CFDictionaryGetValue(device, CFSTR("Channels"));
+//                                    CFRetain(channels);
+//
+//                                    UltHub_Device* theNewDevice = NULL;
+//                                    //	make the new device object
+//                                    AudioObjectID theNewDeviceObjectID = CAObjectMap::GetNextObjectID();
+//                                    SInt16 c = 0;
+//                                    if (CFNumberGetValue(channels, kCFNumberSInt16Type, &c)) {
+//                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID, c);
+//                                    }
+//                                    else {
+//                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID, 2);
+//                                    }
+//                                    theNewDevice->setDeviceUID(uuid);
+//                                    theNewDevice->setDeviceName(name);
+//                                    //	add it to the object map
+//                                    CAObjectMap::MapObject(theNewDeviceObjectID, theNewDevice);
+//
+//                                    //	add it to the device list
+//                                    AddDevice(theNewDevice);
+//
+//                                    //	activate the device
+//                                    theNewDevice->Activate();
+//                                    CFRelease(uuid);
+//                                    CFRelease(name);
+//                                    CFRelease(channels);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
+    AudioObjectID theNewDeviceObjectID = CAObjectMap::GetNextObjectID();
+    auto theNewDevice = new UltHub_Device(theNewDeviceObjectID, 2);
+    theNewDevice->setDeviceUID(CFSTR("1234"));
+    theNewDevice->setDeviceName(CFSTR("Test 1"));
+    //	add it to the object map
+    CAObjectMap::MapObject(theNewDeviceObjectID, theNewDevice);
 
-                                    UltHub_Device* theNewDevice = NULL;
-                                    //	make the new device object
-                                    AudioObjectID theNewDeviceObjectID = CAObjectMap::GetNextObjectID();
-                                    SInt16 c = 0;
-                                    if (CFNumberGetValue(channels, kCFNumberSInt16Type, &c)) {
-                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID, c, this);
-                                    }
-                                    else {
-                                        theNewDevice = new UltHub_Device(theNewDeviceObjectID, 2, this);
-                                    }
-                                    theNewDevice->setDeviceUID(uuid);
-                                    theNewDevice->setDeviceName(name);
-                                    //	add it to the object map
-                                    CAObjectMap::MapObject(theNewDeviceObjectID, theNewDevice);
+    //	add it to the device list
+    AddDevice(theNewDevice);
 
-                                    //	add it to the device list
-                                    AddDevice(theNewDevice);
+    //	activate the device
+    theNewDevice->Activate();
 
-                                    //	activate the device
-                                    theNewDevice->Activate();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
+    theNewDeviceObjectID = CAObjectMap::GetNextObjectID();
+    theNewDevice = new UltHub_Device(theNewDeviceObjectID, 2);
+    theNewDevice->setDeviceUID(CFSTR("12345"));
+    theNewDevice->setDeviceName(CFSTR("Test 2"));
+    //	add it to the object map
+    CAObjectMap::MapObject(theNewDeviceObjectID, theNewDevice);
+    
+    //	add it to the device list
+    AddDevice(theNewDevice);
+    
+    //	activate the device
+    theNewDevice->Activate();
+    
     //	this will change the owned object list and the device list
     AudioObjectPropertyAddress theChangedProperties[] = { kAudioObjectPropertyOwnedObjects,
                                                           kAudioObjectPropertyScopeGlobal,
@@ -357,34 +393,25 @@ void UltHub_PlugIn::InitializeDevices()
                                                           kAudioPlugInPropertyDeviceList,
                                                           kAudioObjectPropertyScopeGlobal,
                                                           kAudioObjectPropertyElementMaster };
-    Host_PropertiesChanged(GetObjectID(), 3, theChangedProperties);
+    Host_PropertiesChanged(GetObjectID(), 8, theChangedProperties);
 }
 
 void UltHub_PlugIn::AddDevice(UltHub_Device* inDevice)
 {
     CAMutex::Locker theLocker(mMutex);
-    _AddDevice(inDevice);
-}
-
-void UltHub_PlugIn::RemoveDevice(UltHub_Device* inDevice)
-{
-    CAMutex::Locker theLocker(mMutex);
-    _RemoveDevice(inDevice);
-}
-
-void UltHub_PlugIn::_AddDevice(UltHub_Device* inDevice)
-{
+    
     if (inDevice != NULL) {
         //  Initialize an DeviceInfo to describe the new device
         DeviceInfo theDeviceInfo(inDevice->GetObjectID(), inDevice->getDeviceUID());
-
+        
         //  put the device info in the list
         mDeviceInfoList.push_back(theDeviceInfo);
     }
 }
 
-void UltHub_PlugIn::_RemoveDevice(UltHub_Device* inDevice)
+void UltHub_PlugIn::RemoveDevice(UltHub_Device* inDevice)
 {
+    CAMutex::Locker theLocker(mMutex);
     //  find it in the device list and grab an iterator for it
     if (inDevice != NULL) {
         bool wasFound = false;
@@ -392,7 +419,7 @@ void UltHub_PlugIn::_RemoveDevice(UltHub_Device* inDevice)
         while (!wasFound && (theDeviceIterator != mDeviceInfoList.end())) {
             if (inDevice->GetObjectID() == theDeviceIterator->mDeviceObjectID) {
                 wasFound = true;
-
+                
                 //  remove the device from the list
                 theDeviceIterator->mDeviceObjectID = 0;
                 mDeviceInfoList.erase(theDeviceIterator);

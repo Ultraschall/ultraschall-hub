@@ -79,6 +79,7 @@ void UltHub_Device::Deactivate()
 
 UltHub_Device::~UltHub_Device()
 {
+    mRingBuffer.Deallocate();
     delete mStateMutex;
     delete mIOMutex;
     mStateMutex = nullptr;
@@ -563,7 +564,7 @@ void UltHub_Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
         //	be synchronized with others or doesn't know should return 0 for this
         //	property.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertyClockDomain for the device");
-        *reinterpret_cast<UInt32*>(outData) = 1337;
+        *reinterpret_cast<UInt32*>(outData) = 0;
         outDataSize = sizeof(UInt32);
         break;
 
@@ -696,6 +697,8 @@ void UltHub_Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
 
     case kAudioDevicePropertySafetyOffset:
         //	This property returns the how close to now the HAL can read and write.
+        //  A UInt32 whose value indicates the number for frames in ahead (for output)
+        //  or behind (for input the current hardware position that is safe to do IO.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertySafetyOffset for the device");
         *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? mSafetyOffsetInput : mSafetyOffsetOutput;
         outDataSize = sizeof(UInt32);
@@ -1020,7 +1023,7 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
     case kAudioStreamPropertyDirection:
         //	This returns whether the stream is an input stream or an output stream.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Stream_GetPropertyData: not enough space for the return value of kAudioStreamPropertyDirection for the stream");
-        *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? mLatencyInput : mLatencyOutput;
+        *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? 1 : 0;
         outDataSize = sizeof(UInt32);
         break;
 
@@ -1046,7 +1049,7 @@ void UltHub_Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inCli
     case kAudioStreamPropertyLatency:
         //	This property returns any additonal presentation latency the stream has.
         ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "UltHub_Device::Stream_GetPropertyData: not enough space for the return value of kAudioStreamPropertyStartingChannel for the stream");
-        *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? 0 : 1;
+        *reinterpret_cast<UInt32*>(outData) = (inObjectID == mInputStreamObjectID) ? mLatencyInput : mLatencyOutput;
         outDataSize = sizeof(UInt32);
         break;
 
@@ -1451,6 +1454,19 @@ void UltHub_Device::Control_SetPropertyData(AudioObjectID inObjectID, pid_t inCl
 
 #pragma mark IO Operations
 
+void UltHub_Device::ResetIO() {
+    DebugMessage("UltHub_Device::ResetIO");
+    mRingBuffer.Deallocate();
+    mRingBuffer.Allocate(mStreamDescription.mChannelsPerFrame, mStreamDescription.mBytesPerFrame, mRingBufferSize);
+    
+    mTicksPerFrame = CAHostTimeBase::GetFrequency() / mStreamDescription.mSampleRate;
+    mAnchorHostTime = CAHostTimeBase::GetCurrentTime();
+    mTimeline++;
+    if (mTimeline == UINT64_MAX)
+        mTimeline = 0;
+}
+
+
 void UltHub_Device::StartIO()
 {
     //	Starting/Stopping IO needs to be reference counted due to the possibility of multiple clients starting IO
@@ -1461,15 +1477,7 @@ void UltHub_Device::StartIO()
 
     //	we only tell the hardware to start if this is the first time IO has been started
     if (mStartCount == 0) {
-        mRingBuffer.Deallocate();
-        mRingBuffer.Allocate(mStreamDescription.mChannelsPerFrame, mStreamDescription.mBytesPerFrame, mRingBufferSize);
-
-        mTicksPerFrame = CAHostTimeBase::GetFrequency() / mStreamDescription.mSampleRate;
-        mAnchorHostTime = CAHostTimeBase::GetCurrentTime();
-        mTimeline++;
-        if (mTimeline == UINT64_MAX)
-            mTimeline = 0;
-        
+        ResetIO();
         DebugMessage("UltHub_Device::StartIO");
     }
     ++mStartCount;
@@ -1492,13 +1500,10 @@ void UltHub_Device::StopIO()
     }
 }
 
-void UltHub_Device::GetZeroTimeStamp(Float64& outSampleTime, UInt64& outHostTime, UInt64& outSeed) const
+void UltHub_Device::GetZeroTimeStamp(Float64& outSampleTime, UInt64& outHostTime, UInt64& outSeed)
 {
-    static UInt64 mNumberTimeStamps = 0;
-    static UInt64 currentTimeLine = 0;
-    
-    if (mTimeline != currentTimeLine) {
-        currentTimeLine = mTimeline;
+    if (mTimeline != mCurrentTimeLine) {
+        mCurrentTimeLine = mTimeline;
         mNumberTimeStamps = 0;
     }
 
@@ -1552,10 +1557,28 @@ void UltHub_Device::BeginIOOperation(UInt32 /*inOperationID*/, UInt32 /*inIOBuff
 {
 }
 
-void UltHub_Device::DoIOOperation(AudioObjectID /*inStreamObjectID*/, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo& inIOCycleInfo, void* ioMainBuffer, void* /*ioSecondaryBuffer*/)
+void UltHub_Device::DoIOOperation(AudioObjectID inStreamObjectID, UInt32 inOperationID, UInt32 inIOBufferFrameSize, const AudioServerPlugInIOCycleInfo& inIOCycleInfo, void* ioMainBuffer, void* /*ioSecondaryBuffer*/)
 {
     if (inIOCycleInfo.mIOCycleCounter == 1) {
-        DebugMessageN4("UltHub_Device::DoIOOperation: inIOCycleInfo.mIOCycleCounter=%llu inIOCycleInfo.mMasterHostTicksPerFrame=%f inIOCycleInfo.mDeviceHostTicksPerFrame=%f inIOCycleInfo.mNominalIOBufferFrameSize=%i", inIOCycleInfo.mIOCycleCounter, inIOCycleInfo.mMasterHostTicksPerFrame, inIOCycleInfo.mDeviceHostTicksPerFrame, inIOCycleInfo.mNominalIOBufferFrameSize);
+        DebugMsg("UltHub_Device::DoIOOperation: Device=%s", CFStringGetCStringPtr(mDeviceName.GetCFString(), kCFStringEncodingUTF8));
+        DebugMsg("UltHub_Device::DoIOOperation: inStreamObjectID=%i", inStreamObjectID);
+        switch (inOperationID) {
+            case kAudioServerPlugInIOOperationReadInput:
+                DebugMsg("UltHub_Device::DoIOOperation: Read");
+                break;
+            case kAudioServerPlugInIOOperationWriteMix:
+                DebugMsg("UltHub_Device::DoIOOperation: Write");
+                break;
+        }
+        DebugMsg("UltHub_Device::DoIOOperation: inIOCycleInfo.mIOCycleCounter=%llu", inIOCycleInfo.mIOCycleCounter);
+        DebugMsg("UltHub_Device::DoIOOperation: inIOCycleInfo.mMasterHostTicksPerFrame=%f", inIOCycleInfo.mMasterHostTicksPerFrame);
+        DebugMsg("UltHub_Device::DoIOOperation: inIOCycleInfo.mDeviceHostTicksPerFrame=%f", inIOCycleInfo.mDeviceHostTicksPerFrame);
+        DebugMsg("UltHub_Device::DoIOOperation: inIOCycleInfo.mNominalIOBufferFrameSize=%i", inIOCycleInfo.mNominalIOBufferFrameSize);
+        DebugMsg("UltHub_Device::DoIOOperation: mStreamDescription.mSampleRate=%f", mStreamDescription.mSampleRate);
+        
+        DebugMsg("UltHub_Device::DoIOOperation: nIOCycleInfo.mCurrentTime.mSampleTime=%f", inIOCycleInfo.mCurrentTime.mSampleTime);
+        DebugMsg("UltHub_Device::DoIOOperation: nIOCycleInfo.mInputTime.mSampleTime=%f", inIOCycleInfo.mInputTime.mSampleTime);
+        DebugMsg("UltHub_Device::DoIOOperation: nIOCycleInfo.mOutputTime.mSampleTime=%f", inIOCycleInfo.mOutputTime.mSampleTime);
     }
     switch (inOperationID) {
     case kAudioServerPlugInIOOperationReadInput:
@@ -1591,16 +1614,6 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
     bufferList.mNumberBuffers = 1;
     bufferList.mBuffers[0] = buffer;
     
-    CARingBuffer::SampleTime startTime;
-    CARingBuffer::SampleTime endTime;
-    mRingBuffer.GetTimeBounds(startTime, endTime);
-    auto readEndTime = (endTime - inIOBufferFrameSize);
-    
-    if (static_cast<CARingBuffer::SampleTime>(inSampleTime) > readEndTime) {
-        DebugMessage("UltHub_Device::ReadInputData: ClockDrift");
-        inSampleTime = readEndTime;
-    }
-    
     CARingBufferError error;
     {
         //	we need to be holding the IO lock to do this
@@ -1618,7 +1631,7 @@ void UltHub_Device::ReadInputData(UInt32 inIOBufferFrameSize, Float64 inSampleTi
             DebugMessage("UltHub_Device::ReadInputData: RingBufferError Unknown");
         }
         MakeBufferSilent(&bufferList);
-        DebugMessageN2("UltHub_Device::ReadInputData: inIOBufferFrameSize = %i inSampleTime = %f", inIOBufferFrameSize, inSampleTime);
+        return;
     }
 
     for (int channel = 0; channel < mStreamDescription.mChannelsPerFrame; ++channel) {
@@ -1642,15 +1655,6 @@ void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSample
         vDSP_vsmul((Float32*)inBuffer + channel, mStreamDescription.mChannelsPerFrame, &mMasterInputVolume,
                    (Float32*)inBuffer + channel, mStreamDescription.mChannelsPerFrame, inIOBufferFrameSize);
     }
-    
-    CARingBuffer::SampleTime startTime;
-    CARingBuffer::SampleTime endTime;
-    mRingBuffer.GetTimeBounds(startTime, endTime);
-    
-    if (static_cast<CARingBuffer::SampleTime>(inSampleTime) > endTime) {
-        DebugMessage("UltHub_Device::WriteOutputData: ClockDrift");
-        inSampleTime = endTime;
-    }
 
     CARingBufferError error;
     {
@@ -1668,7 +1672,6 @@ void UltHub_Device::WriteOutputData(UInt32 inIOBufferFrameSize, Float64 inSample
         else {
             DebugMessage("UltHub_Device::WriteOutputData: RingBufferError Unknown");
         }
-        DebugMessageN2("UltHub_Device::WriteOutputData: inIOBufferFrameSize = %i inSampleTime = %f", inIOBufferFrameSize, inSampleTime);
     }
 }
 
@@ -1692,7 +1695,7 @@ void UltHub_Device::PerformConfigChange(UInt64 inChangeAction, void* inChangeInf
 
         delete theNewFormat;
         
-        DebugMessageN4("UltHub_Device::PerformConfigChange: kUltraschallHub_StreamFormatChange SampleRate=%f BytesPerPacket=%i BytesPerFrame=%i BitsPerChannel=%i", mStreamDescription.mSampleRate, mStreamDescription.mBytesPerPacket, mStreamDescription.mBytesPerFrame, mStreamDescription.mBitsPerChannel);
+        DebugMsg("UltHub_Device::PerformConfigChange: kUltraschallHub_StreamFormatChange SampleRate=%f BytesPerPacket=%i BytesPerFrame=%i BitsPerChannel=%i", mStreamDescription.mSampleRate, mStreamDescription.mBytesPerPacket, mStreamDescription.mBytesPerFrame, mStreamDescription.mBitsPerChannel);
     }
     else if (inChangeAction == kUltraschallHub_SampleRateChange) {
         Float64* theNewSampleRate = reinterpret_cast<Float64*>(inChangeInfo);
@@ -1706,12 +1709,14 @@ void UltHub_Device::PerformConfigChange(UInt64 inChangeAction, void* inChangeInf
 
         delete theNewSampleRate;
         
-        DebugMessageN1("UltHub_Device::PerformConfigChange: kUltraschallHub_SampleRateChange %f", mStreamDescription.mSampleRate);
+        DebugMsg("UltHub_Device::PerformConfigChange: kUltraschallHub_SampleRateChange %f", mStreamDescription.mSampleRate);
     }
 }
 
 void UltHub_Device::AbortConfigChange(UInt64 /*inChangeAction*/, void* /*inChangeInfo*/)
 {
-
-    //	this device doesn't need to do anything special if a change request gets aborted
+    // we need to be holding the IO and State lock to do this
+    CAMutex::Locker theStateLocker(mStateMutex);
+    CAMutex::Locker theIOLocker(mIOMutex);
+    ResetIO();
 }

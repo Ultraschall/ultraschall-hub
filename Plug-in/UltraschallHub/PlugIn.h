@@ -117,6 +117,8 @@ private:
     static pthread_once_t sStaticInitializer;
     static UltHub_PlugIn* sInstance;
     static AudioServerPlugInHostRef sHost;
+public:
+    CFStringRef bundleIdentifier = CFSTR(kUltraschallHub_BundleID);
 };
 
 #endif /* defined(__UltraschallHub__PlugIn__) */
