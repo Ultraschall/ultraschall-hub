@@ -37,7 +37,6 @@
 - (void) parseSettings:(NSDictionary*)settings {
     NSArray *devicesArray = [settings objectForKey:(__bridge NSString*)kAudioHubSettingsKeyDevices];
     for (NSDictionary* deviceDictionary in devicesArray) {
-        NSLog(@"Parse Settings %@ uid %@", [deviceDictionary objectForKey:(__bridge NSString*)kAudioHubSettingsKeyDeviceName], [deviceDictionary objectForKey:(__bridge NSString*)kAudioHubSettingsKeyDeviceUID]);
         [self addDevice:[deviceDictionary objectForKey:(__bridge NSString*)kAudioHubSettingsKeyDeviceName]
                  andUID:[deviceDictionary objectForKey:(__bridge NSString*)kAudioHubSettingsKeyDeviceUID]
             andChannels:[(NSNumber*)[deviceDictionary objectForKey:(__bridge NSString*)kAudioHubSettingsKeyDeviceChannels] integerValue]];

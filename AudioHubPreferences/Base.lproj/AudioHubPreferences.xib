@@ -97,7 +97,7 @@ CA
                     <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wcr-Ef-WES">
                         <rect key="frame" x="257" y="60" width="35" height="23"/>
                         <animations/>
-                        <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" pullsDown="YES" id="QAr-Ac-DVE">
+                        <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" pullsDown="YES" selectedItem="Evd-6j-k07" id="QAr-Ac-DVE">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" id="HHV-zh-Zq4">
@@ -111,11 +111,13 @@ CA
                                     </menuItem>
                                     <menuItem isSeparatorItem="YES" id="TjC-vz-dVr"/>
                                     <menuItem title="Import Configuration..." id="xqc-HR-Ka5">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
                                         <connections>
                                             <action selector="importConfiguration:" target="0hH-vQ-0wk" id="r9a-fE-b47"/>
                                         </connections>
                                     </menuItem>
-                                    <menuItem title="Export Configuration..." keyEquivalent="s" id="tPn-9d-WQF">
+                                    <menuItem title="Export Configuration..." id="tPn-9d-WQF">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
                                         <connections>
                                             <action selector="exportConfiguration:" target="0hH-vQ-0wk" id="gSk-8e-cKV"/>
                                         </connections>
@@ -188,7 +190,7 @@ CA
                                                             <animations/>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="AudioHubDevice:0" id="g2E-Op-gaS">
                                                                 <font key="font" metaFont="smallSystem"/>
-                                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                 <connections>
                                                                     <binding destination="BOR-ZM-kIk" name="value" keyPath="deviceUID" id="smj-br-gQB">
@@ -246,6 +248,7 @@ CA
                                         </tableColumn>
                                     </tableColumns>
                                     <connections>
+                                        <action trigger="doubleAction" selector="doubleAction:" target="0hH-vQ-0wk" id="BBk-63-OMf"/>
                                         <outlet property="dataSource" destination="0hH-vQ-0wk" id="SyH-0F-s3N"/>
                                         <outlet property="delegate" destination="0hH-vQ-0wk" id="BBU-ZF-EuV"/>
                                     </connections>
@@ -256,7 +259,7 @@ CA
                         </clipView>
                         <animations/>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="gDP-Wa-3hM">
-                            <rect key="frame" x="1" y="245" width="433" height="16"/>
+                            <rect key="frame" x="1" y="7" width="0.0" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <animations/>
                         </scroller>
@@ -275,14 +278,14 @@ CA
                 <animations/>
             </view>
         </window>
-        <customView id="VbF-UO-imW">
+        <customView id="VbF-UO-imW" customClass="NotFoundView">
             <rect key="frame" x="0.0" y="0.0" width="437" height="159"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2ef-hJ-QHZ">
                     <rect key="frame" x="18" y="65" width="401" height="29"/>
                     <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="no Audio Hub found" id="EKJ-gG-eLH">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="no Audio Hub Plugin found" id="EKJ-gG-eLH">
                         <font key="font" metaFont="system" size="24"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

@@ -8,6 +8,16 @@
 
 #import "AudioHubViewController.h"
 
+@implementation NotFoundView
+
+- (void)drawRect:(NSRect)dirtyRect {
+    [super drawRect:dirtyRect];
+    [[NSColor controlBackgroundColor] setFill];
+    NSRectFill(dirtyRect);
+}
+
+@end
+
 @interface AudioHubViewController ()
 
 @end
@@ -21,9 +31,7 @@
     if (![self.manager isPluginReady:&error]) {
         NSLog(@"Audio Hub Error: %@", error.description);
         self.notFoundView.frame = self.view.frame;
-        [self.notFoundView setWantsLayer:YES];
-        self.notFoundView.layer.backgroundColor = [NSColor controlBackgroundColor].CGColor;
-        [self.view addSubview:self.notFoundView];
+        [self.view addSubview:self.notFoundView positioned:NSWindowAbove relativeTo:nil];
     }
     self.settings = [self.manager getCurrentSettings:&error];
     if (self.settings == nil) {
@@ -48,6 +56,12 @@
     [super viewDidLoad];
     [self loadSettingsFromPlugin];
     [self updateStatus];
+}
+
+- (IBAction)doubleAction:(id)sender {
+    if (self.tableView.numberOfSelectedRows> 0) {
+        [self changeDevice:sender];
+    }
 }
 
 - (IBAction)addDevice:(id)sender {
@@ -180,7 +194,6 @@
         AudioHubDevice *device = [self.settings deviceAtIndex:row];
         if (device != nil) {
             if ([tableColumn.identifier isEqualToString:@"device"]) {
-                NSLog(@"device cell %@ uuid %@", device.name, device.uid);
                 DeviceTableCellView *deviceTableCellView = (DeviceTableCellView*)cellView;
                 deviceTableCellView.deviceName = device.name;
                 deviceTableCellView.deviceUID = device.uid;

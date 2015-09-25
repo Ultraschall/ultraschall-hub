@@ -7,8 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <AudioHubManager/AudioHubManager.h>
+#import "Manager.h"
+#import "Settings.h"
 #import "Cells.h"
+
+@interface NotFoundView : NSView
+@end
 
 @interface AudioHubViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 

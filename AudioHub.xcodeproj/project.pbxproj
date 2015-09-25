@@ -30,7 +30,6 @@
 		2843858E1BB321B9002DC114 /* CAHALAudioObjectTester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2843858C1BB321B9002DC114 /* CAHALAudioObjectTester.cpp */; settings = {ASSET_TAGS = (); }; };
 		284385901BB32208002DC114 /* AudioHubBoxTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2843858F1BB32208002DC114 /* AudioHubBoxTests.mm */; settings = {ASSET_TAGS = (); }; };
 		284385911BB345B7002DC114 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 286333B61BA7D26A0048DD0B /* Settings.m */; };
-		2859BAA51BADCA3A0000E378 /* Device.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2859BAA41BADCA3A0000E378 /* Device.icns */; settings = {ASSET_TAGS = (); }; };
 		286333B71BA7D26A0048DD0B /* Settings.h in Headers */ = {isa = PBXBuildFile; fileRef = 286333B51BA7D26A0048DD0B /* Settings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		286333B81BA7D26A0048DD0B /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 286333B61BA7D26A0048DD0B /* Settings.m */; settings = {ASSET_TAGS = (); }; };
 		286333BB1BA7D2F90048DD0B /* Manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 286333B91BA7D2F90048DD0B /* Manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -41,7 +40,6 @@
 		286EF26D1BA8350800AC4657 /* CAHALAudioDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500DB1BA6392800B847E4 /* CAHALAudioDevice.cpp */; };
 		286EF26E1BA8351000AC4657 /* CACFString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500C91BA6392800B847E4 /* CACFString.cpp */; };
 		286EF26F1BA8351700AC4657 /* CAHALAudioStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500DF1BA6392800B847E4 /* CAHALAudioStream.cpp */; };
-		2887AE0C1BB00D35007BC62C /* AudioHubManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2805FFE91BA6375000B847E4 /* AudioHubManager.framework */; };
 		2887AE0F1BB0144F007BC62C /* Cells.h in Headers */ = {isa = PBXBuildFile; fileRef = 2887AE0D1BB0144F007BC62C /* Cells.h */; settings = {ASSET_TAGS = (); }; };
 		2887AE101BB0144F007BC62C /* Cells.m in Sources */ = {isa = PBXBuildFile; fileRef = 2887AE0E1BB0144F007BC62C /* Cells.m */; settings = {ASSET_TAGS = (); }; };
 		28BBF1F81BA6D7C60063B59A /* CACFString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500C91BA6392800B847E4 /* CACFString.cpp */; };
@@ -71,7 +69,14 @@
 		28BBF2121BA6E01C0063B59A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280501171BA639C800B847E4 /* CoreFoundation.framework */; };
 		28BBF2131BA6E0210063B59A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280501191BA639CD00B847E4 /* Accelerate.framework */; };
 		28BBF2141BA6E0340063B59A /* CACFArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500B81BA6392800B847E4 /* CACFArray.cpp */; };
-		28DBF44B1BAEEF6C00367FAD /* Device.icns in Resources */ = {isa = PBXBuildFile; fileRef = 28DBF44A1BAEEF6C00367FAD /* Device.icns */; settings = {ASSET_TAGS = (); }; };
+		28D8D5AB1BB5C8BF007817D2 /* Device.icns in Resources */ = {isa = PBXBuildFile; fileRef = 28D8D5AA1BB5C8BF007817D2 /* Device.icns */; settings = {ASSET_TAGS = (); }; };
+		28D8D5AC1BB5D0AB007817D2 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 286333B61BA7D26A0048DD0B /* Settings.m */; };
+		28D8D5AD1BB5D0AB007817D2 /* Manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286333BA1BA7D2F90048DD0B /* Manager.mm */; };
+		28D8D5AE1BB5D154007817D2 /* CAHALAudioObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500DD1BA6392800B847E4 /* CAHALAudioObject.cpp */; };
+		28D8D5AF1BB5D162007817D2 /* CAHALAudioSystemObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500E11BA6392800B847E4 /* CAHALAudioSystemObject.cpp */; };
+		28D8D5B01BB5D16D007817D2 /* CAHALAudioDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500DB1BA6392800B847E4 /* CAHALAudioDevice.cpp */; };
+		28D8D5B11BB5D178007817D2 /* CACFString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500C91BA6392800B847E4 /* CACFString.cpp */; };
+		28D8D5B21BB5D181007817D2 /* CAHALAudioStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500DF1BA6392800B847E4 /* CAHALAudioStream.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -243,7 +248,6 @@
 		2843858C1BB321B9002DC114 /* CAHALAudioObjectTester.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAHALAudioObjectTester.cpp; sourceTree = "<group>"; };
 		2843858D1BB321B9002DC114 /* CAHALAudioObjectTester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAHALAudioObjectTester.h; sourceTree = "<group>"; };
 		2843858F1BB32208002DC114 /* AudioHubBoxTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubBoxTests.mm; sourceTree = "<group>"; };
-		2859BAA41BADCA3A0000E378 /* Device.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Device.icns; sourceTree = "<group>"; };
 		286333B51BA7D26A0048DD0B /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		286333B61BA7D26A0048DD0B /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		286333B91BA7D2F90048DD0B /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
@@ -251,7 +255,7 @@
 		2887AE0D1BB0144F007BC62C /* Cells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cells.h; sourceTree = "<group>"; };
 		2887AE0E1BB0144F007BC62C /* Cells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cells.m; sourceTree = "<group>"; };
 		28BBF2001BA6D8D00063B59A /* AudioHubDeviceListTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubDeviceListTests.mm; sourceTree = "<group>"; };
-		28DBF44A1BAEEF6C00367FAD /* Device.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Device.icns; sourceTree = "<group>"; };
+		28D8D5AA1BB5C8BF007817D2 /* Device.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Device.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,7 +299,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2887AE0C1BB00D35007BC62C /* AudioHubManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,7 +479,7 @@
 		2805FFAE1BA636B100B847E4 /* AudioHub */ = {
 			isa = PBXGroup;
 			children = (
-				2859BAA41BADCA3A0000E378 /* Device.icns */,
+				28D8D5AA1BB5C8BF007817D2 /* Device.icns */,
 				2805011B1BA63A7100B847E4 /* CADispatchQueue.cpp */,
 				2805011C1BA63A7100B847E4 /* CADispatchQueue.h */,
 				2805001A1BA6386700B847E4 /* CAObject.cpp */,
@@ -527,7 +530,6 @@
 				281F1A8B1BAE8ECC00FC62E1 /* AudioHubPreferences.h */,
 				281F1A8D1BAE8ECC00FC62E1 /* AudioHubPreferences.m */,
 				281F1AA51BAEABC700FC62E1 /* Icon.icns */,
-				28DBF44A1BAEEF6C00367FAD /* Device.icns */,
 				281F1A911BAE8ECC00FC62E1 /* AudioHubPreferences.xib */,
 				281F1A941BAE8ECC00FC62E1 /* Info.plist */,
 				2887AE0D1BB0144F007BC62C /* Cells.h */,
@@ -732,7 +734,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2859BAA51BADCA3A0000E378 /* Device.icns in Resources */,
+				28D8D5AB1BB5C8BF007817D2 /* Device.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,7 +758,6 @@
 			files = (
 				281F1AA61BAEABC700FC62E1 /* Icon.icns in Resources */,
 				281F1A931BAE8ECC00FC62E1 /* AudioHubPreferences.xib in Resources */,
-				28DBF44B1BAEEF6C00367FAD /* Device.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -837,6 +838,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28D8D5B21BB5D181007817D2 /* CAHALAudioStream.cpp in Sources */,
+				28D8D5B11BB5D178007817D2 /* CACFString.cpp in Sources */,
+				28D8D5B01BB5D16D007817D2 /* CAHALAudioDevice.cpp in Sources */,
+				28D8D5AF1BB5D162007817D2 /* CAHALAudioSystemObject.cpp in Sources */,
+				28D8D5AE1BB5D154007817D2 /* CAHALAudioObject.cpp in Sources */,
+				28D8D5AC1BB5D0AB007817D2 /* Settings.m in Sources */,
+				28D8D5AD1BB5D0AB007817D2 /* Manager.mm in Sources */,
 				281F1AA01BAEA4B000FC62E1 /* AudioHubViewController.m in Sources */,
 				281F1A8E1BAE8ECC00FC62E1 /* AudioHubPreferences.m in Sources */,
 				2887AE101BB0144F007BC62C /* Cells.m in Sources */,
@@ -963,6 +971,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -994,7 +1003,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -1005,6 +1014,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1030,7 +1040,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -1072,6 +1082,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
 				INFOPLIST_FILE = AudioHubPreferences/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHubPreferences;
@@ -1086,6 +1097,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
 				INFOPLIST_FILE = AudioHubPreferences/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHubPreferences;
