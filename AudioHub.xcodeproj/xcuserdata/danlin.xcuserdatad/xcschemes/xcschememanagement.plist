@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>AudioHub.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>AudioHubManager.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>AudioHubPreferences.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>2805010C1BA6398C00B847E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2805FFAB1BA636B100B847E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2805FFB81BA636F700B847E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2805FFC81BA636F700B847E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2805FFD31BA636F700B847E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2805FFE81BA6375000B847E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2805FFF11BA6375000B847E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>281F1A881BAE8ECC00FC62E1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
