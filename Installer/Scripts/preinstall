@@ -1,0 +1,3 @@
+#!/bin/sh
+launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
+

@@ -6,6 +6,22 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		280DDE211BB8203C009D669B /* AudioHubInstaller */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 280DDE221BB8203C009D669B /* Build configuration list for PBXAggregateTarget "AudioHubInstaller" */;
+			buildPhases = (
+				280DDE291BB82045009D669B /* ShellScript */,
+			);
+			dependencies = (
+				280DDE261BB82042009D669B /* PBXTargetDependency */,
+				280DDE281BB82042009D669B /* PBXTargetDependency */,
+			);
+			name = AudioHubInstaller;
+			productName = AudioHubInstaller;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		2805000C1BA637C100B847E4 /* Factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2805000A1BA637C100B847E4 /* Factory.cpp */; settings = {ASSET_TAGS = (); }; };
 		2805000F1BA637D600B847E4 /* PlugIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2805000D1BA637D600B847E4 /* PlugIn.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -87,11 +103,39 @@
 			remoteGlobalIDString = 2805FFE81BA6375000B847E4;
 			remoteInfo = AudioHubManager;
 		};
+		280DDE121BB81639009D669B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2805FFA41BA636B100B847E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 281F1A881BAE8ECC00FC62E1;
+			remoteInfo = AudioHubPreferences;
+		};
+		280DDE251BB82042009D669B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2805FFA41BA636B100B847E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2805FFAB1BA636B100B847E4;
+			remoteInfo = AudioHub;
+		};
+		280DDE271BB82042009D669B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2805FFA41BA636B100B847E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 281F1A881BAE8ECC00FC62E1;
+			remoteInfo = AudioHubPreferences;
+		};
+		28E33A801BB7F6C300B1BE75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2805FFA41BA636B100B847E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2805FFAB1BA636B100B847E4;
+			remoteInfo = AudioHub;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		280500081BA6379000B847E4 /* install.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = install.sh; sourceTree = "<group>"; };
-		280500091BA6379B00B847E4 /* uninstall.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = uninstall.sh; sourceTree = "<group>"; };
+		280500081BA6379000B847E4 /* install.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = install.sh; path = ../install.sh; sourceTree = "<group>"; };
+		280500091BA6379B00B847E4 /* uninstall.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = uninstall.sh; path = ../uninstall.sh; sourceTree = "<group>"; };
 		2805000A1BA637C100B847E4 /* Factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Factory.cpp; sourceTree = "<group>"; };
 		2805000B1BA637C100B847E4 /* Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Factory.h; sourceTree = "<group>"; };
 		2805000D1BA637D600B847E4 /* PlugIn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlugIn.cpp; sourceTree = "<group>"; };
@@ -237,6 +281,8 @@
 		2805FFF21BA6375000B847E4 /* AudioHubManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioHubManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2805FFF91BA6375000B847E4 /* AudioHubManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioHubManagerTests.m; sourceTree = "<group>"; };
 		2805FFFB1BA6375000B847E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		280DDE2B1BB82F35009D669B /* postinstall */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = postinstall; path = Installer/Scripts/postinstall; sourceTree = "<group>"; };
+		280DDE2C1BB82F35009D669B /* preinstall */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = preinstall; path = Installer/Scripts/preinstall; sourceTree = "<group>"; };
 		281F1A891BAE8ECC00FC62E1 /* AudioHubPreferences.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioHubPreferences.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		281F1A8B1BAE8ECC00FC62E1 /* AudioHubPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioHubPreferences.h; sourceTree = "<group>"; };
 		281F1A8D1BAE8ECC00FC62E1 /* AudioHubPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioHubPreferences.m; sourceTree = "<group>"; };
@@ -305,13 +351,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		280500071BA6377F00B847E4 /* Scripts */ = {
+		280500071BA6377F00B847E4 /* Installer */ = {
 			isa = PBXGroup;
 			children = (
-				280500091BA6379B00B847E4 /* uninstall.sh */,
-				280500081BA6379000B847E4 /* install.sh */,
+				280DDE111BB815E4009D669B /* Scripts */,
 			);
-			name = Scripts;
+			name = Installer;
 			sourceTree = "<group>";
 		};
 		280500931BA6392800B847E4 /* PublicUtility */ = {
@@ -453,12 +498,12 @@
 		2805FFA31BA636B100B847E4 = {
 			isa = PBXGroup;
 			children = (
-				281F1A8A1BAE8ECC00FC62E1 /* AudioHubPreferences */,
 				286333BD1BA7D37B0048DD0B /* Frameworks */,
-				280500931BA6392800B847E4 /* PublicUtility */,
-				280500071BA6377F00B847E4 /* Scripts */,
+				280500071BA6377F00B847E4 /* Installer */,
 				2805FFAE1BA636B100B847E4 /* AudioHub */,
+				281F1A8A1BAE8ECC00FC62E1 /* AudioHubPreferences */,
 				2805FFEA1BA6375000B847E4 /* AudioHubManager */,
+				280500931BA6392800B847E4 /* PublicUtility */,
 				28BBF2021BA6DA020063B59A /* Tests */,
 				2805FFAD1BA636B100B847E4 /* Products */,
 			);
@@ -479,6 +524,8 @@
 		2805FFAE1BA636B100B847E4 /* AudioHub */ = {
 			isa = PBXGroup;
 			children = (
+				280500091BA6379B00B847E4 /* uninstall.sh */,
+				280500081BA6379000B847E4 /* install.sh */,
 				28D8D5AA1BB5C8BF007817D2 /* Device.icns */,
 				2805011B1BA63A7100B847E4 /* CADispatchQueue.cpp */,
 				2805011C1BA63A7100B847E4 /* CADispatchQueue.h */,
@@ -520,6 +567,15 @@
 				2805FFFB1BA6375000B847E4 /* Info.plist */,
 			);
 			path = AudioHubManagerTests;
+			sourceTree = "<group>";
+		};
+		280DDE111BB815E4009D669B /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				280DDE2B1BB82F35009D669B /* postinstall */,
+				280DDE2C1BB82F35009D669B /* preinstall */,
+			);
+			name = Scripts;
 			sourceTree = "<group>";
 		};
 		281F1A8A1BAE8ECC00FC62E1 /* AudioHubPreferences */ = {
@@ -595,6 +651,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				28E33A811BB7F6C300B1BE75 /* PBXTargetDependency */,
 			);
 			name = AudioHubTests;
 			productName = AudioHubTests;
@@ -612,6 +669,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				280DDE131BB81639009D669B /* PBXTargetDependency */,
 			);
 			name = AudioHub;
 			productName = AudioHub;
@@ -695,6 +753,9 @@
 						CreatedOnToolsVersion = 7.0;
 						TestTargetID = 2805FFB81BA636F700B847E4;
 					};
+					280DDE211BB8203C009D669B = {
+						CreatedOnToolsVersion = 7.0;
+					};
 					281F1A881BAE8ECC00FC62E1 = {
 						CreatedOnToolsVersion = 7.0;
 					};
@@ -714,10 +775,11 @@
 			projectRoot = "";
 			targets = (
 				2805FFAB1BA636B100B847E4 /* AudioHub */,
-				2805010C1BA6398C00B847E4 /* AudioHubTests */,
-				2805FFE81BA6375000B847E4 /* AudioHubManager */,
-				2805FFF11BA6375000B847E4 /* AudioHubManagerTests */,
 				281F1A881BAE8ECC00FC62E1 /* AudioHubPreferences */,
+				2805FFE81BA6375000B847E4 /* AudioHubManager */,
+				2805010C1BA6398C00B847E4 /* AudioHubTests */,
+				2805FFF11BA6375000B847E4 /* AudioHubManagerTests */,
+				280DDE211BB8203C009D669B /* AudioHubInstaller */,
 			);
 		};
 /* End PBXProject section */
@@ -762,6 +824,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		280DDE291BB82045009D669B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/AudioHub.pkg",
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "VERSION=$(defaults read \"${BUILT_PRODUCTS_DIR}/AudioHub.driver/Contents/Info\" CFBundleVersion)\nPACKAGE_NAME=\"AudioHub\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\n\necho \"Build ${PRODUCT_NAME}\"\n\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.pkg\"\npkgbuild --analyze --root \"$DSTROOT\" \"${ARCHIVE_PLIST}\"\n\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\npkgbuild --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${DSTROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		280501091BA6398C00B847E4 /* Sources */ = {
@@ -858,6 +937,26 @@
 			isa = PBXTargetDependency;
 			target = 2805FFE81BA6375000B847E4 /* AudioHubManager */;
 			targetProxy = 2805FFF41BA6375000B847E4 /* PBXContainerItemProxy */;
+		};
+		280DDE131BB81639009D669B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 281F1A881BAE8ECC00FC62E1 /* AudioHubPreferences */;
+			targetProxy = 280DDE121BB81639009D669B /* PBXContainerItemProxy */;
+		};
+		280DDE261BB82042009D669B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2805FFAB1BA636B100B847E4 /* AudioHub */;
+			targetProxy = 280DDE251BB82042009D669B /* PBXContainerItemProxy */;
+		};
+		280DDE281BB82042009D669B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 281F1A881BAE8ECC00FC62E1 /* AudioHubPreferences */;
+			targetProxy = 280DDE271BB82042009D669B /* PBXContainerItemProxy */;
+		};
+		28E33A811BB7F6C300B1BE75 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2805FFAB1BA636B100B847E4 /* AudioHub */;
+			targetProxy = 28E33A801BB7F6C300B1BE75 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -971,7 +1070,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1003,7 +1101,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -1014,7 +1111,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1040,7 +1136,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -1076,15 +1171,30 @@
 			};
 			name = Release;
 		};
+		280DDE231BB8203C009D669B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHub;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		280DDE241BB8203C009D669B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHub;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		281F1A961BAE8ECC00FC62E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
-				DSTROOT = /;
 				INFOPLIST_FILE = AudioHubPreferences/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/PreferencePanes";
 				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHubPreferences;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = prefPane;
@@ -1097,9 +1207,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
-				DSTROOT = /;
 				INFOPLIST_FILE = AudioHubPreferences/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/PreferencePanes";
 				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHubPreferences;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = prefPane;
@@ -1153,6 +1262,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		280DDE221BB8203C009D669B /* Build configuration list for PBXAggregateTarget "AudioHubInstaller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				280DDE231BB8203C009D669B /* Debug */,
+				280DDE241BB8203C009D669B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		281F1A951BAE8ECC00FC62E1 /* Build configuration list for PBXNativeTarget "AudioHubPreferences" */ = {
 			isa = XCConfigurationList;

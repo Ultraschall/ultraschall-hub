@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>AudioHubInstaller.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>AudioHubManager.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -57,7 +62,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>280DDE191BB82011009D669B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>280DDE211BB8203C009D669B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>281F1A881BAE8ECC00FC62E1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28E33A781BB7F56600B1BE75</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28E33A821BB7F7D400B1BE75</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28E33A871BB7F7F900B1BE75</key>
 		<dict>
 			<key>primary</key>
 			<true/>
