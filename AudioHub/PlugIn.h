@@ -68,8 +68,9 @@ public:
     Box *mBox;
 
 #pragma mark Settings
-private:
-    CACFDictionary Settings();
+public:
+    void StoreSetting();
+    void RestoreSettings();
 
 #pragma mark Host Accesss
 public:

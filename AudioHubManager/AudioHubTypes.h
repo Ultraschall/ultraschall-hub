@@ -28,6 +28,7 @@ enum {
 };
 const UInt32 kAudioHubCustomProperties = 2;
 
+static const CFStringRef kAudioHubSettingsKey = CFSTR("AudioHubSettings");
 static const CFStringRef kAudioHubSettingsKeyDevices = CFSTR("AudioHubDevices");
 static const CFStringRef kAudioHubSettingsKeyDeviceName = CFSTR("Name");
 static const CFStringRef kAudioHubSettingsKeyDeviceUID = CFSTR("UID");

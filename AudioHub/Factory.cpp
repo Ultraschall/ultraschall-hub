@@ -96,6 +96,7 @@ static OSStatus AudioHub_Initialize(AudioServerPlugInDriverRef inDriver, AudioSe
     try {
         ThrowIf(inDriver != gAudioServerPlugInDriverRef, CAException(kAudioHardwareBadObjectError), "AudioHub_Initialize: bad driver reference");
         PlugIn::GetInstance().SetHost(inHost);
+        PlugIn::GetInstance().RestoreSettings();
     }
     catch (const CAException &inException) {
         theAnswer = inException.GetError();

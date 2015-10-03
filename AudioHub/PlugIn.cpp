@@ -55,6 +55,7 @@ void PlugIn::Activate() {
 
 void PlugIn::Deactivate() {
     CAMutex::Locker theLocker(mMutex);
+    StoreSetting();
     CAObject::Deactivate();
     CAObjectMap::UnmapObject(mBox->GetObjectID(), mBox);
     mBox = nullptr;
@@ -243,6 +244,22 @@ void PlugIn::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const 
             CAObject::SetPropertyData(inObjectID, inClientPID, inAddress, inQualifierDataSize, inQualifierData, inDataSize, inData);
             break;
     };
+}
+
+#pragma mark Settings
+void PlugIn::StoreSetting() {
+    CFPropertyListRef settigns = mBox->GetSettings();
+    sHost->WriteToStorage(sHost, kAudioHubSettingsKey, &settigns);
+    CFRelease(settigns);
+}
+
+void PlugIn::RestoreSettings() {
+    CFPropertyListRef settigns;
+    OSStatus status = sHost->CopyFromStorage(sHost, kAudioHubSettingsKey, &settigns);
+    if (!status) {
+        mBox->SetSettings(settigns);
+    }
+    CFRelease(settigns);
 }
 
 #pragma mark Host Access

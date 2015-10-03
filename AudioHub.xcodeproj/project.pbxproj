@@ -1270,6 +1270,7 @@
 				280DDE241BB8203C009D669B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		281F1A951BAE8ECC00FC62E1 /* Build configuration list for PBXNativeTarget "AudioHubPreferences" */ = {
 			isa = XCConfigurationList;
