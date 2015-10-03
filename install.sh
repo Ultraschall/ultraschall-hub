@@ -8,7 +8,6 @@
 
 echo "Stop CoreAudio Server"
 sudo launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
-sleep
 if [ -d /Library/Audio/Plug-Ins/HAL/HubAudio.driver ]; then
     echo "Remove AudioHub Driver"
     sudo rm -rf /Library/Audio/Plug-Ins/HAL/AudioHub.driver > /dev/null

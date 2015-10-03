@@ -412,6 +412,7 @@ void Box::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const Aud
                     PlugIn::Host_PropertiesChanged(kAudioObjectPlugInObject, 1, theChangedProperties);
                 }
                 CFRetain(*((CFPropertyListRef*)settings));
+                PlugIn::GetInstance().StoreSetting();
             }
         }
             break;
