@@ -246,15 +246,24 @@ void PlugIn::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const 
 }
 
 #pragma mark Settings
-void PlugIn::StoreSetting() {
-    CFPropertyListRef settigns = mBox->GetSettings();
-    sHost->WriteToStorage(sHost, kAudioHubSettingsKey, &settigns);
+void PlugIn::StoreSettings(CFPropertyListRef settings) {
+    if (settings != NULL) {
+        if (sHost != NULL) {
+            sHost->WriteToStorage(sHost, kAudioHubSettingsKey, settings);
+        }
+    }
+}
+
+void PlugIn::StoreSettings() {
+    CFPropertyListRef settings = mBox->GetSettings();
+    this->StoreSettings(settings);
+    CFRelease(settings);
 }
 
 void PlugIn::RestoreSettings() {
     CFPropertyListRef settigns;
     OSStatus status = sHost->CopyFromStorage(sHost, kAudioHubSettingsKey, &settigns);
-    if (settigns) {
+    if (settigns != NULL) {
         if (!status) {
             mBox->SetSettings(settigns);
         }

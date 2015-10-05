@@ -403,16 +403,17 @@ void Box::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const Aud
             if((settings != NULL) && (*settings != NULL))
             {
                 CFRetain(*((CFPropertyListRef*)settings));
-                SetSettings(*settings);
-                if (mAcquired) {
-                    AudioObjectPropertyAddress theChangedProperties[] = {
+                if (SetSettings(*settings)) {
+                    PlugIn::GetInstance().StoreSettings();
+                    if (mAcquired) {
+                        AudioObjectPropertyAddress theChangedProperties[] = {
                             {kAudioPlugInPropertyDeviceList, kAudioObjectPropertyScopeGlobal, kAudioObjectPropertyElementMaster}
-                    };
-                    PlugIn::Host_PropertiesChanged(GetObjectID(), 1, theChangedProperties);
-                    PlugIn::Host_PropertiesChanged(kAudioObjectPlugInObject, 1, theChangedProperties);
+                        };
+                        PlugIn::Host_PropertiesChanged(GetObjectID(), 1, theChangedProperties);
+                        PlugIn::Host_PropertiesChanged(kAudioObjectPlugInObject, 1, theChangedProperties);
+                    }
                 }
-                CFRetain(*((CFPropertyListRef*)settings));
-                PlugIn::GetInstance().StoreSetting();
+                //CFRelease(*((CFPropertyListRef*)settings));
             }
         }
             break;

@@ -759,6 +759,7 @@
 					};
 					281F1A881BAE8ECC00FC62E1 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 53LA4N6GG6;
 					};
 				};
 			};
@@ -839,7 +840,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "VERSION=$(defaults read \"${BUILT_PRODUCTS_DIR}/AudioHub.driver/Contents/Info\" CFBundleVersion)\nPACKAGE_NAME=\"AudioHub\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\n\necho \"Build ${PRODUCT_NAME}\"\n\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.pkg\"\npkgbuild --analyze --root \"$DSTROOT\" \"${ARCHIVE_PLIST}\"\n\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\npkgbuild --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${DSTROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"";
+			shellScript = "VERSION=$(defaults read \"${BUILT_PRODUCTS_DIR}/AudioHub.driver/Contents/Info\" CFBundleVersion)\nPACKAGE_NAME=\"AudioHub\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\n\necho \"Build ${PRODUCT_NAME}\"\n\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.pkg\"\npkgbuild --analyze --root \"$DSTROOT\" \"${ARCHIVE_PLIST}\"\n\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\npkgbuild --timestamp --sign \"53LA4N6GG6\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${DSTROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1078,6 +1079,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1119,6 +1121,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1183,6 +1186,8 @@
 		281F1A961BAE8ECC00FC62E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -1190,6 +1195,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/PreferencePanes";
 				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHubPreferences;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Debug;
@@ -1197,6 +1203,8 @@
 		281F1A971BAE8ECC00FC62E1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -1204,6 +1212,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/PreferencePanes";
 				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHubPreferences;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Release;

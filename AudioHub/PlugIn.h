@@ -69,7 +69,8 @@ public:
 
 #pragma mark Settings
 public:
-    void StoreSetting();
+    void StoreSettings(CFPropertyListRef settings);
+    void StoreSettings();
     void RestoreSettings();
 
 #pragma mark Host Accesss
