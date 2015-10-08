@@ -21,6 +21,8 @@ static const CFStringRef kAudioHubBoxSerialNumber = CFSTR("0815");
 static const CFStringRef kAudioHubBoxFirmwareVersion = CFSTR("1.0");
 static const CFStringRef kAudioHubBoxUID = CFSTR("de.8plugs.audio.AudioHub:1");
 
+static const CFStringRef kAudioHubDeviceModelUID = CFSTR("de.8plugs.audio.AudioHubDevice");
+
 
 enum {
     kAudioHubCustomPropertySettings = 'ephs',

@@ -189,11 +189,22 @@ private:
     Float32 mMasterInputVolume;
     Float32 mMasterOutputVolume;
 
+public:
+    enum class OffsetMode {
+        Stable,
+        Normal,
+        Fast,
+        Insane,
+    };
+    
+private:
     // IO
     const int mSafetyOffsetInput = 0;
-    const int mSafetyOffsetOutput = 128;
+    const int mSafetyOffsetOutput = 0;
     const int mLatencyInput = 0;
-    const int mLatencyOutput = 0;
+    const int mLatencyOutput = 128;
+    
+    OffsetMode offsetMode = OffsetMode::Normal;
 
     UInt32 isHidden = 0;
 };

@@ -512,7 +512,7 @@ void Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
             //	devices that are the same kind of device. Note that two instances of the
             //	save device must have the same value for this property.
             ThrowIf(inDataSize < sizeof(AudioObjectID), CAException(kAudioHardwareBadPropertySizeError), "Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertyModelUID for the device");
-            *reinterpret_cast<CFStringRef *>(outData) = mDeviceUID.CopyCFString();
+            *reinterpret_cast<CFStringRef *>(outData) = kAudioHubDeviceModelUID;
             outDataSize = sizeof(CFStringRef);
             break;
 
@@ -611,7 +611,7 @@ void Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
         case kAudioDevicePropertyLatency:
             //	This property returns the presentation latency of the device.
             ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertyLatency for the device");
-            *reinterpret_cast<UInt32 *>(outData) = 0;
+            *reinterpret_cast<UInt32 *>(outData) = (inAddress.mScope == kAudioObjectPropertyScopeInput) ? mLatencyInput : mLatencyOutput;;
             outDataSize = sizeof(UInt32);
             break;
 
@@ -1041,7 +1041,7 @@ void Device::Stream_GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
         case kAudioStreamPropertyLatency:
             //	This property returns any additonal presentation latency the stream has.
             ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "Device::Stream_GetPropertyData: not enough space for the return value of kAudioStreamPropertyStartingChannel for the stream");
-            *reinterpret_cast<UInt32 *>(outData) = (inObjectID == mInputStreamObjectID) ? mLatencyInput : mLatencyOutput;
+            *reinterpret_cast<UInt32 *>(outData) = 0;
             outDataSize = sizeof(UInt32);
             break;
 

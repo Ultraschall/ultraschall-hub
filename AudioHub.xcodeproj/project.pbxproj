@@ -37,6 +37,7 @@
 		2805FFEC1BA6375000B847E4 /* AudioHubManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2805FFEB1BA6375000B847E4 /* AudioHubManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2805FFF31BA6375000B847E4 /* AudioHubManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2805FFE91BA6375000B847E4 /* AudioHubManager.framework */; settings = {ASSET_TAGS = (); }; };
 		2805FFFA1BA6375000B847E4 /* AudioHubManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2805FFF91BA6375000B847E4 /* AudioHubManagerTests.m */; };
+		2806FF871BC67323005A08D6 /* restart.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2806FF861BC67323005A08D6 /* restart.sh */; settings = {ASSET_TAGS = (); }; };
 		281F1A8C1BAE8ECC00FC62E1 /* AudioHubPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = 281F1A8B1BAE8ECC00FC62E1 /* AudioHubPreferences.h */; };
 		281F1A8E1BAE8ECC00FC62E1 /* AudioHubPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F1A8D1BAE8ECC00FC62E1 /* AudioHubPreferences.m */; };
 		281F1A931BAE8ECC00FC62E1 /* AudioHubPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281F1A911BAE8ECC00FC62E1 /* AudioHubPreferences.xib */; };
@@ -281,6 +282,7 @@
 		2805FFF21BA6375000B847E4 /* AudioHubManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioHubManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2805FFF91BA6375000B847E4 /* AudioHubManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioHubManagerTests.m; sourceTree = "<group>"; };
 		2805FFFB1BA6375000B847E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2806FF861BC67323005A08D6 /* restart.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = restart.sh; sourceTree = SOURCE_ROOT; };
 		280DDE2B1BB82F35009D669B /* postinstall */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = postinstall; path = Installer/Scripts/postinstall; sourceTree = "<group>"; };
 		280DDE2C1BB82F35009D669B /* preinstall */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = preinstall; path = Installer/Scripts/preinstall; sourceTree = "<group>"; };
 		281F1A891BAE8ECC00FC62E1 /* AudioHubPreferences.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioHubPreferences.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -524,6 +526,7 @@
 		2805FFAE1BA636B100B847E4 /* AudioHub */ = {
 			isa = PBXGroup;
 			children = (
+				2806FF861BC67323005A08D6 /* restart.sh */,
 				280500091BA6379B00B847E4 /* uninstall.sh */,
 				280500081BA6379000B847E4 /* install.sh */,
 				28D8D5AA1BB5C8BF007817D2 /* Device.icns */,
@@ -798,6 +801,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2806FF871BC67323005A08D6 /* restart.sh in Resources */,
 				28D8D5AB1BB5C8BF007817D2 /* Device.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -840,7 +844,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "VERSION=$(defaults read \"${BUILT_PRODUCTS_DIR}/AudioHub.driver/Contents/Info\" CFBundleVersion)\nPACKAGE_NAME=\"AudioHub\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\n\necho \"Build ${PRODUCT_NAME}\"\n\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.pkg\"\npkgbuild --analyze --root \"$DSTROOT\" \"${ARCHIVE_PLIST}\"\n\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\npkgbuild --timestamp --sign \"53LA4N6GG6\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${DSTROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n";
+			shellScript = "echo \"Bumping build number...\"\nPLUGIN_INFO=${BUILT_PRODUCTS_DIR}/AudioHub.driver/Contents/Info.plist\nPREF_INFO=${BUILT_PRODUCTS_DIR}/AudioHubPreferences.prefPane/Contents/Info.plist\n\n# increment the build number (ie 115 to 116)\nBUILD_NUM=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PLUGIN_INFO}\")\nif [[ \"${BUILD_NUM}\" == \"\" ]]; then\necho \"No build number in $PLUGIN_INFO\"\nexit 2\nfi\n\nBUILD_NUM=$(expr $BUILD_NUM + 1)\n/usr/libexec/Plistbuddy -c \"Set CFBundleVersion $BUILD_NUM\" \"${PLUGIN_INFO}\"\necho \"Plugin Bumped build number to $BUILD_NUM\"\nBUILD_NUM_PLUGIN=${BUILD_NUM}\n\n# increment the build number (ie 115 to 116)\nBUILD_NUM=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PREF_INFO}\")\nif [[ \"${BUILD_NUM}\" == \"\" ]]; then\necho \"No build number in $PREF_INFO\"\nexit 2\nfi\n\nBUILD_NUM=$(expr $BUILD_NUM + 1)\n/usr/libexec/Plistbuddy -c \"Set CFBundleVersion $BUILD_NUM\" \"${PREF_INFO}\"\necho \"Preferences Bumped build number to $BUILD_NUM\"\n\nVERSION=$(date +%Y-%m-%d)-${BUILD_NUM_PLUGIN}\nPACKAGE_NAME=\"AudioHub\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\n\necho \"Build ${PRODUCT_NAME}\"\n\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.pkg\"\npkgbuild --analyze --root \"$DSTROOT\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${DSTROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1079,7 +1083,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1121,7 +1125,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1186,8 +1190,6 @@
 		281F1A961BAE8ECC00FC62E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -1203,8 +1205,6 @@
 		281F1A971BAE8ECC00FC62E1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
