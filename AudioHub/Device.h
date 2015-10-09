@@ -190,21 +190,23 @@ private:
     Float32 mMasterOutputVolume;
 
 public:
-    enum class OffsetMode {
-        Stable,
-        Normal,
-        Fast,
-        Insane,
+    enum class Offset : UInt32 {
+        Stable = 256,
+        Normal = 128,
+        Fast = 64,
+        Faster = 32,
+        Insane = 16,
+        Off = 0
     };
-    
+    UInt32 offset_to_uint32 (Offset offset) const {
+        return static_cast<UInt32>(offset);
+    }
 private:
     // IO
-    const int mSafetyOffsetInput = 0;
-    const int mSafetyOffsetOutput = 0;
+    Offset mSafetyOffsetInput = Offset::Off;
+    Offset mSafetyOffsetOutput = Offset::Normal;
     const int mLatencyInput = 0;
-    const int mLatencyOutput = 128;
-    
-    OffsetMode offsetMode = OffsetMode::Normal;
+    const int mLatencyOutput = 0;
 
     UInt32 isHidden = 0;
 };

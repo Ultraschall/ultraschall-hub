@@ -697,7 +697,7 @@ void Device::Device_GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID,
             //  A UInt32 whose value indicates the number for frames in ahead (for output)
             //  or behind (for input the current hardware position that is safe to do IO.
             ThrowIf(inDataSize < sizeof(UInt32), CAException(kAudioHardwareBadPropertySizeError), "Device::Device_GetPropertyData: not enough space for the return value of kAudioDevicePropertySafetyOffset for the device");
-            *reinterpret_cast<UInt32 *>(outData) = (inObjectID == mInputStreamObjectID) ? mSafetyOffsetInput : mSafetyOffsetOutput;
+            *reinterpret_cast<UInt32 *>(outData) = offset_to_uint32((inObjectID == mInputStreamObjectID) ? mSafetyOffsetInput : mSafetyOffsetOutput);
             outDataSize = sizeof(UInt32);
             break;
 

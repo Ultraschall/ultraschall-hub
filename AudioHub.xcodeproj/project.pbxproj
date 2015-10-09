@@ -51,6 +51,9 @@
 		286333B81BA7D26A0048DD0B /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 286333B61BA7D26A0048DD0B /* Settings.m */; settings = {ASSET_TAGS = (); }; };
 		286333BB1BA7D2F90048DD0B /* Manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 286333B91BA7D2F90048DD0B /* Manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		286333BC1BA7D2F90048DD0B /* Manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286333BA1BA7D2F90048DD0B /* Manager.mm */; settings = {ASSET_TAGS = (); }; };
+		286719411BC7545800E4B66A /* AudioHubPluginTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286719401BC7545800E4B66A /* AudioHubPluginTests.mm */; settings = {ASSET_TAGS = (); }; };
+		286719431BC7546D00E4B66A /* AudioHubDeviceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 286719421BC7546D00E4B66A /* AudioHubDeviceTests.m */; settings = {ASSET_TAGS = (); }; };
+		286719451BC7548300E4B66A /* AudioHubStreamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 286719441BC7548300E4B66A /* AudioHubStreamTests.m */; settings = {ASSET_TAGS = (); }; };
 		286EF26A1BA8319700AC4657 /* CAHALAudioObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500DD1BA6392800B847E4 /* CAHALAudioObject.cpp */; };
 		286EF26B1BA8319700AC4657 /* CAHALAudioSystemObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500E11BA6392800B847E4 /* CAHALAudioSystemObject.cpp */; };
 		286EF26C1BA831FF00AC4657 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280501151BA639C000B847E4 /* CoreAudio.framework */; };
@@ -300,6 +303,9 @@
 		286333B61BA7D26A0048DD0B /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		286333B91BA7D2F90048DD0B /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
 		286333BA1BA7D2F90048DD0B /* Manager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Manager.mm; sourceTree = "<group>"; };
+		286719401BC7545800E4B66A /* AudioHubPluginTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubPluginTests.mm; sourceTree = "<group>"; };
+		286719421BC7546D00E4B66A /* AudioHubDeviceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioHubDeviceTests.m; sourceTree = "<group>"; };
+		286719441BC7548300E4B66A /* AudioHubStreamTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioHubStreamTests.m; sourceTree = "<group>"; };
 		2887AE0D1BB0144F007BC62C /* Cells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cells.h; sourceTree = "<group>"; };
 		2887AE0E1BB0144F007BC62C /* Cells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cells.m; sourceTree = "<group>"; };
 		28BBF2001BA6D8D00063B59A /* AudioHubDeviceListTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubDeviceListTests.mm; sourceTree = "<group>"; };
@@ -493,6 +499,9 @@
 				28BBF2001BA6D8D00063B59A /* AudioHubDeviceListTests.mm */,
 				2843858F1BB32208002DC114 /* AudioHubBoxTests.mm */,
 				280501111BA6398C00B847E4 /* Info.plist */,
+				286719401BC7545800E4B66A /* AudioHubPluginTests.mm */,
+				286719421BC7546D00E4B66A /* AudioHubDeviceTests.m */,
+				286719441BC7548300E4B66A /* AudioHubStreamTests.m */,
 			);
 			path = AudioHubTests;
 			sourceTree = SOURCE_ROOT;
@@ -595,7 +604,7 @@
 				2887AE0E1BB0144F007BC62C /* Cells.m */,
 			);
 			path = AudioHubPreferences;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		286333BD1BA7D37B0048DD0B /* Frameworks */ = {
 			isa = PBXGroup;
@@ -844,7 +853,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "echo \"Bumping build number...\"\nPLUGIN_INFO=${BUILT_PRODUCTS_DIR}/AudioHub.driver/Contents/Info.plist\nPREF_INFO=${BUILT_PRODUCTS_DIR}/AudioHubPreferences.prefPane/Contents/Info.plist\n\n# increment the build number (ie 115 to 116)\nBUILD_NUM=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PLUGIN_INFO}\")\nif [[ \"${BUILD_NUM}\" == \"\" ]]; then\necho \"No build number in $PLUGIN_INFO\"\nexit 2\nfi\n\nBUILD_NUM=$(expr $BUILD_NUM + 1)\n/usr/libexec/Plistbuddy -c \"Set CFBundleVersion $BUILD_NUM\" \"${PLUGIN_INFO}\"\necho \"Plugin Bumped build number to $BUILD_NUM\"\nBUILD_NUM_PLUGIN=${BUILD_NUM}\n\n# increment the build number (ie 115 to 116)\nBUILD_NUM=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PREF_INFO}\")\nif [[ \"${BUILD_NUM}\" == \"\" ]]; then\necho \"No build number in $PREF_INFO\"\nexit 2\nfi\n\nBUILD_NUM=$(expr $BUILD_NUM + 1)\n/usr/libexec/Plistbuddy -c \"Set CFBundleVersion $BUILD_NUM\" \"${PREF_INFO}\"\necho \"Preferences Bumped build number to $BUILD_NUM\"\n\nVERSION=$(date +%Y-%m-%d)-${BUILD_NUM_PLUGIN}\nPACKAGE_NAME=\"AudioHub\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\n\necho \"Build ${PRODUCT_NAME}\"\n\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.pkg\"\npkgbuild --analyze --root \"$DSTROOT\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${DSTROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n";
+			shellScript = "VERSION=$(date +%Y-%m-%d)\nPACKAGE_NAME=\"AudioHub-${VERSION}\"\nPACKAGE_ROOT=\"/tmp/AudioHub.dst\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.plist\"\n\necho \"Build ${PRODUCT_NAME}\"\n\necho \"analyze ${PACKAGE_ROOT} -> ${ARCHIVE_PLIST}\"\npkgbuild --analyze --root \"${PACKAGE_ROOT}\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${PACKAGE_ROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -863,11 +872,14 @@
 				28BBF20B1BA6DFE10063B59A /* CARingBuffer.cpp in Sources */,
 				28BBF20A1BA6DFDA0063B59A /* CACFString.cpp in Sources */,
 				28BBF2031BA6DFC70063B59A /* CADispatchQueue.cpp in Sources */,
+				286719451BC7548300E4B66A /* AudioHubStreamTests.m in Sources */,
+				286719431BC7546D00E4B66A /* AudioHubDeviceTests.m in Sources */,
 				28BBF2041BA6DFC70063B59A /* CAObject.cpp in Sources */,
 				28BBF2051BA6DFC70063B59A /* Box.cpp in Sources */,
 				28BBF2061BA6DFC70063B59A /* Device.cpp in Sources */,
 				284385901BB32208002DC114 /* AudioHubBoxTests.mm in Sources */,
 				2843858E1BB321B9002DC114 /* CAHALAudioObjectTester.cpp in Sources */,
+				286719411BC7545800E4B66A /* AudioHubPluginTests.mm in Sources */,
 				28BBF2071BA6DFC70063B59A /* DeviceList.cpp in Sources */,
 				28BBF2081BA6DFC70063B59A /* PlugIn.cpp in Sources */,
 				28BBF2091BA6DFC70063B59A /* Factory.cpp in Sources */,
