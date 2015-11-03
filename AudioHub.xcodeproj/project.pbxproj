@@ -52,8 +52,8 @@
 		286333BB1BA7D2F90048DD0B /* Manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 286333B91BA7D2F90048DD0B /* Manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		286333BC1BA7D2F90048DD0B /* Manager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286333BA1BA7D2F90048DD0B /* Manager.mm */; settings = {ASSET_TAGS = (); }; };
 		286719411BC7545800E4B66A /* AudioHubPluginTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286719401BC7545800E4B66A /* AudioHubPluginTests.mm */; settings = {ASSET_TAGS = (); }; };
-		286719431BC7546D00E4B66A /* AudioHubDeviceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 286719421BC7546D00E4B66A /* AudioHubDeviceTests.m */; settings = {ASSET_TAGS = (); }; };
-		286719451BC7548300E4B66A /* AudioHubStreamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 286719441BC7548300E4B66A /* AudioHubStreamTests.m */; settings = {ASSET_TAGS = (); }; };
+		286719431BC7546D00E4B66A /* AudioHubDeviceTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286719421BC7546D00E4B66A /* AudioHubDeviceTests.mm */; settings = {ASSET_TAGS = (); }; };
+		286719451BC7548300E4B66A /* AudioHubStreamTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286719441BC7548300E4B66A /* AudioHubStreamTests.mm */; settings = {ASSET_TAGS = (); }; };
 		286EF26A1BA8319700AC4657 /* CAHALAudioObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500DD1BA6392800B847E4 /* CAHALAudioObject.cpp */; };
 		286EF26B1BA8319700AC4657 /* CAHALAudioSystemObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280500E11BA6392800B847E4 /* CAHALAudioSystemObject.cpp */; };
 		286EF26C1BA831FF00AC4657 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280501151BA639C000B847E4 /* CoreAudio.framework */; };
@@ -304,8 +304,8 @@
 		286333B91BA7D2F90048DD0B /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
 		286333BA1BA7D2F90048DD0B /* Manager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Manager.mm; sourceTree = "<group>"; };
 		286719401BC7545800E4B66A /* AudioHubPluginTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubPluginTests.mm; sourceTree = "<group>"; };
-		286719421BC7546D00E4B66A /* AudioHubDeviceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioHubDeviceTests.m; sourceTree = "<group>"; };
-		286719441BC7548300E4B66A /* AudioHubStreamTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioHubStreamTests.m; sourceTree = "<group>"; };
+		286719421BC7546D00E4B66A /* AudioHubDeviceTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubDeviceTests.mm; sourceTree = "<group>"; };
+		286719441BC7548300E4B66A /* AudioHubStreamTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubStreamTests.mm; sourceTree = "<group>"; };
 		2887AE0D1BB0144F007BC62C /* Cells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cells.h; sourceTree = "<group>"; };
 		2887AE0E1BB0144F007BC62C /* Cells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cells.m; sourceTree = "<group>"; };
 		28BBF2001BA6D8D00063B59A /* AudioHubDeviceListTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubDeviceListTests.mm; sourceTree = "<group>"; };
@@ -500,8 +500,8 @@
 				2843858F1BB32208002DC114 /* AudioHubBoxTests.mm */,
 				280501111BA6398C00B847E4 /* Info.plist */,
 				286719401BC7545800E4B66A /* AudioHubPluginTests.mm */,
-				286719421BC7546D00E4B66A /* AudioHubDeviceTests.m */,
-				286719441BC7548300E4B66A /* AudioHubStreamTests.m */,
+				286719421BC7546D00E4B66A /* AudioHubDeviceTests.mm */,
+				286719441BC7548300E4B66A /* AudioHubStreamTests.mm */,
 			);
 			path = AudioHubTests;
 			sourceTree = SOURCE_ROOT;
@@ -872,8 +872,8 @@
 				28BBF20B1BA6DFE10063B59A /* CARingBuffer.cpp in Sources */,
 				28BBF20A1BA6DFDA0063B59A /* CACFString.cpp in Sources */,
 				28BBF2031BA6DFC70063B59A /* CADispatchQueue.cpp in Sources */,
-				286719451BC7548300E4B66A /* AudioHubStreamTests.m in Sources */,
-				286719431BC7546D00E4B66A /* AudioHubDeviceTests.m in Sources */,
+				286719451BC7548300E4B66A /* AudioHubStreamTests.mm in Sources */,
+				286719431BC7546D00E4B66A /* AudioHubDeviceTests.mm in Sources */,
 				28BBF2041BA6DFC70063B59A /* CAObject.cpp in Sources */,
 				28BBF2051BA6DFC70063B59A /* Box.cpp in Sources */,
 				28BBF2061BA6DFC70063B59A /* Device.cpp in Sources */,

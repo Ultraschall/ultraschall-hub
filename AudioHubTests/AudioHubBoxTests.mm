@@ -24,8 +24,8 @@
 
 - (void)setUp {
     [super setUp];
-    _object = new Box(123);
     _objectId = CAObjectMap::GetNextObjectID();
+    _object = new Box(_objectId);
     CAObjectMap::MapObject(_objectId, _object);
     _object->Activate();
     // Put setup code here. This method is called before the invocation of each test method in the class.
