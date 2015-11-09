@@ -370,6 +370,7 @@
 		28752F0F1BEF87D1007CF026 /* AudioHubTests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = AudioHubTests.plist; path = /Users/danlin/Documents/Source/Hub/AudioHubTests.plist; sourceTree = "<absolute>"; };
 		28752F101BEFAB00007CF026 /* AudioHubFactoryTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubFactoryTests.mm; sourceTree = "<group>"; };
 		28752F131BF06512007CF026 /* UltraschallHubTestTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UltraschallHubTestTypes.h; path = Ultraschall/UltraschallHubTestTypes.h; sourceTree = "<group>"; };
+		28752F151BF06A8A007CF026 /* AudioHubTestTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioHubTestTypes.h; sourceTree = "<group>"; };
 		2887AE0D1BB0144F007BC62C /* Cells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cells.h; sourceTree = "<group>"; };
 		2887AE0E1BB0144F007BC62C /* Cells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cells.m; sourceTree = "<group>"; };
 		288F02D91BE936F300C8FC9C /* UltraschallHubTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UltraschallHubTypes.h; path = Ultraschall/UltraschallHubTypes.h; sourceTree = "<group>"; };
@@ -589,6 +590,7 @@
 				286719421BC7546D00E4B66A /* AudioHubDeviceTests.mm */,
 				286719441BC7548300E4B66A /* AudioHubStreamTests.mm */,
 				28752F101BEFAB00007CF026 /* AudioHubFactoryTests.mm */,
+				28752F151BF06A8A007CF026 /* AudioHubTestTypes.h */,
 			);
 			path = AudioHubTests;
 			sourceTree = SOURCE_ROOT;

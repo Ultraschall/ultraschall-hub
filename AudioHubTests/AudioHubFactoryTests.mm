@@ -29,11 +29,13 @@
     AudioHub_Create(NULL, kAudioServerPlugInTypeUUID);
 }
 
+#if ULTRASCHALL
 - (void)testInitialize {
     auto driver = AudioHub_Create(NULL, kAudioServerPlugInTypeUUID);    
     auto driverRef = static_cast<AudioServerPlugInDriverRef>(driver);
     XCTAssertNotEqual(driverRef, nullptr);
     XCTAssertEqual(driverRef[0]->Initialize(driverRef, nullptr), 0);
 }
+#endif
 
 @end
