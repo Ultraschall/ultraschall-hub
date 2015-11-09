@@ -20,6 +20,18 @@
 			name = AudioHubInstaller;
 			productName = AudioHubInstaller;
 		};
+		28468DE41BF06D380063D71C /* UltraschallHubInstaller */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 28468DEA1BF06D380063D71C /* Build configuration list for PBXAggregateTarget "UltraschallHubInstaller" */;
+			buildPhases = (
+				28468DE91BF06D380063D71C /* ShellScript */,
+			);
+			dependencies = (
+				28468DEE1BF06D650063D71C /* PBXTargetDependency */,
+			);
+			name = UltraschallHubInstaller;
+			productName = AudioHubInstaller;
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -177,6 +189,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 281F1A881BAE8ECC00FC62E1;
 			remoteInfo = AudioHubPreferences;
+		};
+		28468DED1BF06D650063D71C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2805FFA41BA636B100B847E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 288F02DD1BE9376300C8FC9C;
+			remoteInfo = UltraschallHub;
 		};
 		28752EEE1BEF87D1007CF026 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -933,12 +952,13 @@
 			targets = (
 				2805FFE81BA6375000B847E4 /* AudioHubManager */,
 				2805FFAB1BA636B100B847E4 /* AudioHub */,
-				281F1A881BAE8ECC00FC62E1 /* AudioHubPreferences */,
-				288F02DD1BE9376300C8FC9C /* UltraschallHub */,
-				280DDE211BB8203C009D669B /* AudioHubInstaller */,
 				2805010C1BA6398C00B847E4 /* AudioHubTests */,
-				28752EEC1BEF87D1007CF026 /* UltraschallHubTests */,
+				281F1A881BAE8ECC00FC62E1 /* AudioHubPreferences */,
 				2805FFF11BA6375000B847E4 /* AudioHubManagerTests */,
+				280DDE211BB8203C009D669B /* AudioHubInstaller */,
+				288F02DD1BE9376300C8FC9C /* UltraschallHub */,
+				28752EEC1BEF87D1007CF026 /* UltraschallHubTests */,
+				28468DE41BF06D380063D71C /* UltraschallHubInstaller */,
 			);
 		};
 /* End PBXProject section */
@@ -1018,6 +1038,20 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "VERSION=$(date +%Y-%m-%d)\nPACKAGE_NAME=\"AudioHub-${VERSION}\"\nPACKAGE_ROOT=\"/tmp/AudioHub.dst\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.plist\"\n\necho \"Build ${PRODUCT_NAME}\"\n\necho \"analyze ${PACKAGE_ROOT} -> ${ARCHIVE_PLIST}\"\npkgbuild --analyze --root \"${PACKAGE_ROOT}\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${PACKAGE_ROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n";
+		};
+		28468DE91BF06D380063D71C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/AudioHub.pkg",
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "VERSION=$(date +%Y-%m-%d)\nPACKAGE_NAME=\"UltraschallHub-${VERSION}\"\nPACKAGE_ROOT=\"/tmp/UltraschallHub.dst\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.plist\"\n\necho \"Build ${PRODUCT_NAME}\"\n\necho \"analyze ${PACKAGE_ROOT} -> ${ARCHIVE_PLIST}\"\npkgbuild --analyze --root \"${PACKAGE_ROOT}\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${PACKAGE_ROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1187,6 +1221,11 @@
 			isa = PBXTargetDependency;
 			target = 281F1A881BAE8ECC00FC62E1 /* AudioHubPreferences */;
 			targetProxy = 280DDE271BB82042009D669B /* PBXContainerItemProxy */;
+		};
+		28468DEE1BF06D650063D71C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 288F02DD1BE9376300C8FC9C /* UltraschallHub */;
+			targetProxy = 28468DED1BF06D650063D71C /* PBXContainerItemProxy */;
 		};
 		28752EED1BEF87D1007CF026 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1461,6 +1500,22 @@
 			};
 			name = Release;
 		};
+		28468DEB1BF06D380063D71C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHub;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		28468DEC1BF06D380063D71C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHub;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		28752F0C1BEF87D1007CF026 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1589,6 +1644,15 @@
 			buildConfigurations = (
 				281F1A961BAE8ECC00FC62E1 /* Debug */,
 				281F1A971BAE8ECC00FC62E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28468DEA1BF06D380063D71C /* Build configuration list for PBXAggregateTarget "UltraschallHubInstaller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28468DEB1BF06D380063D71C /* Debug */,
+				28468DEC1BF06D380063D71C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
