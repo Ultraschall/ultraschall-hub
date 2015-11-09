@@ -1,7 +1,7 @@
 language: objective-c
 osx_image: xcode7.2b1
 xcode_project: AudioHub.xcodeproj
-xcode_scheme: UltraschallHubTests
+xcode_scheme: UltraschallHub
 notifications:
   slack: ultraschallfm:5MKlQKAZHSbPwiP7S9Rih440
-script: xctool -project AudioHub.xcodeproj -scheme UltraschallHubTests build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+script: xctool -project AudioHub.xcodeproj -scheme UltraschallHub build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
