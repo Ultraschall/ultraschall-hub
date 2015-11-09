@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "0700"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "280DDE211BB8203C009D669B"
+               BuildableName = "AudioHubInstaller"
+               BlueprintName = "AudioHubInstaller"
+               ReferencedContainer = "container:AudioHub.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2805FFF11BA6375000B847E4"
+               BuildableName = "AudioHubManagerTests.xctest"
+               BlueprintName = "AudioHubManagerTests"
+               ReferencedContainer = "container:AudioHub.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2805010C1BA6398C00B847E4"
+               BuildableName = "AudioHubTests.xctest"
+               BlueprintName = "AudioHubTests"
+               ReferencedContainer = "container:AudioHub.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      enableAddressSanitizer = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2805FFF11BA6375000B847E4"
+               BuildableName = "AudioHubManagerTests.xctest"
+               BlueprintName = "AudioHubManagerTests"
+               ReferencedContainer = "container:AudioHub.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2805010C1BA6398C00B847E4"
+               BuildableName = "AudioHubTests.xctest"
+               BlueprintName = "AudioHubTests"
+               ReferencedContainer = "container:AudioHub.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "280DDE211BB8203C009D669B"
+            BuildableName = "AudioHubInstaller"
+            BlueprintName = "AudioHubInstaller"
+            ReferencedContainer = "container:AudioHub.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "280DDE211BB8203C009D669B"
+            BuildableName = "AudioHubInstaller"
+            BlueprintName = "AudioHubInstaller"
+            ReferencedContainer = "container:AudioHub.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "280DDE211BB8203C009D669B"
+            BuildableName = "AudioHubInstaller"
+            BlueprintName = "AudioHubInstaller"
+            ReferencedContainer = "container:AudioHub.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "NO">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "PACKAGES=&quot;${ARCHIVE_PATH}/Packages&quot;&#10;PEODUCTS=&quot;${ARCHIVE_PATH}/Products&quot;&#10;&#10;ARCHIVE_FILENAME=&quot;AudioHub.pkg&quot;&#10;PKG=&quot;${DERIVED_FILE_DIR}/${ARCHIVE_FILENAME}&quot;&#10;&#10;if [ -f &quot;${PKG}&quot; ]; then&#10;mkdir &quot;${PACKAGES}&quot;&#10;cp -r &quot;${PKG}&quot; &quot;${PACKAGES}&quot;&#10;cp -r &quot;${PKG}&quot; &quot;${PEODUCTS}&quot;&#10;fi">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "280DDE211BB8203C009D669B"
+                     BuildableName = "AudioHubInstaller"
+                     BlueprintName = "AudioHubInstaller"
+                     ReferencedContainer = "container:AudioHub.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
+   </ArchiveAction>
+</Scheme>

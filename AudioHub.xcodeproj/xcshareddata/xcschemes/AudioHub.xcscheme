@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "0700"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "if [ $CONFIGURATION == &apos;Release&apos; ]; then&#10;echo &quot;Bumping build number...&quot;&#10;plist=${PROJECT_DIR}/${INFOPLIST_FILE}&#10;&#10;# increment the build number (ie 115 to 116)&#10;buildnum=$(/usr/libexec/PlistBuddy -c &quot;Print CFBundleVersion&quot; &quot;${plist}&quot;)&#10;if [[ &quot;${buildnum}&quot; == &quot;&quot; ]]; then&#10;echo &quot;No build number in $plist&quot;&#10;exit 2&#10;fi&#10;&#10;buildnum=$(expr $buildnum + 1)&#10;/usr/libexec/Plistbuddy -c &quot;Set CFBundleVersion $buildnum&quot; &quot;${plist}&quot;&#10;echo &quot;Bumped build number to $buildnum&quot;&#10;&#10;else&#10;echo $CONFIGURATION &quot; build - Not bumping build number.&quot;&#10;fi">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "2805FFAB1BA636B100B847E4"
+                     BuildableName = "AudioHub.driver"
+                     BlueprintName = "AudioHub"
+                     ReferencedContainer = "container:AudioHub.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2805FFAB1BA636B100B847E4"
+               BuildableName = "AudioHub.driver"
+               BlueprintName = "AudioHub"
+               ReferencedContainer = "container:AudioHub.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      enableAddressSanitizer = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2805010C1BA6398C00B847E4"
+               BuildableName = "AudioHubTests.xctest"
+               BlueprintName = "AudioHubTests"
+               ReferencedContainer = "container:AudioHub.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2805FFAB1BA636B100B847E4"
+            BuildableName = "AudioHub.driver"
+            BlueprintName = "AudioHub"
+            ReferencedContainer = "container:AudioHub.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+         <AdditionalOption
+            key = "NSZombieEnabled"
+            value = "YES"
+            isEnabled = "YES">
+         </AdditionalOption>
+         <AdditionalOption
+            key = "NSDOLoggingEnabled"
+            value = "YES"
+            isEnabled = "YES">
+         </AdditionalOption>
+      </AdditionalOptions>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      debugAsWhichUser = "root"
+      launchStyle = "1"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         FilePath = "/usr/sbin/coreaudiod">
+      </PathRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2805FFAB1BA636B100B847E4"
+            BuildableName = "AudioHub.driver"
+            BlueprintName = "AudioHub"
+            ReferencedContainer = "container:AudioHub.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2805FFAB1BA636B100B847E4"
+            BuildableName = "AudioHub.driver"
+            BlueprintName = "AudioHub"
+            ReferencedContainer = "container:AudioHub.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "NO">
+   </ArchiveAction>
+</Scheme>
