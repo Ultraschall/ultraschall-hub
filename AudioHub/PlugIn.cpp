@@ -24,7 +24,19 @@ THE SOFTWARE.
 
 #include "PlugIn.h"
 
+#if !ULTRASCHALL
+#if !TEST
 #include "AudioHubTypes.h"
+#else
+#include "AudioHubTestTypes.h"
+#endif
+#else
+#if !TEST
+#include "UltraschallHubTypes.h"
+#else
+#include "UltraschallHubTestTypes.h"
+#endif
+#endif
 #include "Box.h"
 
 #include "CAException.h"
@@ -261,6 +273,35 @@ void PlugIn::StoreSettings() {
 }
 
 void PlugIn::RestoreSettings() {
+#if ULTRASCHALL
+    CFBundleRef myBundle = CFBundleGetBundleWithIdentifier(bundleIdentifier);
+    ThrowIf(myBundle == NULL, CAException(kAudioHardwareBadObjectError), "PlugIn::RestoreSettings: bundle not found");
+    CFURLRef settingsURL = CFBundleCopyResourceURL(myBundle, CFSTR("Ultraschall"), CFSTR("ahc"), NULL);
+    ThrowIf(settingsURL == NULL, CAException(kAudioHardwareBadObjectError), "PlugIn::RestoreSettings: internal config not found");
+    
+    CFDataRef resourceData;
+    SInt32 errorCode;
+    // TODO: move to new api
+    Boolean status = CFURLCreateDataAndPropertiesFromResource(kCFAllocatorDefault, settingsURL, &resourceData, NULL, NULL, &errorCode);
+    if (!status) {
+        DebugMsg("RestoreSettings !status %s %d", __FILE__, __LINE__);
+        CFRelease(settingsURL);
+        return;
+    }
+    
+    // Reconstitute the dictionary using the XML data
+    CFErrorRef myError;
+    CFPropertyListRef propertyList = CFPropertyListCreateWithData(kCFAllocatorDefault, resourceData, kCFPropertyListImmutable, NULL, &myError);
+    
+    if (propertyList != NULL) {
+        DebugMsg("RestoreSettings SetSettings %s %d", __FILE__, __LINE__);
+        mBox->SetSettings(propertyList);
+    }
+    
+    // Handle any errors
+    CFRelease(settingsURL);
+#else
+    DebugMsg("RestoreSettings Default %s %d", __FILE__, __LINE__);
     CFPropertyListRef settigns;
     OSStatus status = sHost->CopyFromStorage(sHost, kAudioHubSettingsKey, &settigns);
     if (settigns != NULL) {
@@ -269,6 +310,7 @@ void PlugIn::RestoreSettings() {
         }
         CFRelease(settigns);
     }
+#endif
 }
 
 #pragma mark Host Access

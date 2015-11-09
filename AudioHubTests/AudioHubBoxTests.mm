@@ -8,7 +8,19 @@
 
 #import <XCTest/XCTest.h>
 #include <CoreAudio/AudioServerPlugIn.h>
+#if !ULTRASCHALL
+#if !TEST
 #include "AudioHubTypes.h"
+#else
+#include "AudioHubTestTypes.h"
+#endif
+#else
+#if !TEST
+#include "UltraschallHubTypes.h"
+#else
+#include "UltraschallHubTestTypes.h"
+#endif
+#endif
 #include "CAObject.h"
 #include "CAHALAudioObjectTester.h"
 #include "CAPropertyAddress.h"
@@ -133,6 +145,7 @@
     CFRelease(outData);
 }
 
+#if !ULTRASCHALL
 - (void)testPropertyCustomPropertyInfoList {
     CAHALAudioObjectTester tester(_object);
     tester.GetObjectID();
@@ -233,6 +246,7 @@
     CFRelease(outData);
     XCTAssert(tester.GetPropertyData_UInt32(testAddress));
 }
+#endif
 
 - (void)testPropertyBoxUID {
     CAHALAudioObjectTester tester(_object);
@@ -304,6 +318,7 @@
     XCTAssert(outData == 0);
 }
 
+#if !ULTRASCHALL
 - (void)testPropertyAcquired {
     CAHALAudioObjectTester tester(_object);
     tester.GetObjectID();
@@ -322,6 +337,7 @@
     outData = tester.GetPropertyData_UInt32(address);
     XCTAssert(outData == 1);
 }
+#endif
 
 - (void)testPropertyAcquisitionFailed {
     CAHALAudioObjectTester tester(_object);

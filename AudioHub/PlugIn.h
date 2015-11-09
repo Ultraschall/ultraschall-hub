@@ -32,7 +32,19 @@ THE SOFTWARE.
 #include <CoreAudio/AudioHardwareBase.h>
 #include <CoreAudio/CoreAudioTypes.h>
 
+#if !ULTRASCHALL
+#if !TEST
 #include "AudioHubTypes.h"
+#else
+#include "AudioHubTestTypes.h"
+#endif
+#else
+#if !TEST
+#include "UltraschallHubTypes.h"
+#else
+#include "UltraschallHubTestTypes.h"
+#endif
+#endif
 
 #include "CAObject.h"
 #include "CAMutex.h"

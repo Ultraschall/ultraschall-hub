@@ -23,11 +23,22 @@ THE SOFTWARE.
 */
 
 #include "Box.h"
+#if !ULTRASCHALL
+#if !TEST
 #include "AudioHubTypes.h"
+#else
+#include "AudioHubTestTypes.h"
+#endif
+#else
+#if !TEST
+#include "UltraschallHubTypes.h"
+#else
+#include "UltraschallHubTestTypes.h"
+#endif
+#endif
 #include "PlugIn.h"
 #include "CAException.h"
 #include "CADebugMacros.h"
-#include "AudioHubTypes.h"
 #include "CACFDictionary.h"
 
 #pragma mark Construction/Destruction
@@ -63,9 +74,11 @@ bool Box::HasProperty(AudioObjectID inObjectID, pid_t inClientPID, const AudioOb
         case kAudioObjectPropertyFirmwareVersion:
             
         case kAudioObjectPropertyCustomPropertyInfoList:
+#if !ULTRASCHALL
         case kAudioHubCustomPropertySettings:
         case kAudioHubCustomPropertyActive:
-
+#endif
+        
         case kAudioBoxPropertyBoxUID:
         case kAudioBoxPropertyTransportType:
         case kAudioBoxPropertyHasAudio:
@@ -104,9 +117,11 @@ bool Box::IsPropertySettable(AudioObjectID inObjectID, pid_t inClientPID, const 
         case kAudioBoxPropertyDeviceList:
             theAnswer = false;
             break;
-            
+
+#if !ULTRASCHALL
         case kAudioHubCustomPropertySettings:
         case kAudioHubCustomPropertyActive:
+#endif
         case kAudioObjectPropertyName:
             theAnswer = true;
             break;
@@ -150,6 +165,7 @@ UInt32 Box::GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClientPID, con
             theAnswer = (UInt32)(kAudioHubCustomProperties * sizeof(AudioServerPlugInCustomPropertyInfo));
             break;
 
+#if !ULTRASCHALL
         case kAudioHubCustomPropertySettings:
             theAnswer = sizeof(CFPropertyListRef);
             break;
@@ -157,6 +173,7 @@ UInt32 Box::GetPropertyDataSize(AudioObjectID inObjectID, pid_t inClientPID, con
         case kAudioHubCustomPropertyActive:
             theAnswer = sizeof(CFStringRef);
             break;
+#endif
             
         case kAudioBoxPropertyBoxUID:
             theAnswer = sizeof(CFStringRef);
@@ -267,6 +284,7 @@ void Box::GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const Aud
             if (theNumberItemsToFetch > kAudioHubCustomProperties) {
                 theNumberItemsToFetch = kAudioHubCustomProperties;
             }
+#if !ULTRASCHALL
             if (theNumberItemsToFetch > 0) {
                 ((AudioServerPlugInCustomPropertyInfo*)outData)[0].mSelector = kAudioHubCustomPropertySettings;
                 ((AudioServerPlugInCustomPropertyInfo*)outData)[0].mPropertyDataType = kAudioServerPlugInCustomPropertyDataTypeCFPropertyList;
@@ -277,10 +295,12 @@ void Box::GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const Aud
                 ((AudioServerPlugInCustomPropertyInfo*)outData)[1].mPropertyDataType = kAudioServerPlugInCustomPropertyDataTypeCFString;
                 ((AudioServerPlugInCustomPropertyInfo*)outData)[1].mQualifierDataType = kAudioServerPlugInCustomPropertyDataTypeNone;
             }
+#endif
             outDataSize = (UInt32)(theNumberItemsToFetch * sizeof(AudioServerPlugInCustomPropertyInfo));
             break;
         }
-            
+
+#if !ULTRASCHALL
         case kAudioHubCustomPropertySettings: {
             ThrowIf(inDataSize < sizeof(CFPropertyListRef), CAException(kAudioHardwareBadPropertySizeError), "UltHub_GetPlugInPropertyData: not enough space for the return value of kAudioHubCustomPropertySettings for the box");
             *reinterpret_cast<CFPropertyListRef*>(outData) = this->GetSettings();
@@ -311,6 +331,7 @@ void Box::GetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const Aud
             outDataSize = sizeof(CFStringRef);
             break;
         }
+#endif
             
         case kAudioBoxPropertyBoxUID:
             ThrowIf(inDataSize < sizeof(CFStringRef), CAException(kAudioHardwareBadPropertySizeError), "Box::GetPropertyData: not enough space for the return value of kAudioBoxPropertyBoxUID for the box");
@@ -396,6 +417,7 @@ void Box::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const Aud
         }
             break;
             
+#if !ULTRASCHALL
         case kAudioHubCustomPropertySettings:
         {
             ThrowIf(inDataSize < sizeof(CFPropertyListRef), CAException(kAudioHardwareBadPropertySizeError), "Box::SetPropertyData: not enough space for the return value of kAudioHubCustomPropertySettings for the box");
@@ -453,6 +475,7 @@ void Box::SetPropertyData(AudioObjectID inObjectID, pid_t inClientPID, const Aud
 
         }
             break;
+#endif
             
         default:
             CAObject::SetPropertyData(inObjectID, inClientPID, inAddress, inQualifierDataSize, inQualifierData, inDataSize, inData);

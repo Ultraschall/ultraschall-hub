@@ -25,7 +25,19 @@ THE SOFTWARE.
 #include "Device.h"
 
 #include "PlugIn.h"
+#if !ULTRASCHALL
+#if !TEST
 #include "AudioHubTypes.h"
+#else
+#include "AudioHubTestTypes.h"
+#endif
+#else
+#if !TEST
+#include "UltraschallHubTypes.h"
+#else
+#include "UltraschallHubTestTypes.h"
+#endif
+#endif
 #include <Accelerate/Accelerate.h>
 #include "CADispatchQueue.h"
 #include "CAException.h"
