@@ -1,0 +1,7 @@
+#!/bin/sh
+launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
+
+if [ -d /Library/Audio/Plug-Ins/HAL/UltraschallHub.driver ]; then
+    echo "Remove UltraschallHub Driver"
+    sudo rm -rf /Library/Audio/Plug-Ins/HAL/UltraschallHub.driver > /dev/null
+fi

@@ -66,6 +66,7 @@
 		2843858E1BB321B9002DC114 /* CAHALAudioObjectTester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2843858C1BB321B9002DC114 /* CAHALAudioObjectTester.cpp */; };
 		284385901BB32208002DC114 /* AudioHubBoxTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2843858F1BB32208002DC114 /* AudioHubBoxTests.mm */; };
 		284385911BB345B7002DC114 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 286333B61BA7D26A0048DD0B /* Settings.m */; };
+		284B194B1BF0B8F00071FA10 /* Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = 284B194A1BF0B8F00071FA10 /* Tests.plist */; };
 		286333B71BA7D26A0048DD0B /* Settings.h in Headers */ = {isa = PBXBuildFile; fileRef = 286333B51BA7D26A0048DD0B /* Settings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		286333B81BA7D26A0048DD0B /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 286333B61BA7D26A0048DD0B /* Settings.m */; };
 		286333BB1BA7D2F90048DD0B /* Manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 286333B91BA7D2F90048DD0B /* Manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -378,6 +379,9 @@
 		2843858C1BB321B9002DC114 /* CAHALAudioObjectTester.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAHALAudioObjectTester.cpp; sourceTree = "<group>"; };
 		2843858D1BB321B9002DC114 /* CAHALAudioObjectTester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAHALAudioObjectTester.h; sourceTree = "<group>"; };
 		2843858F1BB32208002DC114 /* AudioHubBoxTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubBoxTests.mm; sourceTree = "<group>"; };
+		284B194A1BF0B8F00071FA10 /* Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tests.plist; path = Ultraschall/Tests.plist; sourceTree = "<group>"; };
+		284B19511BF0B9C50071FA10 /* postinstall */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = postinstall; path = Ultraschall/Installer/Scripts/postinstall; sourceTree = "<group>"; };
+		284B19521BF0B9C50071FA10 /* preinstall */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = preinstall; path = Ultraschall/Installer/Scripts/preinstall; sourceTree = "<group>"; };
 		286333B51BA7D26A0048DD0B /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		286333B61BA7D26A0048DD0B /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		286333B91BA7D2F90048DD0B /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
@@ -386,7 +390,6 @@
 		286719421BC7546D00E4B66A /* AudioHubDeviceTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubDeviceTests.mm; sourceTree = "<group>"; };
 		286719441BC7548300E4B66A /* AudioHubStreamTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubStreamTests.mm; sourceTree = "<group>"; };
 		28752F0E1BEF87D1007CF026 /* UltraschallHubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraschallHubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		28752F0F1BEF87D1007CF026 /* AudioHubTests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = AudioHubTests.plist; path = /Users/danlin/Documents/Source/Hub/AudioHubTests.plist; sourceTree = "<absolute>"; };
 		28752F101BEFAB00007CF026 /* AudioHubFactoryTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioHubFactoryTests.mm; sourceTree = "<group>"; };
 		28752F131BF06512007CF026 /* UltraschallHubTestTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UltraschallHubTestTypes.h; path = Ultraschall/UltraschallHubTestTypes.h; sourceTree = "<group>"; };
 		28752F151BF06A8A007CF026 /* AudioHubTestTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioHubTestTypes.h; sourceTree = "<group>"; };
@@ -717,6 +720,15 @@
 			path = AudioHubPreferences;
 			sourceTree = SOURCE_ROOT;
 		};
+		284B19501BF0B9BA0071FA10 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				284B19511BF0B9C50071FA10 /* postinstall */,
+				284B19521BF0B9C50071FA10 /* preinstall */,
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
 		286333BD1BA7D37B0048DD0B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -730,12 +742,13 @@
 		288F02D81BE936AB00C8FC9C /* UltraschallHub */ = {
 			isa = PBXGroup;
 			children = (
+				284B19501BF0B9BA0071FA10 /* Scripts */,
+				284B194A1BF0B8F00071FA10 /* Tests.plist */,
 				283853D61BEC12CE001E80D1 /* Ultraschall.ahc */,
 				283853D11BEC0EB5001E80D1 /* Device.icns */,
 				283853D21BEC0EB5001E80D1 /* Info.plist */,
 				288F02D91BE936F300C8FC9C /* UltraschallHubTypes.h */,
 				28752F131BF06512007CF026 /* UltraschallHubTestTypes.h */,
-				28752F0F1BEF87D1007CF026 /* AudioHubTests.plist */,
 			);
 			name = UltraschallHub;
 			sourceTree = "<group>";
@@ -983,6 +996,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				284B194B1BF0B8F00071FA10 /* Tests.plist in Resources */,
 				283853D41BEC0EB5001E80D1 /* Info.plist in Resources */,
 				283853D71BEC12CE001E80D1 /* Ultraschall.ahc in Resources */,
 				283853D31BEC0EB5001E80D1 /* Device.icns in Resources */,
@@ -1037,7 +1051,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "VERSION=$(date +%Y-%m-%d)\nPACKAGE_NAME=\"AudioHub-${VERSION}\"\nPACKAGE_ROOT=\"/tmp/AudioHub.dst\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.plist\"\n\necho \"Build ${PRODUCT_NAME}\"\n\necho \"analyze ${PACKAGE_ROOT} -> ${ARCHIVE_PLIST}\"\npkgbuild --analyze --root \"${PACKAGE_ROOT}\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${PACKAGE_ROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n";
+			shellScript = "VERSION=$(date +%Y-%m-%d)\nPACKAGE_NAME=\"AudioHub-${VERSION}\"\nPACKAGE_ROOT=\"/tmp/AudioHub.dst\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.plist\"\n\necho \"Build ${PRODUCT_NAME}\"\n\necho \"analyze ${PACKAGE_ROOT} -> ${ARCHIVE_PLIST}\"\npkgbuild --analyze --root \"${PACKAGE_ROOT}\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${PACKAGE_ROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n\ncp \"${ARCHIVE_FILENAME}\" ~/Desktop";
 		};
 		28468DE91BF06D380063D71C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1047,11 +1061,11 @@
 			inputPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/AudioHub.pkg",
+				"$(DERIVED_FILE_DIR)/UltraschallHub.pkg",
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "VERSION=$(date +%Y-%m-%d)\nPACKAGE_NAME=\"UltraschallHub-${VERSION}\"\nPACKAGE_ROOT=\"/tmp/UltraschallHub.dst\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.plist\"\n\necho \"Build ${PRODUCT_NAME}\"\n\necho \"analyze ${PACKAGE_ROOT} -> ${ARCHIVE_PLIST}\"\npkgbuild --analyze --root \"${PACKAGE_ROOT}\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${PACKAGE_ROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n";
+			shellScript = "VERSION=$(date +%Y-%m-%d)\nPACKAGE_NAME=\"UltraschallHub-${VERSION}\"\nPACKAGE_ROOT=\"/tmp/UltraschallHub.dst\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.plist\"\n\necho \"Build ${PRODUCT_NAME}\"\n\necho \"analyze ${PACKAGE_ROOT} -> ${ARCHIVE_PLIST}\"\npkgbuild --analyze --root \"${PACKAGE_ROOT}\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Ultraschall/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${PACKAGE_ROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n\ncp \"${ARCHIVE_FILENAME}\" ~/Desktop";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1525,7 +1539,7 @@
 					"ULTRASCHALL=1",
 					"TEST=1",
 				);
-				INFOPLIST_FILE = AudioHubTests.plist;
+				INFOPLIST_FILE = Ultraschall/Tests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHubTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1540,7 +1554,7 @@
 					"TEST=1",
 					"ULTRASCHALL=1",
 				);
-				INFOPLIST_FILE = AudioHubTests.plist;
+				INFOPLIST_FILE = Ultraschall/Tests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.8plugs.audio.AudioHubTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1551,16 +1565,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /tmp/UltraschallHub.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"ULTRASCHALL=1",
 				);
 				INFOPLIST_FILE = Ultraschall/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Audio/Plug-Ins/HAL";
 				PRODUCT_BUNDLE_IDENTIFIER = fm.ultraschall.audio.UltraschallHub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = driver;
 			};
 			name = Debug;
@@ -1569,13 +1584,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /tmp/UltraschallHub.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = "ULTRASCHALL=1";
 				INFOPLIST_FILE = Ultraschall/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Audio/Plug-Ins/HAL";
 				PRODUCT_BUNDLE_IDENTIFIER = fm.ultraschall.audio.UltraschallHub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = driver;
 			};
 			name = Release;
