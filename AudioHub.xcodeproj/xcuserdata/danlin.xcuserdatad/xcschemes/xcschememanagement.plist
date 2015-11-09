@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>AudioHubInstaller copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>AudioHubInstaller.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -83,6 +88,11 @@
 			<true/>
 		</dict>
 		<key>281F1A881BAE8ECC00FC62E1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28468DE41BF06D380063D71C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
