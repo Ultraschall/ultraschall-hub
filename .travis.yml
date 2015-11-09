@@ -1,5 +1,5 @@
 language: objective-c
-xcode_project: Plug-In/UltraschallHubDriver.xcodeproj
+xcode_project: AudioHub.xcodeproj
 xcode_scheme: UltraschallHub
 notifications:
   slack: ultraschallfm:5MKlQKAZHSbPwiP7S9Rih440
