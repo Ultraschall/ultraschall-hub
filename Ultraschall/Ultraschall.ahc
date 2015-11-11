@@ -8,7 +8,7 @@
 			<key>Channels</key>
 			<integer>2</integer>
 			<key>Name</key>
-			<string>Einspieler</string>
+			<string>Aux</string>
 			<key>UID</key>
 			<string>UltraschallHubDevice:0</string>
 		</dict>
