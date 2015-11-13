@@ -81,7 +81,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "PACKAGES=&quot;${ARCHIVE_PATH}/Packages&quot;&#10;PRODUCTS=&quot;${ARCHIVE_PATH}/Products&quot;&#10;&#10;ARCHIVE_FILENAME=&quot;UltraschallHub*.pkg&quot;&#10;PKG=&quot;${DERIVED_FILE_DIR}/${ARCHIVE_FILENAME}&quot;&#10;&#10;mkdir &quot;${PACKAGES}&quot;&#10;cp -r $PKG &quot;${PACKAGES}&quot;&#10;cp -r $PKG &quot;${PRODUCTS}&quot;">
+               scriptText = "PACKAGES=&quot;${ARCHIVE_PATH}/Packages&quot;&#10;PRODUCTS=&quot;${ARCHIVE_PATH}/Products&quot;&#10;&#10;ARCHIVE_FILENAME=&quot;UltraschallHub*.pkg&quot;&#10;PKG=&quot;${BUILT_PRODUCTS_DIR}/${ARCHIVE_FILENAME}&quot;&#10;&#10;mkdir &quot;${PACKAGES}&quot;&#10;cp -r $PKG &quot;${PACKAGES}&quot;&#10;cp -r $PKG &quot;${PRODUCTS}&quot;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"

@@ -1047,11 +1047,10 @@
 			inputPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/AudioHub.pkg",
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "VERSION=$(date +%Y-%m-%d)\nPACKAGE_NAME=\"AudioHub-${VERSION}\"\nPACKAGE_ROOT=\"/tmp/AudioHub.dst\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.plist\"\n\necho \"Build ${PRODUCT_NAME}\"\n\necho \"analyze ${PACKAGE_ROOT} -> ${ARCHIVE_PLIST}\"\npkgbuild --analyze --root \"${PACKAGE_ROOT}\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${PACKAGE_ROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n\ncp \"${ARCHIVE_FILENAME}\" ~/Desktop";
+			shellScript = "VERSION=$(date +%Y-%m-%d)\nPACKAGE_NAME=\"AudioHub-${VERSION}\"\nPACKAGE_ROOT=\"/tmp/AudioHub.dst\"\nARCHIVE_FILENAME=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.pkg\"\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.plist\"\n\necho \"Build ${PRODUCT_NAME}\"\n\necho \"analyze ${PACKAGE_ROOT} -> ${ARCHIVE_PLIST}\"\npkgbuild --analyze --root \"${PACKAGE_ROOT}\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${PACKAGE_ROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n\ncp \"${ARCHIVE_FILENAME}\" ~/Desktop";
 		};
 		28468DE91BF06D380063D71C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1061,11 +1060,10 @@
 			inputPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/UltraschallHub.pkg",
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "VERSION=$(date +%Y-%m-%d)\nPACKAGE_NAME=\"UltraschallHub-${VERSION}\"\nPACKAGE_ROOT=\"/tmp/UltraschallHub.dst\"\nARCHIVE_FILENAME=\"${DERIVED_FILE_DIR}/${PACKAGE_NAME}.pkg\"\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.plist\"\n\necho \"Build ${PRODUCT_NAME}\"\n\necho \"analyze ${PACKAGE_ROOT} -> ${ARCHIVE_PLIST}\"\npkgbuild --analyze --root \"${PACKAGE_ROOT}\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Ultraschall/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${PACKAGE_ROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n\ncp \"${ARCHIVE_FILENAME}\" ~/Desktop";
+			shellScript = "VERSION=$(date +%Y-%m-%d)\nPACKAGE_NAME=\"UltraschallHub-${VERSION}\"\nPACKAGE_ROOT=\"/tmp/UltraschallHub.dst\"\nARCHIVE_FILENAME=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.pkg\"\nARCHIVE_PLIST=\"${BUILT_PRODUCTS_DIR}/${PACKAGE_NAME}.plist\"\n\necho \"Build ${PRODUCT_NAME}\"\n\necho \"analyze ${PACKAGE_ROOT} -> ${ARCHIVE_PLIST}\"\npkgbuild --analyze --root \"${PACKAGE_ROOT}\" \"${ARCHIVE_PLIST}\"\n\npkgbuild --timestamp --sign \"Developer ID Installer: Daniel Lindenfelser (53LA4N6GG6)\" --scripts \"${SOURCE_ROOT}/Ultraschall/Installer/Scripts\" --version \"${VERSION}\" --timestamp --identifier \"${PRODUCT_BUNDLE_IDENTIFIER}\" --root \"${PACKAGE_ROOT}\" --component-plist \"${ARCHIVE_PLIST}\" \"${ARCHIVE_FILENAME}\"\n\nspctl -a -v --type install \"${ARCHIVE_FILENAME}\"\n\ncp \"${ARCHIVE_FILENAME}\" ~/Desktop";
 		};
 /* End PBXShellScriptBuildPhase section */
 
